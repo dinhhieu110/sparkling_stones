@@ -1,1 +1,12 @@
+# Loại trừ các thư mục và tệp tạo ra bởi Eclipse
 /target/
+/.project
+/.classpath
+/.settings/
+
+# Loại trừ các tệp log
+*.log
+
+# Loại trừ các thư mục cục bộ Maven
+/.repository/
+/.metadata/
