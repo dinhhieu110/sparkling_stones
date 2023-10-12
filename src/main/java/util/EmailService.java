@@ -2,15 +2,12 @@ package util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 
-
 public class EmailService {
-	private static final String FROM = "";
-	private static final String PASSWORD = "msrs epsp ekob djlx";
+	private static final String FROM = "trandinhhieugenz@gmail.com";
+	private static final String PASSWORD = "pvrk zjex wqia aedf";
 	private static final String NAME = "Sparkling Stones";
 	
 	public static void send(String to, String subject, String msg) {
@@ -39,10 +36,8 @@ public class EmailService {
 
             // Gửi email
             Transport.send(message);
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(EmailService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

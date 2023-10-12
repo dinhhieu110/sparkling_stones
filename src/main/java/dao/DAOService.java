@@ -1,4 +1,4 @@
-package util;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,22 +14,25 @@ public class DAOService {
 	private ResultSet rs;
 
 	public DAOService() {
-		con = null;
-		stm = null;
-		rs = null;
+		try {
+			con = DbContext.getConnection();
+			stm = null;
+			rs = null;
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//	Select không điều kiện
 	public ResultSet select(String sql) {
 		try {
-			con = DbContext.getConnection();
 			if (con != null) {
 				stm = con.prepareStatement(sql);
 				rs = stm.executeQuery();
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-			close();
 		}
 
 		return rs;
@@ -38,7 +41,6 @@ public class DAOService {
 	// Select có điều kiện
 	public ResultSet select(String sql, List<Object> params) {
 		try {
-			con = DbContext.getConnection();
 			if (con != null) {
 				stm = con.prepareStatement(sql);
 
@@ -52,9 +54,8 @@ public class DAOService {
 
 				rs = stm.executeQuery();
 			}
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			close();
+		} catch (SQLException e) {
+			e.printStackTrace();		
 		}
 		return rs;
 	}
@@ -62,22 +63,18 @@ public class DAOService {
 	// Update và insert không điều kiện
 	public void update(String sql) {
 		try {
-			con = DbContext.getConnection();
 			if (con != null) {
 				stm = con.prepareStatement(sql);
 				stm.execute();
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close();
 		}
 	}
 	
 	//Update và insert có điều kiện
 	public void update(String sql, List<Object> params) {
 		try {
-			con = DbContext.getConnection();
 			if (con != null) {
 				stm = con.prepareStatement(sql);
 				
@@ -91,10 +88,8 @@ public class DAOService {
 				
 				stm.execute();
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close();
 		}
 	}
 	
