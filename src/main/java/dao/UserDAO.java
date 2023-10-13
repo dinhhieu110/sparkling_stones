@@ -32,7 +32,7 @@ public class UserDAO extends DAOService{
     
     // Đăng ký user
     public void register(String email, String password, String firstName, String lastName) {
-    	String sql = "INSERT INTO \"User\" (email, password, first_name, last_name) values (?, ?, ?, ?)";
+    	String sql = "insert into \"User\" (email, password, first_name, last_name) values (?, ?, ?, ?)";
     	List<Object> params = new ArrayList<>();
     	params.add(email);
     	params.add(password);
@@ -43,7 +43,7 @@ public class UserDAO extends DAOService{
     }
     
     public User getUserByEmail(String email) {
-    	String sql = "SELECT * FROM \"User\" where email = ?";
+    	String sql = "select * from \"User\" where email = ?";
     	List<Object> params = new ArrayList<>();
     	params.add(email);
     	
@@ -59,11 +59,21 @@ public class UserDAO extends DAOService{
 		    					rs.getString("last_name"), 
 		    					rs.getString("role_id"),
 		    					rs.getString("phone"),
-		    					rs.getString("address"));    			
+		    					rs.getString("address"),
+		    					rs.getBoolean("verified"));    			
     		}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
     	return user;
+    }
+    
+    // Xác nhận tài khoản
+    public void verify(String email) {
+    	String sql = "update \"User\" set verified = true where email = ?";
+    	List<Object> params = new ArrayList<>();
+    	params.add(email);
+    	
+    	update(sql, params);
     }
 }

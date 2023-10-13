@@ -10,7 +10,7 @@ public class EmailService {
 	private static final String PASSWORD = "pvrk zjex wqia aedf";
 	private static final String NAME = "Sparkling Stones";
 	
-	public static void send(String to, String subject, String msg) {
+	public void send(String to, String subject, String msg) {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

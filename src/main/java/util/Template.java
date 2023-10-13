@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Map;
 
-public class EmailTemplate {
+public class Template {
 
 	private String template;
 
-	public EmailTemplate(String customtemplate) {
+	public Template(String customtemplate) {
 		try {
 			this.template = loadTemplate(customtemplate);
 		} catch (Exception e) {
