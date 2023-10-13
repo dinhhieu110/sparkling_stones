@@ -69,7 +69,7 @@ public class OTPController extends HttpServlet {
 		if (otp >= 0) {
 			HttpSession session = request.getSession();
 			OTPService otpService = (OTPService) session.getAttribute("otpService");
-			User user = (User) session.getAttribute("user");
+			User user = (User)session.getAttribute("otpUser");
 
 			String email = user.getEmail();
 			int serverOtp = otpService.getOtp(email);
@@ -77,6 +77,8 @@ public class OTPController extends HttpServlet {
 				if (otp == serverOtp) {
 					otpService.clearOTP(email);
 					dao.verify(email);
+					session.removeAttribute("otpUser");
+					session.removeAttribute("otpService");
 				} else {
 					error = "OTP is incorrect";
 					type = "danger";
@@ -139,7 +141,7 @@ public class OTPController extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("otpService", otpService);
-			session.setAttribute("user", user);		
+			session.setAttribute("otpUser", user);		
 						
 			forward = SUCCESS_FORWARD;
 		}
