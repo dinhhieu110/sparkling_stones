@@ -54,4 +54,14 @@
     <servlet-name>RegisterController</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OTPController</display-name>
+    <servlet-name>OTPController</servlet-name>
+    <servlet-class>controller.common.OTPController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OTPController</servlet-name>
+    <url-pattern>/verify-otp</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,11 +1,18 @@
 package controller.common;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
+import util.Template;
+import util.EncryptionService;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import dao.UserDAO;
 
 /**
  * Servlet implementation class RegisterController
@@ -34,8 +41,59 @@ public class RegisterController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		final String SUCCESS_FORWARD = request.getContextPath() + "/verify-otp";
+
+		// Lấy thông tin đăng kí từ form
+		String firstName = request.getParameter("txtFirstName");
+		String lastName = request.getParameter("txtLastName");
+		String email = request.getParameter("txtEmail");
+		String password = request.getParameter("txtPassword");
+		String cfmPassword = request.getParameter("txtCfmPassword");
+
+		UserDAO dao = new UserDAO();
+		String error = "";
+		String type = "";
+
+		String forward = SUCCESS_FORWARD;
+
+		// Kiểm tra 2 mật khẩu có trùng nhau
+		if (password.equals(cfmPassword)) {
+			User user = dao.getUserByEmail(email);
+			if (user == null) {
+				EncryptionService ecrypt = new EncryptionService();
+				password = ecrypt.encryptMD5(password);
+				dao.register(email, password, firstName, lastName);
+				forward += "?email=" + email;
+			} else {
+				// Kiểm tra account đã được xác thực
+				if (user.isVerified()) {
+					type = "danger";
+					error = "Email has been registered.";
+				} else {
+					type = "warning";
+					error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"\" class=\"alert-link\">Verify here</a>";
+				}
+			}
+		} else {
+			type = "danger";
+			error = "Password does not match";
+		}
+
+		dao.close();
+		if (error.equals("") && type.equals("")) {
+			response.sendRedirect(forward);
+		} else {
+			// Lấy template thông báo lỗi
+			Template template = new Template("template/alert.html");
+			Map<String, String> replacements = new HashMap<String, String>();
+			replacements.put("type", type);
+			replacements.put("content", error);
+
+			String alert = template.getTemplate(replacements);
+			request.setAttribute("error", alert);
+			doGet(request, response);
+		}
+
 	}
 
 }

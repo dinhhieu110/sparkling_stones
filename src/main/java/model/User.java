@@ -9,12 +9,12 @@ public class User {
 	private String role;
 	private String phone;
 	private String address;
+	private boolean verified;
 	
 	public User() {
 	}
 
-	public User(String id, String email, String password, String firstName, String lastName, String role, String phone,
-			String address) {
+	public User(String id, String email, String password, String firstName, String lastName, String role, String phone, String address, boolean verified) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -24,6 +24,7 @@ public class User {
 		this.role = role;
 		this.phone = phone;
 		this.address = address;
+		this.verified = verified;
 	}
 
 	public String getId() {
@@ -89,5 +90,13 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-		
+
+	public boolean isVerified() {
+		return verified;
+	}
+
+	public void setVerified(boolean verified) {
+		this.verified = verified;
+	}
+			
 }
