@@ -20,3 +20,4 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/main.css" />
 <base href="<%=request.getContextPath() %>/" />
+<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/assets/img/Logo-SparklingStones.png">

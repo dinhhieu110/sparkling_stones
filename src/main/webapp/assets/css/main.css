@@ -33,3 +33,20 @@ img {
 	max-width: 100%;
 	vertical-align: middle;
 }
+
+.currency-style del {
+	font-size: 0.75em;
+	font-weight: 400;
+	color: gray;
+}
+
+.title-display {
+	height: 2em;
+	/* Chiều cao tối đa 2 dòng */
+	overflow: hidden;
+	/* Ẩn nội dung vượt quá chiều cao */
+	text-overflow: ellipsis;
+	/* Hiển thị dấu ba chấm khi cắt */
+	white-space: nowrap;
+	/* Ngăn không xuống dòng */
+}

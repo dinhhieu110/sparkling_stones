@@ -4,7 +4,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Product;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.ProductDAO;
 
 /**
  * Servlet implementation class HomeController
@@ -27,7 +33,14 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		ProductDAO pDao = new ProductDAO();
+		
+		List<Product> listOfProducts = pDao.getNewProducts();
+		
+		pDao.close();
+
+		request.setAttribute("listProducts", listOfProducts);
+		
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 	}
 
