@@ -31,9 +31,15 @@
 			<div
 				class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-md-9 col-lg-6 col-xl-5">
-					<img
-						src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+					<!-- <img
+						src="https://img.freepik.com/premium-vector/jeweler-concept-goldsmith-examining-faceting-diamond-with-craft-tools-precious-stones-jewelry-designer-idea-creative-people-professionvector-illustration_613284-2119.jpg?size=626&ext=jpg&ga=GA1.1.1413502914.1697068800&semt=ais"
+						class="img-fluid" alt="Sample image"> -->
+
+						<img
+						src="https://static.vecteezy.com/system/resources/previews/006/409/447/non_2x/jewelers-maker-jewelry-accessories-such-as-necklaces-earrings-and-bracelets-from-gems-in-flat-style-illustration-for-poster-background-vector.jpg"
 						class="img-fluid" alt="Sample image">
+					
+
 				</div>
 				<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
 					<form>

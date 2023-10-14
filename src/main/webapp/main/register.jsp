@@ -109,7 +109,7 @@
 
 				<div class="col-lg-6 mb-5 mb-lg-0">
 					<img
-						src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
+						src="https://img.freepik.com/free-vector/handmade-jewelry-abstract-concept-illustration-self-made-jewelry-designer-startup-handmade-product-book-online-handcrafted-buying-artisan-goods-custom-order_335657-149.jpg"
 						class="w-100 rounded-4 shadow-4" alt="" />
 				</div>
 			</div>
