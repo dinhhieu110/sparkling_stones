@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Detail</title>
+<title>${product.title}|SparklingStones</title>
 <%@include file="/common/head.jsp"%>
 <style>
 .swiper-slide {
@@ -16,7 +17,13 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 100%;
-	background-color: #ccc;
+	background-color: transparent;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+}
+
+.swiper-slide-thumb-active {
+	overflow: hidden;
 }
 
 .swiper-slide-thumb-active::before {
@@ -41,9 +48,9 @@
 			<nav class="d-flex">
 				<h6 class="mb-0">
 					<a href="" class="text-white-50">Home</a> <span
-						class="text-white-50 mx-2"> > </span> <a href=""
+						class="text-white-50 mx-2"> > </span> <a href="list"
 						class="text-white-50">Library</a> <span class="text-white-50 mx-2">
-						> </span> <a href="" class="text-white"><u>Data</u></a>
+						> </span> <a href="" class="text-white">${product.title}</a>
 				</h6>
 			</nav>
 			<!-- Breadcrumb -->
@@ -58,14 +65,12 @@
 				<aside class="col-lg-6">
 					<div class="swiper mySwiper2">
 						<div class="swiper-wrapper" style="height: 100%">
-							<c:forEach begin="0" end="9">
+							<div class="swiper-slide">
+								<div style="background-image: url('${product.thumbnail}')"></div>
+							</div>
+							<c:forEach items="${product.gallery.array}" var="image">
 								<div class="swiper-slide">
-									<div
-										style="background-image: url('https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp')"></div>
-								</div>
-								<div class="swiper-slide">
-									<div
-										style="background-image: url('https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp')"></div>
+									<div style="background-image: url('${image}')"></div>
 								</div>
 							</c:forEach>
 						</div>
@@ -74,14 +79,12 @@
 					</div>
 					<div class="swiper mySwiper mt-2">
 						<div class="swiper-wrapper">
-							<c:forEach begin="0" end="9">
+							<div class="swiper-slide">
+								<div style="background-image: url('${product.thumbnail}')"></div>
+							</div>
+							<c:forEach items="${product.gallery.array}" var="image">
 								<div class="swiper-slide">
-									<div
-										style="background-image: url('https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp')"></div>
-								</div>
-								<div class="swiper-slide">
-									<div
-										style="background-image: url('https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp')"></div>
+									<div style="background-image: url('${image}')"></div>
 								</div>
 							</c:forEach>
 						</div>
@@ -90,16 +93,26 @@
 				</aside>
 				<main class="col-lg-6">
 					<div class="ps-lg-3">
-						<h4 class="title text-dark">
-							Quality Men's Hoodie for Winter, Men's Fashion <br /> Casual
-							Hoodie
-						</h4>
+						<h4 class="title text-dark">${product.title}</h4>
 						<div class="d-flex flex-row my-3">
 							<div class="text-warning mb-1 me-2">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fas fa-star-half-alt"></i> <span class="ms-1">
-									4.5 </span>
+								<c:if test="${product.rating > 0}">
+									<c:forEach begin="1" end="5" varStatus="star">
+										<c:choose>
+											<c:when test="${product.rating >= star.count}">
+												<i class="fas fa-star"></i>
+											</c:when>
+											<c:when
+												test="${product.rating < star.count and product.rating > star.count - 1}">
+												<i class="fas fa-star-half-alt"></i>
+											</c:when>
+											<c:otherwise>
+												<i class="far fa-star"></i>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</c:if>
+								<span class="ms-1">${product.rating > 0 ? product.rating : "No reviews yet"}</span>
 							</div>
 							<span class="text-muted"><i
 								class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span> <span
@@ -107,14 +120,12 @@
 						</div>
 
 						<div class="mb-3">
-							<span class="h5">$75.00</span> <span class="text-muted">/per
-								box</span>
+							<span class="h5"><fmt:formatNumber type="currency"
+									value="${product.discount}" pattern="#,###₫" /></span> <span
+								class="text-muted">/per box</span>
 						</div>
 
-						<p>Modern look and quality demo item is a streetwear-inspired
-							collection that continues to break away from the conventions of
-							mainstream fashion. Made in Italy, these black and brown clothing
-							low-top shirts for men.</p>
+						<p>${product.description}</p>
 
 						<div class="row">
 							<dt class="col-3">Type:</dt>
@@ -147,15 +158,17 @@
 								<label class="mb-2 d-block">Quantity</label>
 								<div class="input-group mb-3" style="width: 170px;">
 									<button class="btn btn-white border border-secondary px-3"
-										type="button" id="button-addon1" data-mdb-ripple-color="dark">
+										type="button" data-action="descrease"
+										onClick="changeQuantity(this)" data-mdb-ripple-color="dark">
 										<i class="fas fa-minus"></i>
 									</button>
-									<input type="text"
+									<input type="number" min="0" step="1" id="quantity"
 										class="form-control text-center border border-secondary"
-										placeholder="14" aria-label="Example text with button addon"
-										aria-describedby="button-addon1" />
+										value="0" aria-label="Example text with button addon" />
 									<button class="btn btn-white border border-secondary px-3"
-										type="button" id="button-addon2" data-mdb-ripple-color="dark">
+										type="button" data-action="increase"
+										onClick="changeQuantity(this)" id="button-addon2"
+										data-mdb-ripple-color="dark">
 										<i class="fas fa-plus"></i>
 									</button>
 								</div>
@@ -191,8 +204,8 @@
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100"
 								id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2"
-								role="tab" aria-controls="ex1-pills-2" aria-selected="false">Warranty
-									info</a></li>
+								role="tab" aria-controls="ex1-pills-2" aria-selected="false">Reviews
+							</a></li>
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100"
 								id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3"
@@ -266,18 +279,40 @@
 							</div>
 							<div class="tab-pane fade mb-2" id="ex1-pills-2" role="tabpanel"
 								aria-labelledby="ex1-tab-2">
-								Tab content or sample information now <br /> Lorem ipsum dolor
-								sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-								veniam, quis nostrud exercitation ullamco laboris nisi ut
-								aliquip ex ea commodo consequat. Duis aute irure dolor in
-								reprehenderit in voluptate velit esse cillum dolore eu fugiat
-								nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in culpa qui officia deserunt mollit anim id est laborum.
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-								enim ad minim veniam, quis nostrud exercitation ullamco laboris
-								nisi ut aliquip ex ea commodo
+								<h4>Write your comment</h4>
+								<div class="form-outline mb-4">
+									<textarea class="form-control" id="form4Example3" rows="2"></textarea>
+									<label class="form-label" for="form4Example3">Comment</label>
+								</div>
+								<h4>Review from users</h4>
+								<c:if test="${reviews.size() > 0}">
+									<c:forEach items="${reviews}" var="review">
+										<div class="card mb-3">
+											<div class="card-body">
+												<h5 class="card-title">${review.name}
+													<span class="text-muted mini-text"><fmt:formatDate
+															value="${review.createdAt}" pattern="yyyy-MM-dd HH:mm" /></span>
+												</h5>
+												<p class="card-subtitle text-warning">
+													<c:forEach begin="1" end="${review.rating}">
+														<i class="fas fa-star"></i>
+													</c:forEach>
+													<c:forEach begin="${review.rating + 1}" end="5">
+														<i class="far fa-star"></i>
+													</c:forEach>
+												</p>
+												<p class="card-text">${review.comment}</p>
+												<c:if test="${review.response != null}">
+													<div class="response-box">
+														<p class="fw-bold">Respone from Sparkling Stones</p>
+														<p class="mb-0">${review.response}</p>
+													</div>
+												</c:if>
+											</div>
+										</div>
+									</c:forEach>
+								</c:if>
+								<c:if test="${reviews.size() == 0}">No reviews yet</c:if>
 							</div>
 							<div class="tab-pane fade mb-2" id="ex1-pills-3" role="tabpanel"
 								aria-labelledby="ex1-tab-3">

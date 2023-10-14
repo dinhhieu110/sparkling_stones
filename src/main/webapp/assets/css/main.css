@@ -33,3 +33,12 @@ img {
 	max-width: 100%;
 	vertical-align: middle;
 }
+
+.mini-text {
+	font-size: 0.75em;
+}
+
+.response-box {
+    background-color: #f5f5f5;
+    padding: 0.875rem 0.75rem;
+}
