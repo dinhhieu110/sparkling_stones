@@ -9,7 +9,7 @@
 				<!-- Left elements -->
 				<div class="col-lg-2 col-sm-4 col-4">
 					<a href="" class="float-start"> <img
-						src="<%=request.getContextPath()%>/assets/img/logo_rec2.png"
+						src="<%=request.getContextPath()%>/assets/img/logo.png"
 						/>
 					</a>
 				</div>

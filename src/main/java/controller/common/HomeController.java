@@ -4,12 +4,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Category;
 import model.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.CategoryDAO;
 import dao.ProductDAO;
 
 /**
@@ -35,11 +37,19 @@ public class HomeController extends HttpServlet {
 			throws ServletException, IOException {
 		ProductDAO pDao = new ProductDAO();
 		
+		CategoryDAO cDao = new CategoryDAO();
+		
+		List<Category> listOfCates = cDao.getCategories(); 
+		
 		List<Product> listOfProducts = pDao.getNewProducts();
+		List<Product> listOfRecommendProducts = pDao.getRecommendedProducts();
+
 		
 		pDao.close();
-
+		request.setAttribute("listOfCates", listOfCates);
 		request.setAttribute("listProducts", listOfProducts);
+		request.setAttribute("listRecommendProducts", listOfRecommendProducts);
+
 		
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 	}

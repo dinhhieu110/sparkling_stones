@@ -40,4 +40,32 @@ public class ProductDAO extends DAOService {
 		
 		return list;
 	}
+	
+	public List<Product> getRecommendedProducts(){
+		String sql2= "select * from \"ProductWithImages\" order by rating limit 4";
+		
+		ResultSet rs2 = select(sql2);
+		
+		List<Product> list2 = new ArrayList<Product>();
+		try {
+			while(rs2.next()) {
+				list2.add( new Product(rs2.getString("id"),
+						  rs2.getString("category_id"),
+						  rs2.getString("title"),
+						  rs2.getInt("price"), 
+						  rs2.getInt("discount"),
+						  rs2.getString("thumbnail"), 
+						  rs2.getArray("gallery"),
+						  rs2.getString("description"),
+						  rs2.getDouble("rating"),
+						  rs2.getTimestamp("created_at"),
+						  rs2.getTimestamp("updated_at")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return list2;
+	}
 }
