@@ -8,7 +8,6 @@ import model.Category;
 import model.Product;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import dao.CategoryDAO;
@@ -46,6 +45,7 @@ public class HomeController extends HttpServlet {
 
 		
 		pDao.close();
+		cDao.close();
 		request.setAttribute("listOfCates", listOfCates);
 		request.setAttribute("listProducts", listOfProducts);
 		request.setAttribute("listRecommendProducts", listOfRecommendProducts);

@@ -7,10 +7,6 @@
 <html>
 <head>
 <title>Home</title>
-<link
-        rel="stylesheet"
-        href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css"
-      >
 <%@include file="/common/head.jsp"%>
 </head>
 <body>
@@ -100,7 +96,7 @@
 									class="btn btn-light border px-2 pt-2 float-end icon-hover"><i
 									class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
 
-								<h5 class="currency-style" class="card-title">
+								<h5 class="card-title currency-style">
 									<fmt:formatNumber value="${product.discount}" type="currency"
 										pattern="#,##0₫" />
 									<del>
@@ -108,10 +104,10 @@
 											pattern="#,##0₫" />
 									</del>
 								</h5>
-								<p class="card-text mb-0 ">${product.title}</p>
+								<p class="card-text mb-0 d-inline-block text-truncate" style="max-width: 200px;">${product.title}</p>
 								<div class="mt-4">
-									<i class="fas fa-star text-warning"> ${product.rating}
-										(99+) </i>
+									<i class="fas fa-star text-warning"	><span class="font-roboto">${product.rating}
+										(99+) </span> </i>
 								</div>
 							</div>
 						</div>
@@ -166,14 +162,19 @@
 								<a href="#!"
 									class="btn btn-light border px-2 pt-2 float-end icon-hover"><i
 									class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-								<h5 class="card-title">
-									<fmt:formatNumber value="${product.price}" type="currency"
+									<h5 class="card-title currency-style">
+									<fmt:formatNumber value="${product.discount}" type="currency"
 										pattern="#,##0₫" />
+									<del>
+										<fmt:formatNumber value="${product.price}" type="currency"
+											pattern="#,##0₫" />
+									</del>
 								</h5>
-								<p class="card-text mb-0">${product.title}</p>
+								</h5>
+								<p class="card-text mb-0 d-inline-block text-truncate" style="max-width: 200px;">${product.title}</p>
 								<div class="mt-4"	>
-									<i class="fas fa-star text-warning"> ${product.rating}
-										(99+) </i>
+										<i class="fas fa-star text-warning"	><span class="font-roboto">${product.rating}
+										(99+) </span> </i>
 								</div>
 							</div>
 						</div>

@@ -40,15 +40,14 @@ img {
 	color: gray;
 }
 
-.title-display {
-	height: 2em;
-	/* Chiều cao tối đa 2 dòng */
+.limited-text {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 	overflow: hidden;
-	/* Ẩn nội dung vượt quá chiều cao */
 	text-overflow: ellipsis;
-	/* Hiển thị dấu ba chấm khi cắt */
-	white-space: nowrap;
-	/* Ngăn không xuống dòng */
 }
 
-
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+}

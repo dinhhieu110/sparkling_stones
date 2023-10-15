@@ -42,7 +42,7 @@ public class ProductDAO extends DAOService {
 	}
 	
 	public List<Product> getRecommendedProducts(){
-		String sql2= "select * from \"ProductWithImages\" order by rating limit 4";
+		String sql2= "select * from \"ProductWithImages\" order by rating desc limit 4";
 		
 		ResultSet rs2 = select(sql2);
 		
