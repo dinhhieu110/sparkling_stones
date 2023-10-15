@@ -11,8 +11,8 @@
 				<div class="col-12 col-lg-3 col-sm-12 mb-2">
 					<!-- Content -->
 					<a href="https://mdbootstrap.com/" target="_blank"
-						class="text-white h2"> MDB </a>
-					<p class="mt-1 text-white">© 2023 Copyright: MDBootstrap.com</p>
+						class="text-white h2"> Sparkling Stones </a>
+					<p class="mt-1 text-white">© 2023 Copyright: Sparkling Stones, Inc. No Rights Reserved</p>
 				</div>
 				<!-- Grid column -->
 
