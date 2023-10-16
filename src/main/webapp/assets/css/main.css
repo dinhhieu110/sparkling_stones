@@ -33,3 +33,17 @@ img {
 	max-width: 100%;
 	vertical-align: middle;
 }
+
+.currency-style del {
+	font-size: 0.75em;
+	font-weight: 400;
+	color: gray;
+}
+
+.limited-text {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
