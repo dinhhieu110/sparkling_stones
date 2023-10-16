@@ -51,19 +51,19 @@
 	<section>
 		<div class="container pt-5">
 			<nav class="row gy-4 ">
-					<c:forEach items = "${listOfCates}" var ="cate">
-						<div class="col">
-							<a href="#"
-								class="text-center d-flex flex-column justify-content-center">
-								<button type="button"
-									class="btn btn-outline-secondary mx-auto p-3 mb-2"
-									data-mdb-ripple-color="dark">
-									<div >${cate.icon}</div>
-								</button>
-								<div class="text-dark">${cate.name}</div>
-							</a>
-						</div>
-					</c:forEach>
+				<c:forEach items="${listOfCates}" var="cate">
+					<div class="col">
+						<a href="#"
+							class="text-center d-flex flex-column justify-content-center">
+							<button type="button"
+								class="btn btn-outline-secondary mx-auto p-3 mb-2"
+								data-mdb-ripple-color="dark">
+								<div>${cate.icon}</div>
+							</button>
+							<div class="text-dark">${cate.name}</div>
+						</a>
+					</div>
+				</c:forEach>
 			</nav>
 		</div>
 	</section>
@@ -104,10 +104,10 @@
 											pattern="#,##0₫" />
 									</del>
 								</h5>
-								<p class="card-text mb-0 d-inline-block text-truncate" style="max-width: 200px;">${product.title}</p>
-								<div class="mt-4">
-									<i class="fas fa-star text-warning"	><span class="font-roboto">${product.rating}
-										(99+) </span> </i>
+								<p class="card-text mb-0 d-inline-block text-truncate"
+									style="max-width: 200px;">${product.title}</p>
+								<div class="mt-4 text-warning">
+									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating} (99+)</span>
 								</div>
 							</div>
 						</div>
@@ -158,11 +158,11 @@
 								</div> <img src="${product.thumbnail}" class="card-img-top rounded-2"
 								style="aspect-ratio: 1/1" />
 							</a>
-							<div class="card-body p-0 pt-3 m-2" >
+							<div class="card-body p-0 pt-3 m-2">
 								<a href="#!"
 									class="btn btn-light border px-2 pt-2 float-end icon-hover"><i
 									class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-									<h5 class="card-title currency-style">
+								<h5 class="card-title currency-style">
 									<fmt:formatNumber value="${product.discount}" type="currency"
 										pattern="#,##0₫" />
 									<del>
@@ -170,11 +170,11 @@
 											pattern="#,##0₫" />
 									</del>
 								</h5>
-								</h5>
-								<p class="card-text mb-0 d-inline-block text-truncate" style="max-width: 200px;">${product.title}</p>
-								<div class="mt-4"	>
-										<i class="fas fa-star text-warning"	><span class="font-roboto">${product.rating}
-										(99+) </span> </i>
+								<p class="card-text mb-0 d-inline-block text-truncate"
+									style="max-width: 200px;">${product.title}</p>
+								<div class="mt-4 text-warning">
+									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating}
+										(99+)</span>
 								</div>
 							</div>
 						</div>

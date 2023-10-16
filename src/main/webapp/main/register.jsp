@@ -6,6 +6,14 @@
 <head>
 <title>Register</title>
 <%@include file="/common/head.jsp"%>
+<style>
+body {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+</style>
 </head>
 <body>
 	<!-- Section: Design Block -->
@@ -59,19 +67,17 @@
 								<!-- Password input -->
 								<div class="form-outline mb-4">
 									<input type="password" id="form3Example4" class="form-control"
-										name="txtPassword"
-										/>
-									<label class="form-label" for="form3Example4">Password</label>
+										name="txtPassword" /> <label class="form-label"
+										for="form3Example4">Password</label>
 								</div>
-								
+
 								<!-- Confirm Password input -->
 								<div class="form-outline mb-4">
 									<input type="password" id="form3Example5" class="form-control"
-										name="txtCfmPassword"
-										/>
-									<label class="form-label" for="form3Example5">Confirm Password</label>
+										name="txtCfmPassword" /> <label class="form-label"
+										for="form3Example5">Confirm Password</label>
 								</div>
-								
+
 								${error}
 
 								<!-- Submit button -->
