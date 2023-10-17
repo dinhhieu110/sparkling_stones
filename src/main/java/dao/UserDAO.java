@@ -60,7 +60,7 @@ public class UserDAO extends DAOService{
 		    					rs.getString("role_id"),
 		    					rs.getString("phone"),
 		    					rs.getString("address"),
-		    					rs.getBoolean("verified"));    			
+		    					rs.getBoolean("verified"));
     		}
 		} catch (SQLException e) {
 			e.printStackTrace();

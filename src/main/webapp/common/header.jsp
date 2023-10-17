@@ -5,7 +5,7 @@
 	<!-- Jumbotron -->
 	<div class="p-3 text-center bg-white border-bottom">
 		<div class="container">
-			<div class="row gy-3">
+			<div class="row align-items-center gy-3">
 				<!-- Left elements -->
 				<div class="col-lg-2 col-sm-4 col-4">
 					<a href="" class="float-start"> <img
