@@ -76,4 +76,53 @@ public class UserDAO extends DAOService{
     	
     	update(sql, params);
     }
+    
+  //Đăng nhập user
+    public User login(String email, String password) {
+    	String sql = "select * from \"User\"\n"
+    			+ "where email = ?\n"
+    			+ "and password =?";
+    	List<Object> params = new ArrayList<>();
+    	params.add(email);
+    	params.add(password);
+    	
+    	ResultSet rs = select(sql, params);
+    	try {
+    		while (rs.next()) {
+    			return new User(rs.getString("id"),
+		    					rs.getString("email"),
+		    					rs.getString("password"), 
+		    					rs.getString("first_name"),
+		    					rs.getString("last_name"), 
+		    					rs.getString("role_id"),
+		    					rs.getString("phone"),
+		    					rs.getString("address"),
+		    					rs.getBoolean("verified"));    			
+    		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+    	return null;
+    }
+    
+    //kiểm tra mật khẩu 
+    public String getPassByEmail(String email) {
+    	String sql = "select password from \"User\"\n"
+    			+ "where email = ?\n";
+    	List<Object> params = new ArrayList<>();
+    	params.add(email);
+    	
+    	ResultSet rs = select(sql, params);
+    	String storedPass = null;
+    	try {
+    		if (rs.next()) {
+    			storedPass = rs.getString("password");  			
+    		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return storedPass;
+    }
+
 }
