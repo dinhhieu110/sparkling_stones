@@ -108,16 +108,16 @@ public class Product {
 		return createdAt;
 	}
 
-	public void setCreateAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
+	public void setCreatedAt(Timestamp createAt) {
+		this.createdAt = createAt;
 	}
 
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdateAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setUpdatedAt(Timestamp updateAt) {
+		this.updatedAt = updateAt;
 	}
 
 }

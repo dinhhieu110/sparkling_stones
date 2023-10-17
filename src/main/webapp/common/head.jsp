@@ -19,4 +19,10 @@
 <!-- Custom styles -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/main.css" />
-<base href="<%=request.getContextPath() %>/" />
+<link rel="icon" type="image/x-icon"
+	href="<%=request.getContextPath()%>/assets/img/favicon.png">
+<link rel="stylesheet"
+	href="https://site-assets.fontawesome.com/releases/v6.4.2/css/all.css">
+	
+<!-- Base for anchor href -->
+<base href="<%=request.getContextPath()%>/" />

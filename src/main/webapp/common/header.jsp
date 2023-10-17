@@ -9,8 +9,8 @@
 				<!-- Left elements -->
 				<div class="col-lg-2 col-sm-4 col-4">
 					<a href="" class="float-start"> <img
-						src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
-						height="35" />
+						src="<%=request.getContextPath()%>/assets/img/logo.png"
+						/>
 					</a>
 				</div>
 				<!-- Left elements -->
