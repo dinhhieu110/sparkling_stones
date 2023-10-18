@@ -64,4 +64,15 @@
     <servlet-name>OTPController</servlet-name>
     <url-pattern>/verify-otp</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogOutController</display-name>
+    <servlet-name>LogOutController</servlet-name>
+    <servlet-class>controller.common.LogOutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogOutController</servlet-name>
+    <url-pattern>/LogOutController</url-pattern>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
 </web-app>

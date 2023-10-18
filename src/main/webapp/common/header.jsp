@@ -27,7 +27,7 @@
 						</c:if>
 						
 						<c:if test="${sessionScope.acc != null}">
-						<a href="login"
+						<a href="logout"
 							class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
 							<i class="fas fa-user-alt m-1 me-md-2"></i>
 							<p class="d-none d-md-block mb-0">Log out</p>
