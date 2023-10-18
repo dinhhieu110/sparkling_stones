@@ -4,7 +4,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.User;
+import util.EncryptionService;
+import util.Template;
+
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import dao.UserDAO;
 
 /**
  * Servlet implementation class LoginController
@@ -33,8 +42,52 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		final String SUCCESS_FORWARD = request.getContextPath();
+		
+		String email = request.getParameter("txtEmail").toLowerCase();
+		String password = request.getParameter("txtPassword");
+		String remember = request.getParameter("chkRemember");
+		
+		UserDAO dao = new UserDAO();
+		User user = dao.getUserByEmail(email);
+		
+		String error = "";
+		String type = "";
+		
+		if (user != null) {
+			if (user.isVerified()) {
+				EncryptionService encrypt = new EncryptionService();
+				String ecryptPassword = encrypt.encryptMD5(password);
+				if (ecryptPassword.equals(user.getPassword())) {
+					HttpSession session = request.getSession();
+					session.setAttribute("user", user);
+				} else {
+					type = "danger";
+					error = "Password is incorrect!";
+				}
+			} else {
+				type = "warning";
+				error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"\" class=\"alert-link\">Verify here</a>";
+			}
+		} else {
+			type = "danger";
+			error = "Email has not been registered!";
+		}
+		
+		dao.close();
+		if (error.equals("") && type.equals("")) {
+			response.sendRedirect(SUCCESS_FORWARD);
+		} else {
+			// Lấy template thông báo lỗi
+			Template template = new Template("template/alert.html");
+			Map<String, String> replacements = new HashMap<String, String>();
+			replacements.put("type", type);
+			replacements.put("content", error);
+
+			String alert = template.getTemplate(replacements);
+			request.setAttribute("error", alert);
+			doGet(request, response);
+		}
 	}
 
 }
