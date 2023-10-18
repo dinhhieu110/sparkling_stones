@@ -44,7 +44,7 @@
 								style="width: 100px">Transactions</p></a> <a
 							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
 								style="width: 100px">Profile setting</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
+							class="nav-link my-0 bg-light" href="logout"><p class="pb-0 mb-0"
 								style="width: 100px">Log out</p></a>
 					</nav>
 				</div>
