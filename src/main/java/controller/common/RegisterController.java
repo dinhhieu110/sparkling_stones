@@ -46,7 +46,7 @@ public class RegisterController extends HttpServlet {
 		// Lấy thông tin đăng kí từ form
 		String firstName = request.getParameter("txtFirstName");
 		String lastName = request.getParameter("txtLastName");
-		String email = request.getParameter("txtEmail");
+		String email = request.getParameter("txtEmail").toLowerCase();
 		String password = request.getParameter("txtPassword");
 		String cfmPassword = request.getParameter("txtCfmPassword");
 
