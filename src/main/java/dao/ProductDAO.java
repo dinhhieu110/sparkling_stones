@@ -25,10 +25,17 @@ public class ProductDAO extends DAOService {
 
 		try {
 			if (rs.next()) {
-				product = new Product(rs.getString("id"), rs.getString("category_id"), rs.getString("title"),
-						rs.getInt("price"), rs.getInt("discount"), rs.getString("thumbnail"), rs.getArray("gallery"),
-						rs.getString("description"), rs.getDouble("rating"), rs.getTimestamp("created_at"),
-						rs.getTimestamp("updated_at"));
+    			product = new Product(rs.getString("id"),
+									  rs.getString("category_id"),
+									  rs.getString("title"),
+									  rs.getInt("price"), 
+									  rs.getInt("discount"),
+									  rs.getString("thumbnail"), 
+									  rs.getArray("gallery"),
+									  rs.getString("description"),
+									  rs.getDouble("rating"),
+									  rs.getTimestamp("created_at"),
+									  rs.getTimestamp("updated_at"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -44,11 +51,18 @@ public class ProductDAO extends DAOService {
 
 		List<Product> list = new ArrayList<Product>();
 		try {
-			while (rs.next()) {
-				list.add(new Product(rs.getString("id"), rs.getString("category_id"), rs.getString("title"),
-						rs.getInt("price"), rs.getInt("discount"), rs.getString("thumbnail"), rs.getArray("gallery"),
-						rs.getString("description"), rs.getDouble("rating"), rs.getTimestamp("created_at"),
-						rs.getTimestamp("updated_at")));
+			while(rs.next()) {
+				list.add( new Product(rs.getString("id"),
+						  rs.getString("category_id"),
+						  rs.getString("title"),
+						  rs.getInt("price"), 
+						  rs.getInt("discount"),
+						  rs.getString("thumbnail"), 
+						  rs.getArray("gallery"),
+						  rs.getString("description"),
+						  rs.getDouble("rating"),
+						  rs.getTimestamp("created_at"),
+						  rs.getTimestamp("updated_at")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -65,11 +79,18 @@ public class ProductDAO extends DAOService {
 
 		List<Product> list = new ArrayList<Product>();
 		try {
-			while (rs.next()) {
-				list.add(new Product(rs.getString("id"), rs.getString("category_id"), rs.getString("title"),
-						rs.getInt("price"), rs.getInt("discount"), rs.getString("thumbnail"), rs.getArray("gallery"),
-						rs.getString("description"), rs.getDouble("rating"), rs.getTimestamp("created_at"),
-						rs.getTimestamp("updated_at")));
+			while(rs.next()) {
+				list.add( new Product(rs.getString("id"),
+						  rs.getString("category_id"),
+						  rs.getString("title"),
+						  rs.getInt("price"), 
+						  rs.getInt("discount"),
+						  rs.getString("thumbnail"), 
+						  rs.getArray("gallery"),
+						  rs.getString("description"),
+						  rs.getDouble("rating"),
+						  rs.getTimestamp("created_at"),
+						  rs.getTimestamp("updated_at")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
