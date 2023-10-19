@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -175,7 +177,7 @@
 					<header
 						class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
 						<strong class="d-block py-2"><c:out
-								value="${fn:length(listP)} Items found" /> </strong>
+								value="${listP.size()} Items found" /> </strong>
 						<div class="ms-auto">
 							<select class="form-select d-inline-block w-auto border pt-1">
 								<option value="0">Best match</option>

@@ -26,5 +26,3 @@
 	
 <!-- Base for anchor href -->
 <base href="<%=request.getContextPath()%>/" />
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
