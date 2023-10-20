@@ -81,17 +81,12 @@
 				<!-- Left links -->
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link text-dark"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Categories</a>
+						aria-current="page" href="home">Home</a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="shop">Shop</a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="#">Categories</a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="#">Gift</a>
 					</li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Hot
-							offers</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Gift
-							boxes</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Projects</a>
-					</li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Menu
-							item</a></li>
+					<li class="nav-item"><a class="nav-link text-dark" href="#">Blogs</a></li>
 					<li class="nav-item"><a class="nav-link text-dark" href="#">Menu
 							name</a></li>
 					<!-- Navbar dropdown -->
