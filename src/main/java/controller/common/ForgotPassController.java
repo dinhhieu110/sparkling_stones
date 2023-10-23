@@ -35,11 +35,9 @@ public class ForgotPassController extends HttpServlet {
 		String email = request.getParameter("email").toLowerCase();
 		
 		UserDAO dao = new UserDAO();
-		String error = "";
-		String type = "";
-
 		User user = dao.getUserByEmail(email);
 		dao.close();
+
 		// Check xem có mail này dưới db không
 		if(user != null){
 			String forward = SUCCESS_FORWARD + "?email=" + email+"&otpTask=OtpResetPassword";
@@ -47,8 +45,8 @@ public class ForgotPassController extends HttpServlet {
 			session.setAttribute("otpUser", user);
 			response.sendRedirect(forward);
 		}else {
-			type = "danger";
-			error = "This account does not exist!";
+			String type = "danger";
+			String error = "This account does not exist!";
 			// Lấy template thông báo lỗi
 			Template template = new Template("template/alert.html");
 			Map<String, String> replacements = new HashMap<String, String>();

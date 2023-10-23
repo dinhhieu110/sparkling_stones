@@ -110,12 +110,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UpdatePassWordController</display-name>
-    <servlet-name>UpdatePassWordController</servlet-name>
-    <servlet-class>controller.common.UpdatePassWordController</servlet-class>
+    <display-name>ResetPasswordController</display-name>
+    <servlet-name>ResetPasswordController</servlet-name>
+    <servlet-class>controller.common.ResetPasswordController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UpdatePassWordController</servlet-name>
+    <servlet-name>ResetPasswordController</servlet-name>
     <url-pattern>/reset-password</url-pattern>
   </servlet-mapping>
 </web-app>

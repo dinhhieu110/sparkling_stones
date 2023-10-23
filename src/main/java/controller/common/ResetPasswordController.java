@@ -1,7 +1,6 @@
 package controller.common;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,11 +15,11 @@ import java.util.Map;
 
 import dao.UserDAO;
 
-public class UpdatePassWordController extends HttpServlet {
+public class ResetPasswordController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String FOWARD_PAGE = "/main/resetpassword.jsp";
 
-	public UpdatePassWordController() {
+	public ResetPasswordController() {
 		super();
 	}
 

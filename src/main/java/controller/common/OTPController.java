@@ -92,8 +92,7 @@ public class OTPController extends HttpServlet {
 					type = "danger";
 				}
 			} else {
-				error = "OTP has expired. <a href=\"verify-otp?email=" + email
-						+ "\" class=\"alert-link\">Resend OTP</a>";
+				error = "OTP has expired. <a href=\"verify-otp?email="+ email +"&otpTask=OtpRegister\" class=\"alert-link\">Resend OTP</a>";
 				type = "warning";
 			}
 		} else {
