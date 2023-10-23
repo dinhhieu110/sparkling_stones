@@ -41,7 +41,7 @@ public class OTPController extends HttpServlet {
 		if (request.getParameter("email") != null) {
 			doPut(request, response);
 		} else {
-			request.getRequestDispatcher(FORWARD_PAGE).forward(request, response);			
+			request.getRequestDispatcher(FORWARD_PAGE).forward(request, response);
 		}
 	}
 
@@ -52,7 +52,6 @@ public class OTPController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		final String SUCCESS_FORWARD = request.getContextPath() + "/login";
-
 		// Lấy mã OTP từ form
 		String[] numbers = request.getParameterValues("number");
 		String otpString = "";
@@ -64,19 +63,25 @@ public class OTPController extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		String error = "";
 		String type = "";
-		
+
 		// Validate the OTP
 		if (otp >= 0) {
 			HttpSession session = request.getSession();
 			OTPService otpService = (OTPService) session.getAttribute("otpService");
-			User user = (User)session.getAttribute("otpUser");
-
+			User user = (User) session.getAttribute("otpUser");
 			String email = user.getEmail();
+			String otpTask = (String) session.getAttribute("otpTask");
 			int serverOtp = otpService.getOtp(email);
 			if (serverOtp > 0) {
 				if (otp == serverOtp) {
 					otpService.clearOTP(email);
-					dao.verify(email);
+					if (otpTask.equals("OtpRegister")) {
+						dao.verify(email);
+					}
+					if(otpTask.equals("OtpResetPassword")) {
+						request.setAttribute("email", email);
+						request.getRequestDispatcher("/main/resetpassword.jsp").forward(request, response);
+					}
 					session.removeAttribute("otpUser");
 					session.removeAttribute("otpService");
 				} else {
@@ -84,7 +89,8 @@ public class OTPController extends HttpServlet {
 					type = "danger";
 				}
 			} else {
-				error = "OTP has expired. <a href=\"verify-otp?email="+ email +"\" class=\"alert-link\">Resend OTP</a>";
+				error = "OTP has expired. <a href=\"verify-otp?email=" + email
+						+ "\" class=\"alert-link\">Resend OTP</a>";
 				type = "warning";
 			}
 		} else {
@@ -107,7 +113,7 @@ public class OTPController extends HttpServlet {
 			doGet(request, response);
 		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -117,35 +123,42 @@ public class OTPController extends HttpServlet {
 		// TODO Auto-generated method stub
 		final String SUCCESS_FORWARD = request.getContextPath() + "/verify-otp";
 		final String FAIL_FORWARD = request.getContextPath() + "/register";
-		
+		final String FAIL_RESETPASSWORD_FORWARD = request.getContextPath() + "/forgotpassword";
+
 		String email = request.getParameter("email");
-		
 		UserDAO dao = new UserDAO();
 		User user = dao.getUserByEmail(email);
+		String otpTask = request.getParameter("otpTask");
 
-		String forward = FAIL_FORWARD;
-		
+		String forward = "";
+		if (otpTask.equals("OtpRegister")) {
+			forward = FAIL_FORWARD;
+		}
+		if(otpTask.equals("OtpResetPassword")) {
+			forward= FAIL_RESETPASSWORD_FORWARD;
+		}
+
 		if (user != null) {
 			OTPService otpService = new OTPService();
 			int otp = otpService.generateOTP(email);
-			
+
 			// Generate The Template to send OTP
 			Template template = new Template("template/mail-otp.html");
 			Map<String, String> replacements = new HashMap<String, String>();
 			replacements.put("user", email);
 			replacements.put("otpnum", String.valueOf(otp));
 			String message = template.getTemplate(replacements);
-			
+
 			EmailService emailService = new EmailService();
 			emailService.send(email, "[Spakling Stones] OTP Verification", message);
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("otpService", otpService);
-			session.setAttribute("otpUser", user);		
-						
+			session.setAttribute("otpUser", user);
+			session.setAttribute("otpTask", otpTask);
 			forward = SUCCESS_FORWARD;
 		}
-		
+
 		dao.close();
 		response.sendRedirect(forward);
 	}

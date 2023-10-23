@@ -98,4 +98,24 @@
     <servlet-name>LogOutController</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ForgotPassController</display-name>
+    <servlet-name>ForgotPassController</servlet-name>
+    <servlet-class>controller.common.ForgotPassController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ForgotPassController</servlet-name>
+    <url-pattern>/forgotpassword</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdatePassWordController</display-name>
+    <servlet-name>UpdatePassWordController</servlet-name>
+    <servlet-class>controller.common.UpdatePassWordController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePassWordController</servlet-name>
+    <url-pattern>/updatepassword</url-pattern>
+  </servlet-mapping>
 </web-app>
