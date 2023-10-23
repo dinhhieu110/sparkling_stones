@@ -1,10 +1,10 @@
 package controller.common;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.User;
 import util.Template;
 
@@ -37,27 +37,28 @@ public class ForgotPassController extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		String error = "";
 		String type = "";
-		String forward = SUCCESS_FORWARD;
-		final String askOtpForResetPassword = "OtpResetPassword";
 
+		User user = dao.getUserByEmail(email);
+		dao.close();
 		// Check xem có mail này dưới db không
-		if((dao.emailIsExist(email))){
-			forward += "?email=" + email+"&otpTask="+askOtpForResetPassword;
+		if(user != null){
+			String forward = SUCCESS_FORWARD + "?email=" + email+"&otpTask=OtpResetPassword";
+			HttpSession session = request.getSession();
+			session.setAttribute("otpUser", user);
 			response.sendRedirect(forward);
 		}else {
 			type = "danger";
 			error = "This account does not exist!";
 			// Lấy template thông báo lỗi
-						Template template = new Template("template/alert.html");
-						Map<String, String> replacements = new HashMap<String, String>();
-						replacements.put("type", type);
-						replacements.put("content", error);
+			Template template = new Template("template/alert.html");
+			Map<String, String> replacements = new HashMap<String, String>();
+			replacements.put("type", type);
+			replacements.put("content", error);
 
-						String alert = template.getTemplate(replacements);
-						request.setAttribute("error", alert);
-						doGet(request, response);
+			String alert = template.getTemplate(replacements);
+			request.setAttribute("error", alert);
+			doGet(request, response);
 		}
-		dao.close();
 	} 
 
 

@@ -21,9 +21,8 @@
 							<h3 class="mb-1 fw-bold">Forgot Password?🔒</h3>
 							<p class="mb-2">Enter your registered email ID to reset the
 								password</p>
-							${error}
 						</div>
-						<form action="forgotpassword" method="post">
+						<form action="forgot-password" method="post">
 							<div class="mb-3">
 								<label for="email" class="form-label fw-bold">Email</label> <input
 									type="email" id="email" class="form-control" name="email"
@@ -34,6 +33,7 @@
 								<button type="submit" class="btn btn-primary">Reset
 									Password</button>
 							</div>
+							<div class="text-center">${error}</div>
 							<span>Already have an account? <a href="main/login.jsp">sign
 									in</a></span>
 						</form>

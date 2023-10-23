@@ -21,7 +21,7 @@
 							<h3 class="mb-1 fw-bold">Change Password</h3>
 							${error}
 						</div>
-						<form action="updatepassword" method="post">
+						<form action="reset-password" method="post">
 							<div class="mb-3">
 								<div class="form-group">
 									<label for="email" class="form-label fw-bold">Your new
@@ -35,7 +35,6 @@
 								</div>
 
 							</div>
-							<input type="hidden" name ="email" value ="${email}">
 							<div class="mb-3 d-grid">
 								<button type="submit" class="btn btn-primary">Confirm</button>
 							</div>

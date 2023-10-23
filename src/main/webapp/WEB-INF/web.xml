@@ -106,7 +106,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ForgotPassController</servlet-name>
-    <url-pattern>/forgotpassword</url-pattern>
+    <url-pattern>/forgot-password</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -116,6 +116,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdatePassWordController</servlet-name>
-    <url-pattern>/updatepassword</url-pattern>
+    <url-pattern>/reset-password</url-pattern>
   </servlet-mapping>
 </web-app>

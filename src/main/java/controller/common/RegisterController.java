@@ -42,7 +42,6 @@ public class RegisterController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String SUCCESS_FORWARD = request.getContextPath() + "/verify-otp";
-		final String askOtpForRegister = "OtpRegister";
 
 		// Lấy thông tin đăng kí từ form
 		String firstName = request.getParameter("txtFirstName");
@@ -64,7 +63,7 @@ public class RegisterController extends HttpServlet {
 				EncryptionService ecrypt = new EncryptionService();
 				password = ecrypt.encryptMD5(password);
 				dao.register(email, password, firstName, lastName);
-				forward += "?email=" + email+"&otpTask="+askOtpForRegister;
+				forward += "?email=" + email+"&otpTask=OtpRegister";
 			} else {
 				// Kiểm tra account đã được xác thực
 				if (user.isVerified()) {
@@ -72,7 +71,7 @@ public class RegisterController extends HttpServlet {
 					error = "Email has been registered.";
 				} else {
 					type = "warning";
-					error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"\" class=\"alert-link\">Verify here</a>";
+					error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"&otpTask=OtpRegister\" class=\"alert-link\">Verify here</a>";
 				}
 			}
 		} else {

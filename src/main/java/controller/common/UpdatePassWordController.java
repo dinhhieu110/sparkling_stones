@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.User;
 import util.EncryptionService;
 import util.Template;
@@ -30,7 +31,7 @@ public class UpdatePassWordController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final String SUCCESS_FORWARD = request.getContextPath() + "/main/login.jsp";
+		final String SUCCESS_FORWARD = request.getContextPath() + "/login";
 
 		String newPassword = request.getParameter("newpass");
 		String cfmNewPassword = request.getParameter("cfmnewpass");
@@ -38,15 +39,15 @@ public class UpdatePassWordController extends HttpServlet {
 		UserDAO dao = new UserDAO();
 		String type = "";
 		String error = "";
-		String email = request.getParameter("email");
 		if (newPassword.equals(cfmNewPassword)) {
-			User user = dao.getUserByEmail(email);
+			HttpSession session = request.getSession();
+			User user = (User) session.getAttribute("otpUser");
 			if (user != null) {
 				EncryptionService ecrypt = new EncryptionService();
 				newPassword = ecrypt.encryptMD5(newPassword);
-				dao.updatePassword(email, newPassword);
+				dao.updatePassword(user.getEmail(), newPassword);
+				session.removeAttribute("otpUser");
 			} else {
-
 				type = "danger";
 				error = "Account does not exist!";
 			}

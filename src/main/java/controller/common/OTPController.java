@@ -51,9 +51,12 @@ public class OTPController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final String SUCCESS_FORWARD = request.getContextPath() + "/login";
+		final String SUCCESS_FORWARD_REGISTER = request.getContextPath() + "/login";
+		final String SUCCESS_FORWARD_RESET = request.getContextPath() + "/reset-password";
+		
 		// Lấy mã OTP từ form
 		String[] numbers = request.getParameterValues("number");
+		String otpTask = (String) request.getParameter("otpTask");
 		String otpString = "";
 		for (String number : numbers) {
 			otpString += number;
@@ -61,6 +64,7 @@ public class OTPController extends HttpServlet {
 		int otp = Integer.parseInt(otpString);
 
 		UserDAO dao = new UserDAO();
+		String forward = "";
 		String error = "";
 		String type = "";
 
@@ -70,19 +74,18 @@ public class OTPController extends HttpServlet {
 			OTPService otpService = (OTPService) session.getAttribute("otpService");
 			User user = (User) session.getAttribute("otpUser");
 			String email = user.getEmail();
-			String otpTask = (String) session.getAttribute("otpTask");
 			int serverOtp = otpService.getOtp(email);
 			if (serverOtp > 0) {
 				if (otp == serverOtp) {
 					otpService.clearOTP(email);
 					if (otpTask.equals("OtpRegister")) {
 						dao.verify(email);
+						forward = SUCCESS_FORWARD_REGISTER;
+						session.removeAttribute("otpUser");
 					}
 					if(otpTask.equals("OtpResetPassword")) {
-						request.setAttribute("email", email);
-						request.getRequestDispatcher("/main/resetpassword.jsp").forward(request, response);
+						forward = SUCCESS_FORWARD_RESET;
 					}
-					session.removeAttribute("otpUser");
 					session.removeAttribute("otpService");
 				} else {
 					error = "OTP is incorrect";
@@ -100,7 +103,7 @@ public class OTPController extends HttpServlet {
 
 		dao.close();
 		if (error.equals("") && type.equals("")) {
-			response.sendRedirect(SUCCESS_FORWARD);
+			response.sendRedirect(forward);
 		} else {
 			// Lấy template thông báo lỗi
 			Template template = new Template("template/alert.html");
@@ -126,16 +129,16 @@ public class OTPController extends HttpServlet {
 		final String FAIL_RESETPASSWORD_FORWARD = request.getContextPath() + "/forgotpassword";
 
 		String email = request.getParameter("email");
+		String otpTask = request.getParameter("otpTask");
 		UserDAO dao = new UserDAO();
 		User user = dao.getUserByEmail(email);
-		String otpTask = request.getParameter("otpTask");
 
 		String forward = "";
 		if (otpTask.equals("OtpRegister")) {
 			forward = FAIL_FORWARD;
 		}
-		if(otpTask.equals("OtpResetPassword")) {
-			forward= FAIL_RESETPASSWORD_FORWARD;
+		if (otpTask.equals("OtpResetPassword")) {
+			forward = FAIL_RESETPASSWORD_FORWARD;
 		}
 
 		if (user != null) {
@@ -155,8 +158,7 @@ public class OTPController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("otpService", otpService);
 			session.setAttribute("otpUser", user);
-			session.setAttribute("otpTask", otpTask);
-			forward = SUCCESS_FORWARD;
+			forward = SUCCESS_FORWARD + "?otpTask=" + otpTask;
 		}
 
 		dao.close();
