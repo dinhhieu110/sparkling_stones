@@ -37,18 +37,6 @@ public class LoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Cookie arr[] = request.getCookies();
-		if (arr != null) {
-			for (Cookie o : arr) {
-				if (o.getName().equals("userC")) {
-					request.setAttribute("email", o.getValue());
-				}
-				if (o.getName().equals("passC")) {
-					request.setAttribute("password", o.getValue());
-				}
-			}
-		}
-
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 	}
 
@@ -74,17 +62,15 @@ public class LoginController extends HttpServlet {
 				if (ecryptPassword.equals(user.getPassword())) {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
-					// lưu account lên cookie
-					Cookie u = new Cookie("userC", email);
-					Cookie p = new Cookie("passC", password);
-					u.setMaxAge(60 * 60);
+					// Lưu account lên cookie
 					if (remember != null) {
-						p.setMaxAge(60 * 60);
-					} else {
-						p.setMaxAge(0);
+						Cookie u = new Cookie("userC", email);
+						Cookie p = new Cookie("passC", ecryptPassword);
+						u.setMaxAge(60 * 60 * 24 * 30);
+						p.setMaxAge(60 * 60 * 24 * 30);
+						response.addCookie(p);
+						response.addCookie(u);
 					}
-					response.addCookie(u);
-					response.addCookie(p);
 				} else {
 					type = "danger";
 					error = "Password is incorrect!";

@@ -61,28 +61,24 @@
 						<div class="form-outline mb-4">
 							<input type="email" id="form3Example3"
 								class="form-control form-control-lg"
-								placeholder="Enter a valid email address" name="txtEmail"
-								value="${email}" /> <label class="form-label"
-								for="form3Example3">Email address</label>
+								placeholder="Enter a valid email address" name="txtEmail"/> <label
+								class="form-label" for="form3Example3">Email address</label>
 						</div>
 
 						<!-- Password input -->
 						<div class="form-outline mb-3">
 							<input type="password" id="form3Example4"
 								class="form-control form-control-lg"
-								placeholder="Enter password" name="txtPassword"
-								value="${password}" /> <label class="form-label"
+								placeholder="Enter password" name="txtPassword"/> <label class="form-label"
 								for="form3Example4">Password</label>
 						</div>
 
-						<div
-							class="d-flex justify-content-between align-items-center mb-3">
+						<div class="d-flex justify-content-between align-items-center mb-3">
 							<!-- Checkbox -->
 							<div class="form-check mb-0">
-								<input class="form-check-input me-2" type="checkbox" value="1"
-									id="form2Example3" name="chkRemember" /> <label
-									class="form-check-label" for="form2Example3"> Remember
-									me </label>
+								<input class="form-check-input me-2" type="checkbox" value=""
+									id="form2Example3" name="chkRemember"/> <label class="form-check-label"
+									for="form2Example3"> Remember me </label>
 							</div>
 							<a href="#!" class="text-body">Forgot password?</a>
 						</div>
