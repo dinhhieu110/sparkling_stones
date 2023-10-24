@@ -57,7 +57,7 @@ public class ResetPasswordController extends HttpServlet {
 		}
 		dao.close();
 		if (error.equals("") && type.equals("")) {
-			response.sendRedirect(SUCCESS_FORWARD);
+			response.sendRedirect(SUCCESS_FORWARD+"?status=SuccessfullyResetPassword");
 		} else {
 			// Lấy template thông báo lỗi
 			Template template = new Template("template/alert.html");
