@@ -62,11 +62,7 @@ public class LoginController extends HttpServlet {
 				if (ecryptPassword.equals(user.getPassword())) {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
-					
-					// lưu account lên cookie
-					Cookie u = new Cookie("userC", email);
-					Cookie p = new Cookie("passC", password);
-					u.setMaxAge(60 * 60);
+					// Lưu account lên cookie
 					if (remember != null) {
 						Cookie u = new Cookie("userC", email);
 						Cookie p = new Cookie("passC", ecryptPassword);
