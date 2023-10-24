@@ -80,7 +80,7 @@ public class OTPController extends HttpServlet {
 					otpService.clearOTP(email);
 					if (otpTask.equals("OtpRegister")) {
 						dao.verify(email);
-						forward = SUCCESS_FORWARD_REGISTER;
+						forward = SUCCESS_FORWARD_REGISTER+"?status=SuccessfullyRegister";
 						session.removeAttribute("otpUser");
 					}
 					if(otpTask.equals("OtpResetPassword")) {

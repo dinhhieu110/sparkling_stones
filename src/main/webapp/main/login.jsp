@@ -26,6 +26,9 @@
 </style>
 </head>
 <body>
+
+	<input type="hidden" id="status" value="<%= request.getParameter("status")%>">
+
 	<section class="vh-100">
 		<div class="container-fluid h-custom">
 			<div
@@ -114,7 +117,20 @@
 			<!-- Right -->
 		</div>
 	</section>
-
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="alert/dist/sweetalert.css">
+	<script type="text/javascript">
+		var status = document.getElementById("status").value;
+		if(status == "SuccessfullyRegister"){
+			swal("Congrats","Account Created Successfully","success");
+		}
+		if(status == "SuccessfullyResetPassword"){
+			swal("Congrats","Password Updated Successfully","success");
+		}
+	</script>
+	
+	
 	<%@include file="/common/script.jsp"%>
 </body>
 </html>
