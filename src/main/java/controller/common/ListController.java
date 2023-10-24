@@ -27,7 +27,6 @@ public class ListController extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ProductDAO pDao = new ProductDAO();
 		CategoryDAO cDao = new CategoryDAO();
 		ProductDAO pagingDao = new ProductDAO();
 		int countProducts = pagingDao.getTotalProducts(); 

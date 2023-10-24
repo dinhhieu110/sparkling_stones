@@ -28,13 +28,13 @@ public class EmailService {
         try {
             // Tạo đối tượng MimeMessage
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(FROM, NAME));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setFrom(new InternetAddress(FROM, NAME)); 								// Người gửi
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));		// Người nhận
             String encodedSubject = MimeUtility.encodeText(subject, "UTF-8", "B");
             message.setSubject(encodedSubject);
-            message.setContent(msg, "text/html; charset=utf-8");
+            message.setContent(msg, "text/html; charset=utf-8");							// Nội dung
 
-            // Gửi email
+            // Gửi email (toàn bộ nội dung trên) 
             Transport.send(message);
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();
