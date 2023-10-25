@@ -42,7 +42,7 @@
 					<form action="login" method="post">
 						<div
 							class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-							<p class="lead fw-normal mb-0 me-3">Sign up with</p>
+							<p class="lead fw-normal mb-0 me-3">Sign in with</p>
 							<button type="button" class="btn btn-primary btn-floating mx-1">
 								<i class="fab fa-facebook-f"></i>
 							</button>
