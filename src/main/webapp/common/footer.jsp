@@ -11,20 +11,24 @@
 				<div class="col-12 col-lg-3 col-sm-12 mb-2">
 					<!-- Content -->
 					<a href="https://mdbootstrap.com/" target="_blank"
-						class="text-white h2"> Sparkling Stones </a>
-					<p class="mt-1 text-white">© 2023 Copyright: Sparkling Stones, Inc. No Rights Reserved</p>
+						class="text-white h2"> <i class="fa fa-diamond" aria-hidden="true"></i>Sparkling Stones </a>
+					<p class="mt-1 text-white">© 2023 Công Ty Cổ Phần Vàng Bạc Đá Quý Đà Nẵng</p>
+					<p class="text-white">Khu Đô Thị FPT, Q.Ngũ Hành Sơn, TP.Đà Nẵng</p>
+					<p></p>
+					
 				</div>
 				<!-- Grid column -->
 
 				<!-- Grid column -->
 				<div class="col-6 col-sm-4 col-lg-2">
 					<!-- Links -->
-					<h6 class="text-uppercase text-white fw-bold mb-2">Store</h6>
+					<h6 class="text-uppercase text-white fw-bold mb-2">VỀ SPARKLING STONES</h6>
 					<ul class="list-unstyled mb-4">
-						<li><a class="text-white-50" href="#">About us</a></li>
-						<li><a class="text-white-50" href="#">Find store</a></li>
-						<li><a class="text-white-50" href="#">Categories</a></li>
-						<li><a class="text-white-50" href="#">Blogs</a></li>
+						<li><a class="text-white-50" href="#">Câu Chuyện Sparkling Stones</a></li>
+						<li><a class="text-white-50" href="#">Tuyển Dụng</a></li>
+						<li><a class="text-white-50" href="#">Xuất Khẩu</a></li>
+						<li><a class="text-white-50" href="#">Kiểm Định Kim Cương</a></li>
+						
 					</ul>
 				</div>
 				<!-- Grid column -->
@@ -33,12 +37,12 @@
 				<div class="col-6 col-sm-4 col-lg-2">
 					<!-- Links -->
 					<h6 class="text-uppercase text-white fw-bold mb-2">
-						Information</h6>
+						DỊCH VỤ KHÁCH HÀNG</h6>
 					<ul class="list-unstyled mb-4">
-						<li><a class="text-white-50" href="#">Help center</a></li>
-						<li><a class="text-white-50" href="#">Money refund</a></li>
-						<li><a class="text-white-50" href="#">Shipping info</a></li>
-						<li><a class="text-white-50" href="#">Refunds</a></li>
+						<li><a class="text-white-50" href="#">Trung tâm giúp đỡ</a></li>
+						<li><a class="text-white-50" href="#">Hướng dẫn đo size</a></li>
+						<li><a class="text-white-50" href="#">Hướng dẫn mua hàng và thanh toán</a></li>
+						<li><a class="text-white-50" href="#">Chính sách giao hàng</a></li>
 					</ul>
 				</div>
 				<!-- Grid column -->
@@ -46,12 +50,12 @@
 				<!-- Grid column -->
 				<div class="col-6 col-sm-4 col-lg-2">
 					<!-- Links -->
-					<h6 class="text-uppercase text-white fw-bold mb-2">Support</h6>
+					<h6 class="text-uppercase text-white fw-bold mb-2">HỖ TRỢ</h6>
 					<ul class="list-unstyled mb-4">
-						<li><a class="text-white-50" href="#">Help center</a></li>
-						<li><a class="text-white-50" href="#">Documents</a></li>
-						<li><a class="text-white-50" href="#">Account restore</a></li>
-						<li><a class="text-white-50" href="#">My orders</a></li>
+						<li><a class="text-white-50" href="#">Chính sách xử lí dữ liệu cá nhân</a></li>
+						<li><a class="text-white-50" href="#">Chính sách bảo mật thôn tin khách hàng</a></li>
+						<li><a class="text-white-50" href="#">Câu hỏi thường gặp</a></li>
+						<li><a class="text-white-50" href="#">Chính sách hoàn tiền</a></li>
 					</ul>
 				</div>
 				<!-- Grid column -->
@@ -59,15 +63,14 @@
 				<!-- Grid column -->
 				<div class="col-12 col-sm-12 col-lg-3">
 					<!-- Links -->
-					<h6 class="text-uppercase text-white fw-bold mb-2">Newsletter</h6>
-					<p class="text-white">Stay in touch with latest updates about
-						our products and offers</p>
+					<h6 class="text-uppercase text-white fw-bold mb-2">KẾT NỐI VỚI CHÚNG TÔI</h6>
+					<p class="text-white">Duy trì cập nhật những thay đổi mới nhất về sản phẩm và ưu đãi của chúng tôi</p>
 					<div class="input-group mb-3">
 						<input type="email" class="form-control border"
 							placeholder="Email" aria-label="Email"
 							aria-describedby="button-addon2" />
 						<button class="btn btn-light border shadow-0" type="button"
-							id="button-addon2" data-mdb-ripple-color="dark">Join</button>
+							id="button-addon2" data-mdb-ripple-color="dark">Tham gia</button>
 					</div>
 				</div>
 				<!-- Grid column -->
