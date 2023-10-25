@@ -223,25 +223,56 @@
 					</div>
 
 					<hr />
-
 					<!-- Pagination -->
+					<%String from = (String)request.getAttribute("from"); %>
+					<%String searchName = (String)request.getAttribute("searchName"); 
+					%>
 					<nav aria-label="Page navigation example"
 						class="d-flex justify-content-center mt-3">
 						<ul class="pagination">
 							<li class="page-item ${tag == 1 ?"disabled":" "}""><a
-								class="page-link" href="shop?index=${(tag-1)}"
+								class="page-link" 
+								<% if(from=="shop")
+									{ %>
+									href="shop?index=${(tag-1)}"
+								<%}%>
+								<% if (from =="search")
+									{ %>
+									href="search?txt=${searchName}&index=${(tag-1)}"
+									<%}
+									%>
 								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 							<c:forEach begin="1" end="${endP}" var="i">
 								<li class="page-item ${tag == i ?"active":" "}"><a
-									class="page-link" href="shop?index=${i}">${i}</a></li>
+									class="page-link" 
+									<% if(from=="shop")
+									{ %>
+										href="shop?index=${i}"
+									<%}%>
+									<% if (from =="search")
+									{ %>
+										href="search?txt=${searchName}&index=${i}"
+									<%}
+									%>
+									>${i}</a></li>
 							</c:forEach>
 							<li class="page-item ${tag == endP ?"disabled":" "}""><a
-								class="page-link" href="shop?index=${(tag + 1)}"
+								class="page-link" 
+								<% if(from=="shop")
+									{ %>
+									href="shop?index=${(tag+1)}"
+								<%}%>
+								<% if (from =="search")
+									{ %>
+									href="search?txt=${searchName}&index=${(tag+1)}"
+									<%}
+									%>
 								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
 						</ul>
 					</nav>
+				
 					<!-- Pagination -->
 				</div>
 			</div>

@@ -98,7 +98,8 @@ public class ProductDAO extends DAOService {
 
 		return list;
 	}
-
+	
+	// Lấy tổng số sản phẩm
 	public int getTotalProducts() {
 		String sql = "select count(*) from \"Product\"";
 
@@ -131,6 +132,62 @@ public class ProductDAO extends DAOService {
 						rs.getTimestamp("updated_at")));
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	// Lấy số sản phẩm sau search
+	public int getNumSearchProducts(String nameSearch) {
+
+		String sql = "select count (*) from \"ProductWithImages\" where lower(title) like ?";
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(nameSearch);
+		ResultSet rs = select(sql, params);
+
+		try {
+			while(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public List<Product> searchByName(String nameSearch, int index) {
+
+		String sql = "select * from \r\n"
+				+ "(select row_number() over (order by id asc ) as rowNo, *\r\n"
+				+ "from \"ProductWithImages\" where lower(title) like ?) as  x\r\n"
+				+ "where rowNo between ?*9-8 and ?*9 ;";
+		
+		List<Object> params = new ArrayList<Object>();
+		params.add(nameSearch);
+		params.add(index);
+		params.add(index);
+
+		ResultSet rs = select(sql, params);
+
+		List<Product> list = new ArrayList<Product>();
+		try {
+			while(rs.next()) {
+				list.add( new Product(rs.getString("id"),
+						  rs.getString("category_id"),
+						  rs.getString("title"),
+						  rs.getInt("price"), 
+						  rs.getInt("discount"),
+						  rs.getString("thumbnail"), 
+						  rs.getArray("gallery"),
+						  rs.getString("description"),
+						  rs.getDouble("rating"),
+						  rs.getTimestamp("created_at"),
+						  rs.getTimestamp("updated_at")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
