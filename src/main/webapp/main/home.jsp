@@ -46,14 +46,14 @@ div.container-fluid {
 						<!-- Single item -->
 						<div class="carousel-item">
 							<img
-								src="https://cdn.pnj.io/images/promo/190/halloween-teasing-1972x640CTA.jpg"
+								src="https://cdn.pnj.io/images/promo/182/ts-y-t9-1200x450CTA__1_.jpg "
 								height="494px" class="d-block w-100" alt="Canyon at Nigh" />
 						</div>
 
 						<!-- Single item -->
 						<div class="carousel-item">
 							<img
-								src="https://cdn.pnj.io/images/promo/182/ts-y-t9-1200x450CTA__1_.jpg "
+								src="https://cdn.pnj.io/images/promo/190/halloween-teasing-1972x640CTA.jpg"
 								class="d-block w-100" alt="Cliff Above a Stormy Sea" />
 						</div>
 					</div>
