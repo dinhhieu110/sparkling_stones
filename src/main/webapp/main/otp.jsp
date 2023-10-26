@@ -84,6 +84,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 					<span>A code has been sent to your email</span>
 				</div>
 				<form action="verify-otp" method="post">
+					<input type="hidden" value="${param.otpTask}" name="otpTask">
 					<div id="otp"
 					class="inputs d-flex flex-row justify-content-center mt-2">
 					<input class="m-2 text-center form-control rounded" type="number"

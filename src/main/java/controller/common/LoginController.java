@@ -35,36 +35,21 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		Cookie arr[] = request.getCookies();
-        if (arr != null) {
-            for (Cookie o : arr) {
-                if (o.getName().equals("userC")) {
-                    request.setAttribute("email", o.getValue());
-                }
-                if (o.getName().equals("passC")) {
-                    request.setAttribute("password", o.getValue());
-                }
-            }
-        }
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String SUCCESS_FORWARD = request.getContextPath();
 
 		String email = request.getParameter("txtEmail").toLowerCase();
 		String password = request.getParameter("txtPassword");
 		String remember = request.getParameter("chkRemember");
 		
-
 		UserDAO dao = new UserDAO();
 		User user = dao.getUserByEmail(email);
 
@@ -78,18 +63,6 @@ public class LoginController extends HttpServlet {
 				if (ecryptPassword.equals(user.getPassword())) {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
-					//lưu account lên cookie
-					Cookie u = new Cookie("userC", email);
-		            Cookie p = new Cookie("passC", password);
-		            u.setMaxAge(60 * 60 );
-		            if (remember != null) {
-		                p.setMaxAge(60 * 60 );
-		            } else {
-		                p.setMaxAge(0);
-		            }
-		            response.addCookie(u);
-		            response.addCookie(p);
-					
 				} else {
 					type = "danger";
 					error = "Password is incorrect!";

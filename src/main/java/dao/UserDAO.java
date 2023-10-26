@@ -95,4 +95,15 @@ public class UserDAO extends DAOService{
 
 
     }
+
+    // Cập nhật mật khẩu
+	public void updatePassword(String email, String newPassword) {
+		String sql =  "update \"User\" set password = ? where email = ?";
+		List<Object> params = new ArrayList<>();
+		params.add(newPassword);
+		params.add(email);
+		
+		update(sql, params);
+		
+	}
 }

@@ -15,7 +15,7 @@ public class Product {
 	private double rating;
 	public Timestamp createdAt;
 	public Timestamp updatedAt;
-	
+
 	public Product(String id, String category, String title, int price, int discount, String thumbnail, Array gallery,
 			String description, double rating, Timestamp createdAt, Timestamp updatedAt) {
 		super();

@@ -1,6 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+.nav-link {
+transition: .4s;
+}
+.nav-link:hover {
+transition: .4s;
+background-color: rgba(0, 122, 255, 0.3) ;
+}
+
+.my-li{
+	margin: 0px 30px;
+}
+</style>
 <header>
 	<!-- Jumbotron -->
 	<div class="p-3 text-center bg-white border-bottom">
@@ -20,26 +33,22 @@
 					<div class="d-flex float-end">
 						<c:if test="${user == null}">
 							<a href="login"
-								class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+								class="me-1 border-bottom rounded py-1 px-3 nav-link d-flex align-items-center">
 								<i class="fas fa-user-alt m-1 me-md-2"></i>
-								<p class="d-none d-md-block mb-0">Sign in</p>
+								<p class="d-none d-md-block mb-0">Tài Khoản Của Tôi</p>
 							</a> 
 						</c:if>
 						<c:if test="${user != null}">
 							<a href="my-account"
-								class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+								class="me-1 border-bottom rounded py-1 px-3 nav-link d-flex align-items-center">
 								<i class="fas fa-user-alt m-1 me-md-2"></i>
 								<p class="d-none d-md-block mb-0">${user.firstName} ${user.lastName}</p>
 							</a> 
 						</c:if>
-						<a
-							href="wishlist"
-							class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center"> <i class="fas fa-heart m-1 me-md-2"></i>
-							<p class="d-none d-md-block mb-0">Wishlist</p>
-						</a> <a href="cart"
-							class="border rounded py-1 px-3 nav-link d-flex align-items-center">
+						 <a href="cart"
+							class="rounded border-bottom py-1 px-3 nav-link d-flex align-items-center">
 							<i class="fas fa-shopping-cart m-1 me-md-2"></i>
-							<p class="d-none d-md-block mb-0">My cart</p>
+							<p class="d-none d-md-block mb-0">Giỏ Hàng</p>
 						</a>
 					</div>
 				</div>
@@ -50,7 +59,7 @@
 					<div class="input-group float-center">
 						<div class="form-outline">
 							<input type="search" id="form1" class="form-control" /> <label
-								class="form-label" for="form1">Search</label>
+								class="form-label" for="form1">Tìm Kiếm</label>
 						</div>
 						<button type="button" class="btn btn-primary shadow-0">
 							<i class="fas fa-search"></i>
@@ -67,7 +76,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-white">
 		<!-- Container wrapper -->
 		<div
-			class="container justify-content-center justify-content-md-between">
+			class="container-fluid">
 			<!-- Toggle button -->
 			<button class="navbar-toggler border py-2 text-dark" type="button"
 				data-mdb-toggle="collapse" data-mdb-target="#navbarLeftAlignExample"
@@ -77,28 +86,21 @@
 			</button>
 
 			<!-- Collapsible wrapper -->
-			<div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+			<div class="collapse navbar-collapse justify-content-around" id="navbarLeftAlignExample">
 				<!-- Left links -->
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link text-dark"
-						aria-current="page" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Categories</a>
-					</li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Hot
-							offers</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Gift
-							boxes</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Projects</a>
-					</li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Menu
-							item</a></li>
-					<li class="nav-item"><a class="nav-link text-dark" href="#">Menu
-							name</a></li>
+				<ul class="navbar-nav mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link rounded text-dark"
+						aria-current="page" href="home">Trang Chủ</a></li>
+					<li class="nav-item my-li"><a class="nav-link rounded text-dark" href="shop">Cửa Hàng</a></li>
+					<li class="nav-item my-li"><a class="nav-link rounded text-dark" href="#">Thương Hiệu</a></li>
+					<li class="nav-item my-li"><a class="nav-link rounded text-dark" href="#">Quà Tặng</a></li>
+					<li class="nav-item my-li"><a class="nav-link rounded text-dark" href="#">Bài Viết</a></li>
+					<li class="nav-item my-li"><a class="nav-link rounded text-dark" href="#">Khuyến Mãi</a></li>					
 					<!-- Navbar dropdown -->
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle text-dark" href="#"
+					<li class="nav-item dropdown my-li"><a
+						class="nav-link rounded dropdown-toggle text-dark" href="#"
 						id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
-						aria-expanded="false"> Others </a> <!-- Dropdown menu -->
+						aria-expanded="false"> Khác </a> <!-- Dropdown menu -->
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#">Action</a></li>
 							<li><a class="dropdown-item" href="#">Another action</a></li>

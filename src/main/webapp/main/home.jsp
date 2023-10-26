@@ -6,41 +6,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Home</title>
+<title>Trang Chủ</title>
 <%@include file="/common/head.jsp"%>
+<style>
+div.container-fluid {
+	padding: 0px;
+}
+</style>
 </head>
 <body>
 	<%@include file="/common/header.jsp"%>
 	<!-- intro -->
-	<section class="pt-3">
-		<div class="container">
-			<div class="row gx-3">
-				<main class="col-lg-9">
-					<div class="card-banner p-5 bg-primary rounded-5"
-						style="height: 350px;">
-						<div style="max-width: 500px;">
-							<h2 class="text-white">
-								Great products with <br /> best deals
-							</h2>
-							<p class="text-white">No matter how far along you are in your
-								sophistication as an amateur astronomer, there is always one.</p>
-							<a href="#" class="btn btn-light shadow-0 text-primary"> View
-								more </a>
+	<section>
+		<div class="container-fluid">
+			<main class="col-lg-12">
+				<!-- Carousel wrapper -->
+				<div id="carouselBasicExample" class="carousel slide carousel-fade"
+					data-mdb-ride="carousel">
+					<!-- Indicators -->
+					<div class="carousel-indicators">
+						<button type="button" data-mdb-target="#carouselBasicExample"
+							data-mdb-slide-to="0" class="active" aria-current="true"
+							aria-label="Slide 1"></button>
+						<button type="button" data-mdb-target="#carouselBasicExample"
+							data-mdb-slide-to="1" aria-label="Slide 2"></button>
+						<button type="button" data-mdb-target="#carouselBasicExample"
+							data-mdb-slide-to="2" aria-label="Slide 3"></button>
+					</div>
+
+					<!-- Inner -->
+					<div class="carousel-inner">
+						<!-- Single item -->
+						<div class="carousel-item active">
+							<img
+								src="https://cdn.pnj.io/images/promo/187/banner-chung-1972x640-cta.jpg"
+								class="d-block w-100" alt="Sunset Over the City" />
+						</div>
+
+						<!-- Single item -->
+						<div class="carousel-item">
+							<img
+								src="https://cdn.pnj.io/images/promo/182/ts-y-t9-1200x450CTA__1_.jpg "
+								height="494px" class="d-block w-100" alt="Canyon at Nigh" />
+						</div>
+
+						<!-- Single item -->
+						<div class="carousel-item">
+							<img
+								src="https://cdn.pnj.io/images/promo/190/halloween-teasing-1972x640CTA.jpg"
+								class="d-block w-100" alt="Cliff Above a Stormy Sea" />
 						</div>
 					</div>
-				</main>
-				<aside class="col-lg-3">
-					<div class="card-banner h-100 rounded-5"
-						style="background-color: #f87217;">
-						<div class="card-body text-center pb-5">
-							<h5 class="pt-5 text-white">Amazing Gifts</h5>
-							<p class="text-white">No matter how far along you are in your
-								sophistication</p>
-							<a href="#" class="btn btn-outline-light"> View more </a>
-						</div>
-					</div>
-				</aside>
-			</div>
+					<!-- Inner -->
+
+					<!-- Controls -->
+					<button class="carousel-control-prev" type="button"
+						data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+				<!-- Carousel wrapper -->
+			</main>
 			<!-- row //end -->
 		</div>
 		<!-- container end.// -->
@@ -73,7 +105,7 @@
 	<section>
 		<div class="container my-5">
 			<header class="mb-4">
-				<h3>New products</h3>
+				<h3>Sản Phẩm Mới Nhất</h3>
 			</header>
 
 			<div class="row">
@@ -104,10 +136,13 @@
 											pattern="#,##0₫" />
 									</del>
 								</h5>
+								<a href="detail?id=${product.id}">
 								<p class="card-text mb-0 d-inline-block text-truncate"
 									style="max-width: 200px;">${product.title}</p>
+								</a>
 								<div class="mt-4 text-warning">
-									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating} (99+)</span>
+									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating}
+										(99+)</span>
 								</div>
 							</div>
 						</div>
@@ -122,17 +157,9 @@
 	<!-- Features -->
 	<section>
 		<div class="container">
-			<div class="card p-4 bg-primary">
-				<div class="row align-items-center">
-					<div class="col">
-						<h4 class="mb-0 text-white">Best products and brands in store</h4>
-						<p class="mb-0 text-white-50">Trendy products and text to
-							build on the card title</p>
-					</div>
-					<div class="col-auto">
-						<a class="btn btn-white text-primary shadow-0" href="#">Discover</a>
-					</div>
-				</div>
+			<div class="card">
+				<img height ="400px"
+					src="https://cdn.pnj.io/images/promo/182/ts-y-t9-1200x450CTA__1_.jpg">
 			</div>
 		</div>
 	</section>
@@ -142,7 +169,7 @@
 	<section>
 		<div class="container my-5">
 			<header class="mb-4">
-				<h3>Recommended</h3>
+				<h3>Sản Phẩm Bán Chạy</h3>
 			</header>
 			<div class="row">
 				<c:forEach items="${listRecommendProducts}" var="product">
@@ -170,8 +197,10 @@
 											pattern="#,##0₫" />
 									</del>
 								</h5>
+								<a href="detail?id=${product.id}">
 								<p class="card-text mb-0 d-inline-block text-truncate"
 									style="max-width: 200px;">${product.title}</p>
+								</a>
 								<div class="mt-4 text-warning">
 									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating}
 										(99+)</span>
