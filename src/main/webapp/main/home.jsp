@@ -136,8 +136,10 @@ div.container-fluid {
 											pattern="#,##0₫" />
 									</del>
 								</h5>
+								<a href="detail?id=${product.id}">
 								<p class="card-text mb-0 d-inline-block text-truncate"
 									style="max-width: 200px;">${product.title}</p>
+								</a>
 								<div class="mt-4 text-warning">
 									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating}
 										(99+)</span>
@@ -195,8 +197,10 @@ div.container-fluid {
 											pattern="#,##0₫" />
 									</del>
 								</h5>
+								<a href="detail?id=${product.id}">
 								<p class="card-text mb-0 d-inline-block text-truncate"
 									style="max-width: 200px;">${product.title}</p>
+								</a>
 								<div class="mt-4 text-warning">
 									<i class="fas fa-star"></i><span class="fw-bold ms-1">${product.rating}
 										(99+)</span>

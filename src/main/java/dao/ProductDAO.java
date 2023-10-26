@@ -42,6 +42,7 @@ public class ProductDAO extends DAOService {
 		return product;
 	}
 
+	// 8 new products
 	public List<Product> getNewProducts() {
 
 		String sql = "select * from \"ProductWithImages\" order by created_at desc limit 8";
@@ -70,6 +71,36 @@ public class ProductDAO extends DAOService {
 
 		return list;
 	}
+	
+	// 4 new products
+		public List<Product> getOtherProducts() {
+
+			String sql = "select * from \"ProductWithImages\" order by created_at desc limit 4";
+
+			ResultSet rs = select(sql);
+
+			List<Product> list = new ArrayList<Product>();
+			try {
+				while(rs.next()) {
+					list.add( new Product(rs.getString("id"),
+							  rs.getString("category_id"),
+							  rs.getString("title"),
+							  rs.getInt("price"), 
+							  rs.getInt("discount"),
+							  rs.getString("thumbnail"), 
+							  rs.getArray("gallery"),
+							  rs.getString("description"),
+							  rs.getDouble("rating"),
+							  rs.getTimestamp("created_at"),
+							  rs.getTimestamp("updated_at")));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return list;
+		}
 
 	public List<Product> getRecommendedProducts() {
 		String sql = "select * from \"ProductWithImages\" order by rating desc limit 4";
