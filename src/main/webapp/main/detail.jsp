@@ -47,10 +47,11 @@
 			<!-- Breadcrumb -->
 			<nav class="d-flex">
 				<h6 class="mb-0">
-					<a href="" class="text-white-50">Home</a> <span
+					<a href="" class="text-white-50">Trang Chủ</a> <span
 						class="text-white-50 mx-2"> > </span> <a href="list"
-						class="text-white-50">Library</a> <span class="text-white-50 mx-2">
-						> </span> <a href="" class="text-white">${product.title}</a>
+						class="text-white-50">Thư Viện</a> <span
+						class="text-white-50 mx-2"> > </span> <a href=""
+						class="text-white">${product.title}</a>
 				</h6>
 			</nav>
 			<!-- Breadcrumb -->
@@ -112,7 +113,7 @@
 										</c:choose>
 									</c:forEach>
 								</c:if>
-								<span class="ms-1">${product.rating > 0 ? product.rating : "No reviews yet"}</span>
+								<span class="ms-1">${product.rating > 0 ? product.rating : "Chưa có đánh giá nào"}</span>
 							</div>
 							<span class="text-muted"><i
 								class="fas fa-shopping-basket fa-sm mx-1"></i>154 orders</span> <span
@@ -122,38 +123,42 @@
 						<div class="mb-3">
 							<span class="h5"><fmt:formatNumber type="currency"
 									value="${product.discount}" pattern="#,###₫" /></span> <span
-								class="text-muted">/per box</span>
+								class="text-muted">/sản phẩm</span>
 						</div>
 
 						<p>${product.description}</p>
 
 						<div class="row">
-							<dt class="col-3">Type:</dt>
-							<dd class="col-9">Regular</dd>
+							<dt class="col-3">Trọng lượng</dt>
+							<dd class="col-9">14.35 phân</dd>
 
-							<dt class="col-3">Color</dt>
-							<dd class="col-9">Brown</dd>
+							<dt class="col-3">Loại đá chính</dt>
+							<dd class="col-9">Đính đá Topaz</dd>
 
-							<dt class="col-3">Material</dt>
-							<dd class="col-9">Cotton, Jeans</dd>
+							<dt class="col-3">Loại đá phụ</dt>
+							<dd class="col-9">Không gắn đá</dd>
 
-							<dt class="col-3">Brand</dt>
-							<dd class="col-9">Reebook</dd>
+							<dt class="col-3">Thương Hiệu</dt>
+							<dd class="col-9">TDH</dd>
 						</div>
 
 						<hr />
 
 						<div class="row mb-4">
 							<div class="col-md-4 col-6">
-								<label class="mb-2">Size</label> <select
+								<label class="mb-2">Kích cỡ</label> <select
 									class="form-select border border-secondary"
 									style="height: 35px;">
-									<option>Small</option>
-									<option>Medium</option>
-									<option>Large</option>
+									<option>9</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+
 								</select>
 							</div>
 							<!-- col.// -->
+							<!--  
 							<div class="col-md-4 col-6 mb-3">
 								<label class="mb-2 d-block">Quantity</label>
 								<div class="input-group mb-3" style="width: 170px;">
@@ -173,14 +178,12 @@
 									</button>
 								</div>
 							</div>
+							-->
 						</div>
-						<a href="#" class="btn btn-warning shadow-0"> Buy now </a> <a
-							href="#" class="btn btn-primary shadow-0"> <i
-							class="me-1 fa fa-shopping-basket"></i> Add to cart
-						</a> <a href="#"
-							class="btn btn-light border border-secondary py-2 icon-hover px-3">
-							<i class="me-1 fa fa-heart fa-lg"></i> Save
-						</a>
+						<a href="#" class="btn btn-warning shadow-0"> MUA NGAY </a> 
+						<a href="#" class="btn btn-primary shadow-0"> <i
+							class="me-1 fa fa-shopping-basket"></i> THÊM VÀO GIỎ HÀNG
+						</a> 
 					</div>
 				</main>
 			</div>
@@ -199,23 +202,23 @@
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100 active"
 								id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1"
-								role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
-							</li>
+								role="tab" aria-controls="ex1-pills-1" aria-selected="true">ĐẶC
+									TẢ</a></li>
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100"
 								id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2"
-								role="tab" aria-controls="ex1-pills-2" aria-selected="false">Reviews
-							</a></li>
+								role="tab" aria-controls="ex1-pills-2" aria-selected="false">ĐÁNH
+									GIÁ </a></li>
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100"
 								id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3"
-								role="tab" aria-controls="ex1-pills-3" aria-selected="false">Shipping
-									info</a></li>
+								role="tab" aria-controls="ex1-pills-3" aria-selected="false">DỊCH
+									VỤ SAU MUA </a></li>
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100"
 								id="ex1-tab-4" data-mdb-toggle="pill" href="#ex1-pills-4"
-								role="tab" aria-controls="ex1-pills-4" aria-selected="false">Seller
-									profile</a></li>
+								role="tab" aria-controls="ex1-pills-4" aria-selected="false">CÂU
+									HỎI THƯỜNG GẶP </a></li>
 						</ul>
 						<!-- Pills navs -->
 
@@ -223,68 +226,79 @@
 						<div class="tab-content" id="ex1-content">
 							<div class="tab-pane fade show active" id="ex1-pills-1"
 								role="tabpanel" aria-labelledby="ex1-tab-1">
-								<p>With supporting text below as a natural lead-in to
-									additional content. Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-									dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-									exercitation ullamco laboris nisi ut aliquip ex ea commodo
-									consequat. Duis aute irure dolor in reprehenderit in voluptate
-									velit esse cillum dolore eu fugiat nulla pariatur.</p>
+								<p>Hãy khám phá và để những thiết kế rực rỡ đầy màu sắc của
+									truyền cảm hứng cho bạn kể câu chuyện mang đậm chất riêng của
+									mình một cách đầy thú vị. Sở hữu thiết kế độc đáo với những
+									điểm nhấn đá đầy màu sắc lấp lánh, chiếc nhẫn bạc STYLE By PNJ
+									sẽ tôn lên vẻ đẹp cá tính và tinh tế của nàng xinh.</p>
 								<div class="row mb-2">
 									<div class="col-12 col-md-6">
 										<ul class="list-unstyled mb-0">
-											<li><i class="fas fa-check text-success me-2"></i>Some
-												great feature name here</li>
-											<li><i class="fas fa-check text-success me-2"></i>Lorem
-												ipsum dolor sit amet, consectetur</li>
-											<li><i class="fas fa-check text-success me-2"></i>Duis
-												aute irure dolor in reprehenderit</li>
-											<li><i class="fas fa-check text-success me-2"></i>Optical
-												heart sensor</li>
+											<li><i class="fas fa-check text-success me-2"></i>Những
+												điểm nhấn sẽ được tạo ra</li>
+											<li><i class="fas fa-check text-success me-2"></i>Xây
+												dựng nên vẻ đẹp của bạn</li>
+											<li><i class="fas fa-check text-success me-2"></i>Tỏa
+												sáng ở mọi góc cạnh</li>
+											<li><i class="fas fa-check text-success me-2"></i>Không
+												thể nhầm lẫn với mạ vàng thông thường</li>
 										</ul>
 									</div>
 									<div class="col-12 col-md-6 mb-0">
 										<ul class="list-unstyled">
-											<li><i class="fas fa-check text-success me-2"></i>Easy
-												fast and ver good</li>
-											<li><i class="fas fa-check text-success me-2"></i>Some
-												great feature name here</li>
-											<li><i class="fas fa-check text-success me-2"></i>Modern
-												style and design</li>
+											<li><i class="fas fa-check text-success me-2"></i>Dễ
+												dàng phối đồ</li>
+											<li><i class="fas fa-check text-success me-2"></i>Đại
+												diện cho sự hiện đại</li>
+											<li><i class="fas fa-check text-success me-2"></i>Điểm
+												nhấn cho sự sang trọng</li>
 										</ul>
 									</div>
 								</div>
+								<!-- 
+								<dt class="col-3">Trọng lượng</dt>
+							<dd class="col-9">14.35 phân</dd>
+
+							<dt class="col-3">Loại đá chính</dt>
+							<dd class="col-9">Không gắn đá</dd>
+
+							<dt class="col-3">Loại đá phụ</dt>
+							<dd class="col-9">Không gắn đá</dd>
+
+							<dt class="col-3">Thương Hiệu</dt>
+							<dd class="col-9">TDH</dd>
+								 -->
 								<table class="table border mt-3 mb-2">
 									<tr>
-										<th class="py-2">Display:</th>
-										<td class="py-2">13.3-inch LED-backlit display with IPS</td>
+										<th class="py-2">Trọng lượng:</th>
+										<td class="py-2">14.35 phân</td>
 									</tr>
 									<tr>
-										<th class="py-2">Processor capacity:</th>
-										<td class="py-2">2.3GHz dual-core Intel Core i5</td>
+										<th class="py-2">Loại đá chính:</th>
+										<td class="py-2">Đính đá Topaz </td>
 									</tr>
 									<tr>
-										<th class="py-2">Camera quality:</th>
-										<td class="py-2">720p FaceTime HD camera</td>
+										<th class="py-2">Loại đá phụ</th>
+										<td class="py-2">Không gắn đá</td>
 									</tr>
 									<tr>
-										<th class="py-2">Memory</th>
-										<td class="py-2">8 GB RAM or 16 GB RAM</td>
+										<th class="py-2">Thương hiệu</th>
+										<td class="py-2">TDH</td>
 									</tr>
 									<tr>
-										<th class="py-2">Graphics</th>
-										<td class="py-2">Intel Iris Plus Graphics 640</td>
+										<th class="py-2">Nguyên liệu</th>
+										<td class="py-2">Vàng, Kim cương</td>
 									</tr>
 								</table>
 							</div>
 							<div class="tab-pane fade mb-2" id="ex1-pills-2" role="tabpanel"
 								aria-labelledby="ex1-tab-2">
-								<h4>Write your comment</h4>
+								<h4>VIẾT BÌNH LUẬN CỦA BẠN</h4>
 								<div class="form-outline mb-4">
 									<textarea class="form-control" id="form4Example3" rows="2"></textarea>
-									<label class="form-label" for="form4Example3">Comment</label>
+									<label class="form-label" for="form4Example3">Bình luận</label>
 								</div>
-								<h4>Review from users</h4>
+								<h4>ĐÁNH GIÁ TỪ NGƯỜI DÙNG</h4>
 								<c:if test="${reviews.size() > 0}">
 									<c:forEach items="${reviews}" var="review">
 										<div class="card mb-3">
@@ -304,7 +318,7 @@
 												<p class="card-text">${review.comment}</p>
 												<c:if test="${review.response != null}">
 													<div class="response-box">
-														<p class="fw-bold">Respone from Sparkling Stones</p>
+														<p class="fw-bold">Response from Sparkling Stones</p>
 														<p class="mb-0">${review.response}</p>
 													</div>
 												</c:if>
@@ -312,29 +326,58 @@
 										</div>
 									</c:forEach>
 								</c:if>
-								<c:if test="${reviews.size() == 0}">No reviews yet</c:if>
+								<c:if test="${reviews.size() == 0}">Hiện tại, chưa có đánh giá nào cho sản phẩm này</c:if>
 							</div>
 							<div class="tab-pane fade mb-2" id="ex1-pills-3" role="tabpanel"
 								aria-labelledby="ex1-tab-3">
-								Another tab content or sample information now <br /> Dolor sit
-								amet, consectetur adipisicing elit, sed do eiusmod tempor
-								incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-								veniam, quis nostrud exercitation ullamco laboris nisi ut
-								aliquip ex ea commodo consequat. Duis aute irure dolor in
-								reprehenderit in voluptate velit esse cillum dolore eu fugiat
-								nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in culpa qui officia deserunt mollit anim id est laborum.
+								<div class="row mb-2">
+									<div class="col-12 col-md-6">
+										<ul class="list-unstyled mb-0">
+											<li><i class="fas fa-check text-success me-2"></i>Chỉ
+												bảo hành các sản phẩm thuộc hệ thống cửa hàng kênh lẻ và
+												online của Sparkling Stones. ​</li>
+											<li><i class="fas fa-check text-success me-2"></i>Chế độ
+												bảo hành sản phẩm có thể thay đổi theo chính sách</li>
+											<li><i class="fas fa-check text-success me-2"></i>Bảo
+												hành miễn phí 3 tháng</li>
+										</ul>
+									</div>
+									<div class="col-12 col-md-6 mb-0">
+										<ul class="list-unstyled">
+
+											<li><i class="fas fa-check text-success me-2"></i>Siêu
+												âm trọn đời bằng máy chuyên dụng</li>
+											<li><i class="fas fa-check text-success me-2"></i>Thay
+												miễn phí đá CZ ​</li>
+											<li><i class="fas fa-check text-success me-2"></i>Thay
+												miễn phí đá tổng hợp ​</li>
+											<li><i class="fas fa-check text-success me-2"></i>Siêu
+												âm trọn đời bằng máy chuyên dụng</li>
+										</ul>
+									</div>
+								</div>
 							</div>
 							<div class="tab-pane fade mb-2" id="ex1-pills-4" role="tabpanel"
 								aria-labelledby="ex1-tab-4">
-								Some other tab content or sample information now <br /> Lorem
-								ipsum dolor sit amet, consectetur adipisicing elit, sed do
-								eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-								enim ad minim veniam, quis nostrud exercitation ullamco laboris
-								nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-								in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-								nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-								sunt in culpa qui officia deserunt mollit anim id est laborum.
+								<h4>Mua Online có ưu đãi gì đặc biệt cho tôi?</h4>
+								<p style="font-weight: 300">
+									Sparkling Stones mang đến nhiều trải nghiệm mua sắm hiện đại khi mua Online:
+									<br> - Ưu đãi độc quyền Online với hình thức thanh toán đa
+									dạng. <br> - Đặt giữ hàng Online, nhận tại cửa hàng. <br>
+									- Miễn phí giao hàng từ 1-7 ngày trên toàn quốc và giao hàng
+									trong 3 giờ tại một số khu vực trung tâm với các sản phẩm có
+									gắn nhãn <br> - Trả góp 0% lãi suất với đơn hàng từ 3
+									triệu. <br>
+								</p>
+								<h4>Sparkling Stones có thu mua lại trang sức không?</h4>
+								<p style="font-weight: 300">Sparkling Stones có dịch vụ thu đổi trang sức
+									Sparkling Stones tại hệ thống cửa hàng trên toàn quốc.</p>
+								<h4>Nếu đặt mua Online mà sản phẩm không đeo vừa thì có
+									được đổi không?</h4>
+								<p style="font-weight: 300">Sparkling Stones có chính sách thu đổi trang
+									sức vàng trong vòng 48 giờ, đổi ni/ size trang sức bạc trong
+									vòng 72 giờ. Quý khách sẽ được áp dụng đổi trên hệ thống Sparkling Stones
+									toàn quốc.</p>
 							</div>
 						</div>
 						<!-- Pills content -->
@@ -344,58 +387,22 @@
 					<div class="px-0 border rounded-2 shadow-0">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">Similar items</h5>
+								<h5 class="card-title">Những sản phẩm mới khác</h5>
+								<c:forEach items="${otherP}" var ="o">
 								<div class="d-flex mb-3">
-									<a href="#" class="me-3"> <img
-										src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp"
+									<a href="detail?id=${o.id}" class="me-3"> <img
+										src="${o.thumbnail}"
 										style="min-width: 96px; height: 96px;"
 										class="img-md img-thumbnail" />
 									</a>
 									<div class="info">
-										<a href="#" class="nav-link mb-1"> Rucksack Backpack Large
-											<br /> Line Mounts
-										</a> <strong class="text-dark"> $38.90</strong>
+										<a href="detail?id=${o.id}" class="nav-link mb-1"> ${o.title}
+										</a> <strong class="text-dark"><fmt:formatNumber value="${o.discount}" type="currency"
+										pattern="#,##0₫" /></strong>
 									</div>
 								</div>
-
-								<div class="d-flex mb-3">
-									<a href="#" class="me-3"> <img
-										src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/9.webp"
-										style="min-width: 96px; height: 96px;"
-										class="img-md img-thumbnail" />
-									</a>
-									<div class="info">
-										<a href="#" class="nav-link mb-1"> Summer New Men's Denim
-											<br /> Jeans Shorts
-										</a> <strong class="text-dark"> $29.50</strong>
-									</div>
-								</div>
-
-								<div class="d-flex mb-3">
-									<a href="#" class="me-3"> <img
-										src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp"
-										style="min-width: 96px; height: 96px;"
-										class="img-md img-thumbnail" />
-									</a>
-									<div class="info">
-										<a href="#" class="nav-link mb-1"> T-shirts with multiple
-											colors, for men and lady </a> <strong class="text-dark">
-											$120.00</strong>
-									</div>
-								</div>
-
-								<div class="d-flex">
-									<a href="#" class="me-3"> <img
-										src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp"
-										style="min-width: 96px; height: 96px;"
-										class="img-md img-thumbnail" />
-									</a>
-									<div class="info">
-										<a href="#" class="nav-link mb-1"> Blazer Suit Dress
-											Jacket for Men, Blue color </a> <strong class="text-dark">
-											$339.90</strong>
-									</div>
-								</div>
+								</c:forEach>
+								
 							</div>
 						</div>
 					</div>

@@ -63,7 +63,7 @@ public class RegisterController extends HttpServlet {
 				EncryptionService ecrypt = new EncryptionService();
 				password = ecrypt.encryptMD5(password);
 				dao.register(email, password, firstName, lastName);
-				forward += "?email=" + email;
+				forward += "?email=" + email+"&otpTask=OtpRegister";
 			} else {
 				// Kiểm tra account đã được xác thực
 				if (user.isVerified()) {
@@ -71,7 +71,7 @@ public class RegisterController extends HttpServlet {
 					error = "Email has been registered.";
 				} else {
 					type = "warning";
-					error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"\" class=\"alert-link\">Verify here</a>";
+					error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"&otpTask=OtpRegister\" class=\"alert-link\">Verify here</a>";
 				}
 			}
 		} else {
