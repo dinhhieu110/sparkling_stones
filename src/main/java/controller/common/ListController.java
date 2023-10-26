@@ -30,8 +30,9 @@ public class ListController extends HttpServlet {
 		CategoryDAO cDao = new CategoryDAO();
 		ProductDAO pagingDao = new ProductDAO();
 		int countProducts = pagingDao.getTotalProducts(); 
-		int endPage = countProducts/9;
-		if(countProducts % 9 != 0) {
+		int size = 9;
+		int endPage = countProducts/size;
+		if(countProducts % size != 0) {
 			endPage ++;
 		}
 		
@@ -52,7 +53,7 @@ public class ListController extends HttpServlet {
 		request.setAttribute("endP", endPage);
 		request.setAttribute("listP", list);
 		request.setAttribute("tag", index);
-
+		request.setAttribute("from", "shop");
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 
 	}
