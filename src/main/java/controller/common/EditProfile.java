@@ -1,7 +1,6 @@
 package controller.common;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import dao.UserDAO;
  */
 public class EditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String FOWARD_PAGE = "/SparklingStones/main/myaccount.jsp";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,15 +26,6 @@ public class EditProfile extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * String ufirst_name = request.getParameter("first-name"); String ulast_name =
-		 * request.getParameter("last-name"); String uphone =
-		 * request.getParameter("phone"); String uaddress =
-		 * request.getParameter("address");
-		 * 
-		 * UserDAO user = new UserDAO(); user.editProfile(ufirst_name, ulast_name,
-		 * uphone, uaddress, uaddress); response.sendRedirect(FOWARD_PAGE);
-		 */
 		
 	}
 
