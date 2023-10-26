@@ -38,6 +38,7 @@ public class DetailController extends HttpServlet {
 		ProductDAO dao = new ProductDAO();
 		ReviewDAO rDao = new ReviewDAO();
 		Product product = dao.getProductById(id);
+		List <Product> otherProducts = dao.getOtherProducts();
 		List<Review> reviews = rDao.getReviewsByProductId(id);
 		
 		dao.close();
@@ -46,6 +47,7 @@ public class DetailController extends HttpServlet {
 		if (product != null) {
 			request.setAttribute("product", product);
 			request.setAttribute("reviews", reviews);
+			request.setAttribute("otherP", otherProducts);
 			request.getRequestDispatcher(FORWARD_PAGE).forward(request, response);
 		} else {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
