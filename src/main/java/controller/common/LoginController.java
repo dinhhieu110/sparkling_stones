@@ -1,6 +1,7 @@
 package controller.common;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,39 +22,39 @@ import dao.UserDAO;
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String FOWARD_PAGE = "/main/login.jsp";
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
+	public LoginController() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		final String SUCCESS_FORWARD = request.getContextPath();
-		
+
 		String email = request.getParameter("txtEmail").toLowerCase();
 		String password = request.getParameter("txtPassword");
 		String remember = request.getParameter("chkRemember");
-		
+
 		UserDAO dao = new UserDAO();
 		User user = dao.getUserByEmail(email);
-		
+
 		String error = "";
 		String type = "";
-		
+
 		if (user != null) {
 			if (user.isVerified()) {
 				EncryptionService encrypt = new EncryptionService();
@@ -61,19 +62,30 @@ public class LoginController extends HttpServlet {
 				if (ecryptPassword.equals(user.getPassword())) {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
+					
+					// lưu account lên cookie
+					if (remember != null) {
+						Cookie u = new Cookie("userC", email);
+						Cookie p = new Cookie("passC", ecryptPassword);
+						u.setMaxAge(60 * 60 * 24 * 30);
+						p.setMaxAge(60 * 60 * 24 * 30);
+						response.addCookie(p);
+						response.addCookie(u);
+					}
 				} else {
 					type = "danger";
 					error = "Password is incorrect!";
 				}
 			} else {
 				type = "warning";
-				error = "Account has not been verified. <a href=\"verify-otp?email="+ email +"\" class=\"alert-link\">Verify here</a>";
+				error = "Account has not been verified. <a href=\"verify-otp?email=" + email
+						+ "\" class=\"alert-link\">Verify here</a>";
 			}
 		} else {
 			type = "danger";
 			error = "Email has not been registered!";
 		}
-		
+
 		dao.close();
 		if (error.equals("") && type.equals("")) {
 			response.sendRedirect(SUCCESS_FORWARD);
