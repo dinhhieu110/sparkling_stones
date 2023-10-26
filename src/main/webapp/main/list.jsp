@@ -193,7 +193,9 @@
 
 							<div class="col-lg-4 col-md-6 col-sm-6 d-flex">
 								<div class="card w-100 my-2 shadow-2-strong">
+								<a href="detail?id=${p.id}">
 									<img src="${p.thumbnail}" class="card-img-top" />
+								</a>
 									<div class="card-body d-flex flex-column">
 										<h5 class="card-title currency-style">
 											<fmt:formatNumber value="${p.discount}" type="currency"
@@ -203,8 +205,10 @@
 													pattern="#,##0₫" />
 											</del>
 										</h5>
+										<a href="detail?id=${p.id}">
 										<p class="card-text mb-0 d-inline-block text-truncate"
 											style="max-width: 200px;">${p.title}</p>
+										</a>
 										<div class="mt-4 text-warning">
 											<i class="fas fa-star"></i><span class="fw-bold ms-1">${p.rating}
 												(99+)</span>
