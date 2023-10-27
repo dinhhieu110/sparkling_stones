@@ -87,4 +87,24 @@ public class UserDAO extends DAOService{
 		update(sql, params);
 		
 	}
+	
+	
+	public void editProfile(String firstName, String lastName, String phone, String address,String email) {
+    	String sql = "update \"User\"\n"
+    			+ "set first_name =?,\n"
+    			+ "last_name=?,\n"
+    			+ "phone =?,\n"
+    			+ "address=?\n"
+    			+ "where email =?";
+    	List<Object> params = new ArrayList<>();
+    	params.add(firstName);
+    	params.add(lastName);
+    	params.add(phone);
+    	params.add(address);
+    	params.add(email);
+    	
+    	update(sql, params);
+
+
+    }
 }
