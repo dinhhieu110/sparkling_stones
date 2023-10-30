@@ -13,6 +13,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     margin: 0px 30px;
   }
 </style>
+<div id="preloader"></div>
 <header>
   <!-- Jumbotron -->
   <div class="p-3 text-center bg-white border-bottom">

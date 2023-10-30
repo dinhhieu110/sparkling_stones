@@ -158,7 +158,6 @@
 								</select>
 							</div>
 							<!-- col.// -->
-							<!--  
 							<div class="col-md-4 col-6 mb-3">
 								<label class="mb-2 d-block">Quantity</label>
 								<div class="input-group mb-3" style="width: 170px;">
@@ -167,9 +166,9 @@
 										onClick="changeQuantity(this)" data-mdb-ripple-color="dark">
 										<i class="fas fa-minus"></i>
 									</button>
-									<input type="number" min="0" step="1" id="quantity"
+									<input type="number" min="1" step="1" id="quantity"
 										class="form-control text-center border border-secondary"
-										value="0" aria-label="Example text with button addon" />
+										value="1" aria-label="Example text with button addon" />
 									<button class="btn btn-white border border-secondary px-3"
 										type="button" data-action="increase"
 										onClick="changeQuantity(this)" id="button-addon2"
@@ -178,11 +177,10 @@
 									</button>
 								</div>
 							</div>
-							-->
 						</div>
 						<a href="#" class="btn btn-warning shadow-0"> MUA NGAY </a> 
-						<a href="#" class="btn btn-primary shadow-0"> <i
-							class="me-1 fa fa-shopping-basket"></i> THÊM VÀO GIỎ HÀNG
+						<a href="#" class="btn btn-primary shadow-0" onclick="addToCart(event, '${product.id}')"> 
+							<i class="me-1 fa fa-shopping-basket"></i> THÊM VÀO GIỎ HÀNG
 						</a> 
 					</div>
 				</main>

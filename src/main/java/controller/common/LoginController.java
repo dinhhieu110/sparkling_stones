@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Cart;
 import model.User;
 import util.EncryptionService;
 import util.Template;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import dao.CartDAO;
 import dao.UserDAO;
 
 /**
@@ -62,6 +64,21 @@ public class LoginController extends HttpServlet {
 				if (ecryptPassword.equals(user.getPassword())) {
 					HttpSession session = request.getSession();
 					session.setAttribute("user", user);
+					
+					// Lấy cart của user
+					CartDAO cartDao = new CartDAO();
+					Cart cart = null;
+					
+					if(!cartDao.isExist(user.getId())) {
+						String cartId = cartDao.addCart(user.getId());
+						cart = new Cart(cartId);
+					} else {
+						cart = cartDao.getCartByUserId(user.getId());						
+					}
+					
+					session.setAttribute("cart", cart);
+					
+					cartDao.close();
 					
 					// lưu account lên cookie
 					if (remember != null) {
