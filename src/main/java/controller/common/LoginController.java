@@ -76,6 +76,12 @@ public class LoginController extends HttpServlet {
 					type = "danger";
 					error = "Password is incorrect!";
 				}
+				if(user.getRole().equals("6d48747d-8781-460e-9b2e-b9dc8c44a6f4")) {
+					request.getRequestDispatcher("/home").forward(request, response);
+					return;
+				} else {
+					request.getRequestDispatcher("/main/adminhome.jsp").forward(request, response);
+				}
 			} else {
 				type = "warning";
 				error = "Account has not been verified. <a href=\"verify-otp?email=" + email
