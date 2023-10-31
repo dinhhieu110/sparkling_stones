@@ -95,6 +95,7 @@ public class LoginController extends HttpServlet {
 		}
 
 		dao.close();
+		
 		if (error.equals("") && type.equals("")) {
 			response.sendRedirect(forward);
 		} else {
