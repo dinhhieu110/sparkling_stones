@@ -50,4 +50,9 @@ public class Cart {
 	public void addToCart(Item item) {
 		items.add(item);
 	}
+	
+	public void removeFromCart(Item item) {
+		if (items.contains(item))
+			items.remove(item);
+	}
 }

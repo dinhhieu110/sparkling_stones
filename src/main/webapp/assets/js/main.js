@@ -61,3 +61,23 @@ function addToCart(event, id) {
         },
     });
 }
+
+function updateCart(event, id, action) {
+	event.preventDefault();
+	var path = getContextPath();
+	
+	$.ajax({
+        url: path + "/add-to-cart",
+        data: {
+			id: id,
+			action: action,
+        },
+        type: "post",
+        success: function (response) {
+            $('#cart').html(response);
+        },
+        error: function (xhr) {
+            console.log("ERROR Ajax");
+        },
+    });
+}

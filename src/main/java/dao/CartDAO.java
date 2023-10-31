@@ -105,4 +105,12 @@ public class CartDAO extends DAOService {
 		update(sql, params);
 		return itemId.toString();
 	}
+
+	public void removeFromCart(String itemId) {
+		String sql = "delete from \"Cart_Item\" where id = ?";
+		List<Object> params = new ArrayList<>();
+		params.add(UUID.fromString(itemId));
+		
+		update(sql, params);
+	}
 }

@@ -37,68 +37,72 @@
 					<div class="card border shadow-0">
 						<div class="m-4">
 							<h4 class="card-title mb-4">Giỏ hàng của bạn</h4>
-							<c:forEach items="${cart.items}" var="item">
-								<div class="row gy-3 mb-4">
-									<div class="col-lg-5">
-										<div class="me-lg-5">
-											<div class="d-flex">
-												<img
-													src="${item.product.thumbnail}"
-													class="border rounded me-3"
-													style="width: 96px; height: 96px;" />
-												<div class="">
-													<a href="detail?id=${item.product.id}" class="nav-link">${item.product.title}</a>
+							<div id="cart">
+								<c:forEach items="${cart.items}" var="item">
+									<div class="row gy-3 mb-4">
+										<div class="col-lg-5">
+											<div class="me-lg-5">
+												<div class="d-flex">
+													<img
+														src="${item.product.thumbnail}"
+														class="border rounded me-3"
+														style="width: 96px; height: 96px;" />
+													<div class="">
+														<a href="detail?id=${item.product.id}" class="nav-link">${item.product.title}</a>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div
-										class="col-lg-3 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-										<div class="">
-											<div class="input-group mb-3" style="width: 170px;">
-												<button class="btn btn-white border border-secondary px-3"
-													type="button" id="button-addon1"
-													data-mdb-ripple-color="dark">
-													<i class="fas fa-minus"></i>
-												</button>
-												<input type="text"
-													class="form-control text-center border border-secondary"
-													value="${item.quantity}"
-													id="quantity"
-													aria-label="Example text with button addon"
-													aria-describedby="button-addon1" />
-												<button class="btn btn-white border border-secondary px-3"
-													type="button" id="button-addon2"
-													data-mdb-ripple-color="dark">
-													<i class="fas fa-plus"></i>
-												</button>
+										<div
+											class="col-lg-3 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+											<div class="">
+												<div class="input-group mb-3" style="width: 170px;">
+													<button class="btn btn-white border border-secondary px-3"
+														type="button" id="button-addon1"
+														onclick="updateCart(event, '${item.product.id}', 'decrease')"
+														data-mdb-ripple-color="dark">
+														<i class="fas fa-minus"></i>
+													</button>
+													<input type="text"
+														class="form-control text-center border border-secondary"
+														value="${item.quantity}"
+														id="quantity"
+														aria-label="Example text with button addon"
+														aria-describedby="button-addon1" />
+													<button class="btn btn-white border border-secondary px-3"
+														type="button" id="button-addon2"
+														onclick="updateCart(event, '${item.product.id}', 'increase')"
+														data-mdb-ripple-color="dark">
+														<i class="fas fa-plus"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<text class="h6">
+													<fmt:formatNumber value="${item.product.finalPrice * item.quantity}" type="currency" pattern="#,###₫" />
+												</text>
+												<br /> <small class="text-muted text-nowrap">
+													<fmt:formatNumber value="${item.product.finalPrice}" type="currency" pattern="#,###₫" />
+													/ mỗi sản phẩm </small>
+											</div>
+										</div>
+										<div
+											class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+											<div class="float-md-end">
+												<a href="#!"
+													class="btn btn-light border px-2 icon-hover-primary"><i
+													class="fas fa-heart fa-lg px-1 text-secondary"></i></a> <a
+													href="#" onclick="updateCart(event, '${item.product.id}', 'delete')"
+													class="btn btn-light border text-danger px-2 icon-hover-danger">
+													<i class="fa-solid fa-trash px-1"></i>
+												</a>
 											</div>
 										</div>
 									</div>
-									<div class="col-lg-2">
-										<div class="">
-											<text class="h6">
-												<fmt:formatNumber value="${item.product.finalPrice * item.quantity}" type="currency" pattern="#,###₫" />
-											</text>
-											<br /> <small class="text-muted text-nowrap">
-												<fmt:formatNumber value="${item.product.finalPrice}" type="currency" pattern="#,###₫" />
-												/ mỗi sản phẩm </small>
-										</div>
-									</div>
-									<div
-										class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-										<div class="float-md-end">
-											<a href="#!"
-												class="btn btn-light border px-2 icon-hover-primary"><i
-												class="fas fa-heart fa-lg px-1 text-secondary"></i></a> <a
-												href="#"
-												class="btn btn-light border text-danger px-2 icon-hover-danger">
-												<i class="fa-solid fa-trash px-1"></i>
-											</a>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
+								</c:forEach>
+							</div>
 						</div>
 
 						<div class="border-top pt-4 mx-4 mb-4">

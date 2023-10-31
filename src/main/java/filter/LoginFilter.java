@@ -6,10 +6,12 @@ import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Cart;
 import model.User;
 
 import java.io.IOException;
 
+import dao.CartDAO;
 import dao.UserDAO;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -73,6 +75,21 @@ public class LoginFilter extends HttpFilter implements Filter {
 
 				if (password.equals(user.getPassword())) {
 					session.setAttribute("user", user);
+					
+					// Lấy cart của user
+					CartDAO cartDao = new CartDAO();
+					Cart cart = null;
+					
+					if(!cartDao.isExist(user.getId())) {
+						String cartId = cartDao.addCart(user.getId());
+						cart = new Cart(cartId);
+					} else {
+						cart = cartDao.getCartByUserId(user.getId());						
+					}
+					
+					session.setAttribute("cart", cart);
+					
+					cartDao.close();
 				}
 
 				dao.close();
