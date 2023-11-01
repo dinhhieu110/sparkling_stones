@@ -46,6 +46,7 @@ public class LoginController extends HttpServlet {
 
 
 		final String SUCCESS_FORWARD = request.getContextPath();
+		final String USER_FOWARD = request.getContextPath();
 		final String ADMIN_FOWARD = request.getContextPath()+"/main/adminhome.jsp";
 		
 
