@@ -87,4 +87,34 @@ public class UserDAO extends DAOService{
 		update(sql, params);
 		
 	}
+	
+	public boolean editProfile(User user) {
+		boolean f = false;
+		try {
+			String sql = "update \"User\"\n" + "set first_name =?,\n" + "last_name=?,\n" + "phone =?,\n" + "address=?\n"
+					+ "where email =?";
+			List<Object> params = new ArrayList<>();
+			params.add(user.getFirstName());
+			params.add(user.getLastName());
+			params.add(user.getPhone());
+			params.add(user.getAddress());
+			params.add(user.getEmail());
+
+			update(sql, params);
+			/*
+			 * Connection con = null; PreparedStatement p = con.prepareStatement(sql);
+			 * p.setString(1, user.getFirstName()); p.setString(2, user.getLastName());
+			 * p.setString(3, user.getPhone()); p.setString(4, user.getAddress());
+			 * p.setString(5, user.getEmail());
+			 * 
+			 * p.executeUpdate();
+			 */
+
+			f = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return f;
+		
+	}
 }
