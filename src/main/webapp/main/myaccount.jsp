@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="alert/dist/sweetalert.css">
+
 <title>My Account</title>
 <%@include file="/common/head.jsp"%>
 <%
@@ -114,6 +116,7 @@ to {
 </style>
 </head>
 <body>
+	<input type="hidden" id="status" value="<%= request.getParameter("status")%>">
 	<%@include file="/common/header.jsp"%>
 
 	<!-- Heading -->
@@ -440,5 +443,16 @@ to {
 	<%@include file="/common/footer.jsp"%>
 
 	<%@include file="/common/script.jsp"%>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		var status = document.getElementById("status").value;
+		
+		if(status == "SuccessfullyChangePassword"){
+			swal("Congrats","Password Updated Successfully","success");
+			document.getElementById("status").value = "";
+		}
+		
+		
+	</script>
 </body>
 </html>

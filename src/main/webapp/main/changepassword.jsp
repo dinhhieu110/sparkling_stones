@@ -45,8 +45,8 @@ if (user == null) {
 									Password</label> <input type="password" id="comfirmnewpass"
 									class="form-control" name="comfirmnewpass"
 									placeholder="Comfirm PassWord" required>
-
 							</div>
+							${error}
 							<div class="mb-3 d-grid">
 								<button type="submit" class="btn btn-primary">Change
 									Password</button>
@@ -58,5 +58,6 @@ if (user == null) {
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

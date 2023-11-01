@@ -46,7 +46,7 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final String SUCCESS_FORWARD = request.getContextPath() + "/home";
+		final String SUCCESS_FORWARD = request.getContextPath() + "/my-account";
 		
 		String email = request.getParameter("email");
 		String oldPassword = request.getParameter("oldpass");
@@ -71,15 +71,16 @@ public class ChangePassword extends HttpServlet {
 
 			} else {
 				type = "danger";
-				error = "Account does not exist!";
+				error = "Password does not match!";
 			}
 
 		} else {
 			type = "danger";
-			error = "Password does not match";
+			error = "Old password is incorrect";
 		}
 		dao.close();
 		if (error.equals("") && type.equals("")) {
+			
 			response.sendRedirect(SUCCESS_FORWARD + "?status=SuccessfullyChangePassword");
 		} else {
 			// Lấy template thông báo lỗi
