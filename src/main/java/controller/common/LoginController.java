@@ -43,20 +43,31 @@ public class LoginController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+<<<<<<< HEAD
 		final String SUCCESS_FORWARD= request.getContextPath();
 		final String USER_FOWARD= request.getContextPath();
 		final String ADMIN_FOWARD = request.getContextPath()+"/main/adminhome.jsp";
 
+=======
+		final String SUCCESS_FORWARD = request.getContextPath();
+		final String USER_FOWARD= request.getContextPath();
+		final String ADMIN_FOWARD = request.getContextPath()+"/main/adminhome.jsp";
+		
+>>>>>>> origin/master
 		String email = request.getParameter("txtEmail").toLowerCase();
 		String password = request.getParameter("txtPassword");
 		String remember = request.getParameter("chkRemember");
-
+		
 		UserDAO dao = new UserDAO();
 		User user = dao.getUserByEmail(email);
 
 		String error = "";
 		String type = "";
 		String forward = SUCCESS_FORWARD;
+<<<<<<< HEAD
+=======
+		
+>>>>>>> origin/master
 		if (user != null) {
 			if (user.isVerified()) {
 				EncryptionService encrypt = new EncryptionService();
@@ -94,6 +105,7 @@ public class LoginController extends HttpServlet {
 		}
 
 		dao.close();
+		
 		if (error.equals("") && type.equals("")) {
 			response.sendRedirect(forward);
 		} else {
