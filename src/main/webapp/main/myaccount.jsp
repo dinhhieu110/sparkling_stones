@@ -379,9 +379,9 @@ to {
 					</header>
 					<form action="EditProfile" method="post">
 						<div class="modal-body">
-							<label for="email" class="modal-label"> <i
+							<!-- <label for="email" class="modal-label"> <i
 								class="ti-email"></i> Email
-							</label> <input value="${user.getEmail()}" id="email" type="email"
+							</label> --> <input value="${user.getId()}" id="email" type="hidden"
 								readonly name="email" class="modal-input"> <label
 								for="first-name" class="modal-label"> <i
 								class="ti-email"></i> First Name
