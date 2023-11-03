@@ -88,7 +88,7 @@ public class LoginController extends HttpServlet {
 				}
 			} else {
 				type = "warning";
-				error = "Account has not been verified. <a href=\"verify-otp?email=" + email
+				error = "Account has not been verified. <a href=\"verify-otp?email=" + email + "&otpTask=OtpRegister"
 						+ "\" class=\"alert-link\">Verify here</a>";
 			}
 		} else {

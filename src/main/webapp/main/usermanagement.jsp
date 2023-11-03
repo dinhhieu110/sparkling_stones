@@ -1,3 +1,4 @@
+<%@page import="dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -291,6 +292,9 @@ table.table .avatar {
 </head>
 <body>
 	<%@include file="/common/adminheader.jsp"%>
+	<input type="hidden" id="status"
+		value="<%=request.getParameter("status")%>">
+
 	<main style="margin-top: 58px">
 		<div class="container pt-4">
 			<section class="mb-4">
@@ -317,48 +321,49 @@ table.table .avatar {
 									<th>Họ và tên</th>
 									<th>Địa chỉ</th>
 									<th>Số điện thoại</th>
+									<th>Vai trò</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>dinhhieu@gmail.com</td>
-									<td>Đình Hiệu</td>
-									<td>55 Lê Thiện Trị</td>
-									<td>0123 456 789</td>
-									<td><a href="#editEmployeeModal" class="edit"
-										data-toggle="modal"><i class="material-icons"
-											data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-										href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-											class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>dinhhieu@gmail.com</td>
-									<td>Đình Hiệu</td>
-									<td>55 Lê Thiện Trị</td>
-									<td>0123 456 789</td>
-									<td><a href="#editEmployeeModal" class="edit"
-										data-toggle="modal"><i class="material-icons"
-											data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-										href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-											class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-									</td>
-								</tr>
+								<c:forEach items="${listU}" var="u">
+									<tr>
+										<td>${u.email}</td>
+										<td>${u.lastName}${u.firstName}</td>
+										<td>${u.address}</td>
+										<td>${u.phone}</td>
+										<td>${u.role}</td>
+										<td><a href="#editEmployeeModal" class="edit"
+											data-toggle="modal"><i class="material-icons"
+												data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
+											href="#deleteEmployeeModal" class="delete"
+											data-toggle="modal"><i class="material-icons"
+												data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
+						<%
+						UserDAO uDao = new UserDAO();
+						int countU = uDao.getTotalUser();
+						%>
 						<div class="clearfix">
 							<div class="hint-text">
-								Showing <b>5</b> out of <b>25</b> entries
+								Hiển thị <b>${listU.size()}</b> trong số <b><%=countU%></b>
+								nguời dùng
 							</div>
 							<ul class="pagination">
-								<li class="page-item disabled"><a href="#">Previous</a></li>
-								<li class="page-item"><a href="#" class="page-link">1</a></li>
-								<li class="page-item"><a href="#" class="page-link">2</a></li>
-								<li class="page-item active"><a href="#" class="page-link">3</a></li>
-								<li class="page-item"><a href="#" class="page-link">4</a></li>
-								<li class="page-item"><a href="#" class="page-link">5</a></li>
-								<li class="page-item"><a href="#" class="page-link">Next</a></li>
+								<li class="page-item ${tag == endP ?"disabled":" "}""><a
+									class="page-link" href="manage-user?index=${(tag-1)}"
+									aria-label="Next"> <span aria-hidden="true">&laquo;</span></a></li>
+								<c:forEach begin="1" end="${endP}" var="i">
+									<li class="page-item ${tag == i ?"active":" "}"><a
+										class="page-link" href="manage-user?index=${i}">${i}</a></li>
+								</c:forEach>
+								<li class="page-item ${tag == endP ?"disabled":" "}""><a
+									class="page-link" href="manage-user?index=${(tag+1)}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
 							</ul>
 						</div>
 					</div>
@@ -367,34 +372,66 @@ table.table .avatar {
 				<div id="addEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form>
+							<form action="manage-user" method="post">
 								<div class="modal-header">
-									<h4 class="modal-title">Add Employee</h4>
+									<h4 class="modal-title">Thêm Người Dùng Mới</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<div class="form-group">
-										<label>Name</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="floatingInput"
+											placeholder="name@example.com" name="email"> <label
+											for="floatingInput">Email</label>
 									</div>
-									<div class="form-group">
-										<label>Email</label> <input type="email" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" name="lastName"> <label
+											for="floatingInput">Họ</label>
 									</div>
-									<div class="form-group">
-										<label>Address</label>
-										<textarea class="form-control" required></textarea>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" name="firstName"> <label
+											for="floatingInput">Tên</label>
 									</div>
-									<div class="form-group">
-										<label>Phone</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating">
+										<input type="password" class="form-control"
+											id="floatingPassword" placeholder="Password" name="pass">
+										<label for="floatingPassword">Mật Khẩu</label>
+									</div>
+									</br>
+									<div class="form-floating">
+										<textarea name="address" class="form-control" placeholder=" "
+											id="floatingTextarea"></textarea>
+										<label for="floatingTextarea">Địa chỉ</label>
+									</div>
+									</br>
+									<div class="form-floating">
+										<input class="form-control" type="tel" id="phone" name="phone"
+											placeholder="123-45-678" required> <label>Số
+											điện thoại</label>
+									</div>
+									</br>
+									<div class="form-group container">
+										<div class="row">
+											<div class="col">
+												<input checked type="radio" id="user" name="role"
+													value="6d48747d-8781-460e-9b2e-b9dc8c44a6f4" required>
+												<label for="user">User</label>
+											</div>
+											<div class="col">
+												<input type="radio" id="admin" name="role"
+													value="5268b7a1-a1ff-42c1-884e-2be5df62297c" required>
+												<label for="admin">Admin</label>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<input type="button" class="btn btn-light"
-										data-dismiss="modal" value="Hủy"> <input
-										type="submit" class="btn btn-light" value="Thêm">
+									<input type="button" class="btn btn-light" data-dismiss="modal"
+										value="Hủy">
+									<button type="submit" class="btn btn-light" name="action"
+										value="add">Thêm</button>
 								</div>
 							</form>
 						</div>
@@ -404,34 +441,67 @@ table.table .avatar {
 				<div id="editEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form>
+							<form action="manage-user" method="post">
 								<div class="modal-header">
-									<h4 class="modal-title">Edit Employee</h4>
+									<h4 class="modal-title">Cập Nhật Người Dùng</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<div class="form-group">
-										<label>Name</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="email" class="form-control" id="floatingInput"
+											placeholder="name@example.com" name="email"> <label
+											for="floatingInput">Email</label>
 									</div>
-									<div class="form-group">
-										<label>Email</label> <input type="email" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" name="lastName"> <label
+											for="floatingInput">Họ</label>
 									</div>
-									<div class="form-group">
-										<label>Address</label>
-										<textarea class="form-control" required></textarea>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" name="firstName"> <label
+											for="floatingInput">Tên</label>
 									</div>
-									<div class="form-group">
-										<label>Phone</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating">
+										<input type="password" class="form-control"
+											id="floatingPassword" placeholder="Password" name="pass">
+										<label for="floatingPassword">Mật Khẩu</label>
+									</div>
+									</br>
+									<div class="form-floating">
+										<textarea name="address" class="form-control" placeholder=" "
+											id="floatingTextarea"></textarea>
+										<label for="floatingTextarea">Địa chỉ</label>
+									</div>
+									</br>
+									<div class="form-floating">
+										<input class="form-control" type="tel" id="phone" name="phone"
+											placeholder="1234-453-678" required> <label>Số
+											điện thoại</label>
+									</div>
+									</br>
+									<div class="form-group container">
+										<div class="row">
+											<div class="col">
+												<input checked type="radio" id="user" name="role"
+													value="6d48747d-8781-460e-9b2e-b9dc8c44a6f4" required>
+												<label for="user">User</label>
+											</div>
+											<div class="col">
+												<input type="radio" id="admin" name="role"
+													value="5268b7a1-a1ff-42c1-884e-2be5df62297c" required>
+												<label for="admin">Admin</label>
+											</div>
+										</div>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<input type="button" class="btn btn-light"
-										data-dismiss="modal" value="Hủy"> <input
-										type="submit" class="btn btn-light" value="Lưu">
+									<input type="button" class="btn btn-light" data-dismiss="modal"
+										value="Hủy">
+									<button type="submit" class="btn btn-light" name="action"
+										value="edit">Cập Nhật</button>
+
 								</div>
 							</form>
 						</div>
@@ -443,20 +513,20 @@ table.table .avatar {
 						<div class="modal-content">
 							<form>
 								<div class="modal-header">
-									<h4 class="modal-title">Delete Employee</h4>
+									<h4 class="modal-title">Xóa Người Dùng</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<p>Are you sure you want to delete these Records?</p>
+									<p>Bạn có chắc là muốn xóa người dùng này?</p>
 									<p class="text-warning">
-										<small>This action cannot be undone.</small>
+										<small>Hành động này không thể được hoàn tác.</small>
 									</p>
 								</div>
 								<div class="modal-footer">
-									<input type="button" class="btn btn-light"
-										data-dismiss="modal" value="Hủy"> <input
-										type="submit" class="btn btn-danger" value="Xóa">
+									<input type="button" class="btn btn-light" data-dismiss="modal"
+										value="Hủy"> <input type="submit"
+										class="btn btn-danger" value="Xóa">
 								</div>
 							</form>
 						</div>
@@ -464,5 +534,16 @@ table.table .avatar {
 				</div>
 			</section>
 		</div>
+			<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="alert/dist/sweetalert.css">
+	<script type="text/javascript">
+		var status = document.getElementById("status").value;
+		if(status == "SuccessfullyAdded"){
+			swal("Congrats","Account Added Successfully","success");
+		}
+		if(status == "UnsuccessfullyAdded"){
+			swal("Sorry!","Account Added Unsuccessfully","error");
+		}
+	</script>
 </body>
 </html>
