@@ -16,6 +16,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   	list-style-type: none;
   }
 </style>
+<div id="preloader"></div>
 <header>
   <!-- Jumbotron -->
   <div class="p-3 text-center bg-white border-bottom">
