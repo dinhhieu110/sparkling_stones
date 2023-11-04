@@ -45,9 +45,9 @@ public class CartDAO extends DAOService {
 	}
 	
 	public Cart getCartByUserId(String id) {
-		String sql = "select c.id as item_id, p.*, session_id, quantity from \"Shopping_Session\" s \r\n"
-				+ "join \"Cart_Item\" c on s.id = c.session_id\r\n"
-				+ "join \"ProductWithImages\" p on c.product_id = p.id\r\n"
+		String sql = "select c.id as item_id, p.*, s.id as session_id, quantity from \"Shopping_Session\" s \n"
+				+ "left join \"Cart_Item\" c on s.id = c.session_id\n"
+				+ "left join \"ProductWithImages\" p on c.product_id = p.id\n"
 				+ "where s.user_id = ?";
 		List<Object> params = new ArrayList<>();
 		params.add(UUID.fromString(id));
@@ -62,19 +62,21 @@ public class CartDAO extends DAOService {
 				cart = new Cart(rs.getString("session_id"));
 				
 				do {
-					product = new Product(rs.getString("id"),
-							  rs.getString("category_id"),
-							  rs.getString("title"),
-							  rs.getInt("price"), 
-							  rs.getInt("discount"),
-							  rs.getString("thumbnail"), 
-							  rs.getArray("gallery"),
-							  rs.getString("description"),
-							  rs.getDouble("rating"),
-							  rs.getTimestamp("created_at"),
-							  rs.getTimestamp("updated_at"));
-					item = new Item(rs.getString("item_id"), product, rs.getInt("quantity"));
-					cart.addToCart(item);
+					if(rs.getString("item_id") != null) {
+						product = new Product(rs.getString("id"),
+								  rs.getString("category_id"),
+								  rs.getString("title"),
+								  rs.getInt("price"), 
+								  rs.getInt("discount"),
+								  rs.getString("thumbnail"), 
+								  rs.getArray("gallery"),
+								  rs.getString("description"),
+								  rs.getDouble("rating"),
+								  rs.getTimestamp("created_at"),
+								  rs.getTimestamp("updated_at"));
+						item = new Item(rs.getString("item_id"), product, rs.getInt("quantity"));
+						cart.addToCart(item);
+					}
 				} while (rs.next());
 			}
 		} catch (SQLException e) {

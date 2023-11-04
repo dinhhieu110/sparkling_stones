@@ -167,4 +167,14 @@
     <servlet-name>EditProfile</servlet-name>
     <url-pattern>/EditProfile</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManageUserController</display-name>
+    <servlet-name>ManageUserController</servlet-name>
+    <servlet-class>controller.common.ManageUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageUserController</servlet-name>
+    <url-pattern>/manage-user</url-pattern>
+  </servlet-mapping>
 </web-app>

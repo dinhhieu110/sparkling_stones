@@ -462,5 +462,6 @@ body {
 			},
 		});
 	</script>
+		<%@include file="/common/script.jsp"%>
 </body>
 </html>
