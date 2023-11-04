@@ -308,7 +308,7 @@ table.table .avatar {
 									</h2>
 								</div>
 								<div class="col-sm-6">
-									<a href="#addEmployeeModal" class="btn btn-light text-dark"
+									<a href="#openModal" onClick ="addUser()" class="btn btn-light text-dark"
 										data-toggle="modal"><i class="material-icons">&#xE147;</i>
 										<span>THÊM NGƯỜI DÙNG MỚI</span></a>
 								</div>
@@ -329,16 +329,19 @@ table.table .avatar {
 								<c:forEach items="${listU}" var="u">
 									<tr>
 										<td>${u.email}</td>
-										<td>${u.lastName}${u.firstName}</td>
+										<td>${u.lastName} ${u.firstName}</td>
 										<td>${u.address}</td>
 										<td>${u.phone}</td>
 										<td>${u.role}</td>
-										<td><a href="#editEmployeeModal" class="edit"
+										<td><a href="#openModal" class="edit"
+											onclick="updateUser('${u.id}')"
 											data-toggle="modal"><i class="material-icons"
 												data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-											href="#deleteEmployeeModal" class="delete"
-											data-toggle="modal"><i class="material-icons"
-												data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
+											href="#deleteEmployeeModal"
+											class="delete" 
+											onclick="deleteUser('${u.id}')"
+											data-toggle="modal"><i
+												class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -368,42 +371,42 @@ table.table .avatar {
 						</div>
 					</div>
 				</div>
-				<!-- Edit Modal HTML -->
-				<div id="addEmployeeModal" class="modal fade">
+				<!-- Add & Edit Modal HTML -->
+				<div id="openModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<form action="manage-user" method="post">
 								<div class="modal-header">
-									<h4 class="modal-title">Thêm Người Dùng Mới</h4>
+									<h4 id ="title" class="modal-title">Thêm Người Dùng Mới</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
 									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="floatingInput"
+										<input type="email" class="form-control" id="email"
 											placeholder="name@example.com" name="email"> <label
-											for="floatingInput">Email</label>
+											for="email">Email</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" name="lastName"> <label
-											for="floatingInput">Họ</label>
+										<input type="text" class="form-control" id="firstName"
+											placeholder="lName" name="lastName"> <label
+											for="firstName">Họ</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" name="firstName"> <label
-											for="floatingInput">Tên</label>
+										<input type="text" class="form-control" id="lastName"
+											placeholder="name@example.com" name="firstName"> <label
+											for="lastName">Tên</label>
 									</div>
 									<div class="form-floating">
 										<input type="password" class="form-control"
-											id="floatingPassword" placeholder="Password" name="pass">
-										<label for="floatingPassword">Mật Khẩu</label>
+											id="pass" placeholder="Password" name="pass">
+										<label for="pass">Mật Khẩu</label>
 									</div>
 									</br>
 									<div class="form-floating">
 										<textarea name="address" class="form-control" placeholder=" "
-											id="floatingTextarea"></textarea>
-										<label for="floatingTextarea">Địa chỉ</label>
+											id="address"></textarea>
+										<label for="address">Địa chỉ</label>
 									</div>
 									</br>
 									<div class="form-floating">
@@ -427,81 +430,12 @@ table.table .avatar {
 										</div>
 									</div>
 								</div>
+								<input type="hidden" name="myUpdateHidden" id="updateHidden" value =" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
-									<button type="submit" class="btn btn-light" name="action"
+									<button id ="fbtn" type="submit" class="btn btn-light" name="action"
 										value="add">Thêm</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Edit Modal HTML -->
-				<div id="editEmployeeModal" class="modal fade">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<form action="manage-user" method="post">
-								<div class="modal-header">
-									<h4 class="modal-title">Cập Nhật Người Dùng</h4>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-								</div>
-								<div class="modal-body">
-									<div class="form-floating mb-3">
-										<input type="email" class="form-control" id="floatingInput"
-											placeholder="name@example.com" name="email"> <label
-											for="floatingInput">Email</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" name="lastName"> <label
-											for="floatingInput">Họ</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" name="firstName"> <label
-											for="floatingInput">Tên</label>
-									</div>
-									<div class="form-floating">
-										<input type="password" class="form-control"
-											id="floatingPassword" placeholder="Password" name="pass">
-										<label for="floatingPassword">Mật Khẩu</label>
-									</div>
-									</br>
-									<div class="form-floating">
-										<textarea name="address" class="form-control" placeholder=" "
-											id="floatingTextarea"></textarea>
-										<label for="floatingTextarea">Địa chỉ</label>
-									</div>
-									</br>
-									<div class="form-floating">
-										<input class="form-control" type="tel" id="phone" name="phone"
-											placeholder="1234-453-678" required> <label>Số
-											điện thoại</label>
-									</div>
-									</br>
-									<div class="form-group container">
-										<div class="row">
-											<div class="col">
-												<input checked type="radio" id="user" name="role"
-													value="6d48747d-8781-460e-9b2e-b9dc8c44a6f4" required>
-												<label for="user">User</label>
-											</div>
-											<div class="col">
-												<input type="radio" id="admin" name="role"
-													value="5268b7a1-a1ff-42c1-884e-2be5df62297c" required>
-												<label for="admin">Admin</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy">
-									<button type="submit" class="btn btn-light" name="action"
-										value="edit">Cập Nhật</button>
-
 								</div>
 							</form>
 						</div>
@@ -511,7 +445,7 @@ table.table .avatar {
 				<div id="deleteEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form>
+							<form action="manage-user" method="post">
 								<div class="modal-header">
 									<h4 class="modal-title">Xóa Người Dùng</h4>
 									<button type="button" class="close" data-dismiss="modal"
@@ -523,10 +457,12 @@ table.table .avatar {
 										<small>Hành động này không thể được hoàn tác.</small>
 									</p>
 								</div>
+								<input type="hidden" name="myDeleteHidden" id="deleteHidden" value =" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy"> <input type="submit"
-										class="btn btn-danger" value="Xóa">
+										value="Hủy">
+									<button type="submit" class="btn btn-danger" name="action"
+										value="delete">Xóa</button>
 								</div>
 							</form>
 						</div>
@@ -534,16 +470,29 @@ table.table .avatar {
 				</div>
 			</section>
 		</div>
-			<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<link rel="stylesheet" href="alert/dist/sweetalert.css">
-	<script type="text/javascript">
-		var status = document.getElementById("status").value;
-		if(status == "SuccessfullyAdded"){
-			swal("Congrats","Account Added Successfully","success");
-		}
-		if(status == "UnsuccessfullyAdded"){
-			swal("Sorry!","Account Added Unsuccessfully","error");
-		}
-	</script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" href="alert/dist/sweetalert.css">
+		<script type="text/javascript">
+			var status = document.getElementById("status").value;
+			if (status == "SuccessfullyAdded") {
+				swal("Congrats", "Account Added Successfully", "success");
+				status = "";
+
+			}
+			if (status == "UnsuccessfullyAdded") {
+				swal("Sorry!", "Account Added Unsuccessfully", "error");
+				status = "";
+
+			}
+			if(status == "SuccessfullyRemoved"){
+				swal("Congrats", "Account Deleted Successfully", "success");
+				status = "";
+			}
+			if(status == "SuccessfullyUpdated"){
+				swal("Congrats", "Account Updated Successfully", "success");
+				status = "";
+			}
+		</script>
+		<%@include file="/common/script.jsp"%>
 </body>
 </html>

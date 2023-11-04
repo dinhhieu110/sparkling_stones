@@ -43,7 +43,7 @@ public class UserDAO extends DAOService{
     	update(sql, params);
     }
     
-    // Add User
+    // Add User - Admin
     public void addUser(String email, String lastName, String firstName, String password, String address, String phone, String role) {
     	String sql = "insert into \"User\" (email, last_name, first_name, password, address, phone, role_id) values (?, ?, ?, ?, ?, ?, ?)";
     	List<Object> params = new ArrayList<Object>();
@@ -58,10 +58,58 @@ public class UserDAO extends DAOService{
     	update(sql, params);
     }
     
+    // DeleteUser - Admin
+    public void deleteUser(String id) {
+    	String sql = "delete from \"User\" where id = ? ";
+    	List<Object> params = new ArrayList<Object>();
+    	params.add(UUID.fromString(id));
+    	update(sql, params);
+    }
+    
+	// Update User - Admin
+	public void updateUser (String id, String firstName, String lastName, String address, String phone, String role) {
+		String sql = "update \"User\" set first_name = ?, last_name = ?, address = ?,phone = ?, role_id =? where id = ?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(firstName);
+		params.add(lastName);
+		params.add(address);
+		params.add(phone);
+    	params.add(UUID.fromString(role));
+		params.add(UUID.fromString(id));	
+		update(sql, params);
+
+	}
+    
     public User getUserByEmail(String email) {
     	String sql = "select * from \"User\" where email = ?";
     	List<Object> params = new ArrayList<>();
     	params.add(email);
+    	
+    	ResultSet rs = select(sql, params);
+    	User user = null;
+    	
+    	try {
+    		if (rs.next()) {
+    			user = new User(rs.getString("id"),
+		    					rs.getString("email"),
+		    					rs.getString("password"), 
+		    					rs.getString("first_name"),
+		    					rs.getString("last_name"), 
+		    					rs.getString("role_id"),
+		    					rs.getString("phone"),
+		    					rs.getString("address"),
+		    					rs.getBoolean("verified"));
+    		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return user;
+    }
+    
+    public User getUserById(String id) {
+    	String sql = "select * from \"User\" where id = ?";
+    	List<Object> params = new ArrayList<>();
+    	params.add(UUID.fromString(id));
     	
     	ResultSet rs = select(sql, params);
     	User user = null;
