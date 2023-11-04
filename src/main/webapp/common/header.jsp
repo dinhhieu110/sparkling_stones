@@ -12,6 +12,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   .my-li {
     margin: 0px 30px;
   }
+  ul, li{
+  	list-style-type: none;
+  }
 </style>
 <div id="preloader"></div>
 <header>
@@ -30,6 +33,13 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <!-- Center elements -->
         <div class="order-lg-last col-lg-5 col-sm-8 col-8">
           <div class="d-flex float-end">
+           <a
+              href="cart"
+              class="rounded border-bottom py-1 px-3 nav-link d-flex align-items-center"
+            >
+              <i class="fas fa-shopping-cart m-1 me-md-2"></i>
+              <p class="d-none d-md-block mb-0">Giỏ Hàng</p>
+            </a>
             <c:if test="${user == null}">
               <a
                 href="login"
@@ -40,23 +50,30 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               </a>
             </c:if>
             <c:if test="${user != null}">
+            <li>
               <a
                 href="my-account"
-                class="me-1 border-bottom rounded py-1 px-3 nav-link d-flex align-items-center"
+                class=" dropdown-toggle hidden-arrow me-1 border-bottom rounded py-1 px-3 nav-link d-flex align-items-center"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-mdb-toggle="dropdown"
+                aria-expanded="false"
               >
                 <i class="fas fa-user-alt m-1 me-md-2"></i>
                 <p class="d-none d-md-block mb-0">
                   ${user.firstName} ${user.lastName}
                 </p>
               </a>
+              <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuLink"
+              >
+            	<li><a class="dropdown-item" href="EditProfile">Thông tin</a></li>
+            	<li><a class="dropdown-item" href="ChangePassword">Đổi mật khẩu</a></li>
+            	<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+          	</ul>
+          	</li>
             </c:if>
-            <a
-              href="cart"
-              class="rounded border-bottom py-1 px-3 nav-link d-flex align-items-center"
-            >
-              <i class="fas fa-shopping-cart m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">Giỏ Hàng</p>
-            </a>
           </div>
         </div>
         <!-- Center elements -->

@@ -45,17 +45,22 @@ public class LoginController extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+
 		final String SUCCESS_FORWARD = request.getContextPath();
+		final String USER_FOWARD = request.getContextPath();
+		final String ADMIN_FOWARD = request.getContextPath()+"/main/adminhome.jsp";
+		
 
 		String email = request.getParameter("txtEmail").toLowerCase();
 		String password = request.getParameter("txtPassword");
 		String remember = request.getParameter("chkRemember");
-
+		
 		UserDAO dao = new UserDAO();
 		User user = dao.getUserByEmail(email);
-
 		String error = "";
 		String type = "";
+		String forward = SUCCESS_FORWARD;
 
 		if (user != null) {
 			if (user.isVerified()) {
@@ -93,6 +98,11 @@ public class LoginController extends HttpServlet {
 					type = "danger";
 					error = "Password is incorrect!";
 				}
+				if(user.getRole().equals("6d48747d-8781-460e-9b2e-b9dc8c44a6f4")) {
+					forward = USER_FOWARD;
+				} else {
+					forward = ADMIN_FOWARD;
+				}
 			} else {
 				type = "warning";
 				error = "Account has not been verified. <a href=\"verify-otp?email=" + email
@@ -104,8 +114,9 @@ public class LoginController extends HttpServlet {
 		}
 
 		dao.close();
+		
 		if (error.equals("") && type.equals("")) {
-			response.sendRedirect(SUCCESS_FORWARD);
+			response.sendRedirect(forward);
 		} else {
 			// Lấy template thông báo lỗi
 			Template template = new Template("template/alert.html");
