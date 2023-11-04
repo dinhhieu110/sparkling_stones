@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,150 +37,71 @@
 					<div class="card border shadow-0">
 						<div class="m-4">
 							<h4 class="card-title mb-4">Giỏ hàng của bạn</h4>
-							<div class="row">
-								<div class="col-lg-5">
-									<div class="me-lg-5">
-										<div class="d-flex">
-											<img
-												src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp"
-												class="border rounded me-3"
-												style="width: 96px; height: 96px;" />
-											<div class="">
-												<a href="#" class="nav-link">Winter jacket for men and
-													lady</a>
-												<p class="text-muted">Yellow, Jeans</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div
-									class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-									<div class="">
-										<text class="h6">$1156.00</text>
-										<br /> <small class="text-muted text-nowrap"> $460.00
-											/ sản phẩm </small>
-									</div>
-								</div>
-								<div
-									class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-									<div class="float-md-end">
-										<div class="container">
-											<div class="row d-flex">
-												<button style="width: 10px"
-													class="col btn btn-primary border border-secondary px-1"
-													type="button" data-action="descrease"
-													onClick="changeQuantity(this)" data-mdb-ripple-color="dark">
-													<i class="fas fa-minus"></i>
-												</button>
-												<input type="number" min="0" step="1" id="quantity"
-													class="col form-control text-center border border-secondary"
-													value="0" aria-label="Example text with button addon" />
-												<button style="width: 10px"
-													class="col btn btn-primary border border-secondary px-1"
-													type="button" data-action="increase"
-													onClick="changeQuantity(this)" id="button-addon2"
-													data-mdb-ripple-color="dark">
-													<i class="fas fa-plus"></i>
-												</button>
-												<div class="col">
-													<a href="#"
-														class=" btn btn-light border text-danger icon-hover-danger">
-														Xóa</a>
+							<div id="cart">
+								<c:forEach items="${cart.items}" var="item">
+									<div class="row gy-3 mb-4">
+										<div class="col-lg-5">
+											<div class="me-lg-5">
+												<div class="d-flex">
+													<img
+														src="${item.product.thumbnail}"
+														class="border rounded me-3"
+														style="width: 96px; height: 96px;" />
+													<div class="">
+														<a href="detail?id=${item.product.id}" class="nav-link">${item.product.title}</a>
+													</div>
 												</div>
 											</div>
 										</div>
-
-									</div>
-								</div>
-							</div>
-
-							<div class="row gy-3 mb-4">
-								<div class="col-lg-5">
-									<div class="me-lg-5">
-										<div class="d-flex">
-											<img
-												src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp"
-												class="border rounded me-3"
-												style="width: 96px; height: 96px;" />
+										<div
+											class="col-lg-3 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
 											<div class="">
-												<a href="#" class="nav-link">Mens T-shirt Cotton Base</a>
-												<p class="text-muted">Blue, Medium</p>
+												<div class="input-group mb-3" style="width: 170px;">
+													<button class="btn btn-white border border-secondary px-3"
+														type="button" id="button-addon1"
+														onclick="updateCart(event, '${item.product.id}', 'decrease')"
+														data-mdb-ripple-color="dark">
+														<i class="fas fa-minus"></i>
+													</button>
+													<input type="text"
+														class="form-control text-center border border-secondary"
+														value="${item.quantity}"
+														id="quantity"
+														aria-label="Example text with button addon"
+														aria-describedby="button-addon1" />
+													<button class="btn btn-white border border-secondary px-3"
+														type="button" id="button-addon2"
+														onclick="updateCart(event, '${item.product.id}', 'increase')"
+														data-mdb-ripple-color="dark">
+														<i class="fas fa-plus"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-2">
+											<div class="">
+												<text class="h6">
+													<fmt:formatNumber value="${item.product.finalPrice * item.quantity}" type="currency" pattern="#,###₫" />
+												</text>
+												<br /> <small class="text-muted text-nowrap">
+													<fmt:formatNumber value="${item.product.finalPrice}" type="currency" pattern="#,###₫" />
+													/ mỗi sản phẩm </small>
+											</div>
+										</div>
+										<div
+											class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+											<div class="float-md-end">
+												<a href="#!"
+													class="btn btn-light border px-2 icon-hover-primary"><i
+													class="fas fa-heart fa-lg px-1 text-secondary"></i></a> <a
+													href="#" onclick="updateCart(event, '${item.product.id}', 'delete')"
+													class="btn btn-light border text-danger px-2 icon-hover-danger">
+													<i class="fa-solid fa-trash px-1"></i>
+												</a>
 											</div>
 										</div>
 									</div>
-								</div>
-								<div
-									class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-									<div class="">
-										<select style="width: 100px;" class="form-select me-4">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</div>
-									<div class="">
-										<text class="h6">$44.80</text>
-										<br /> <small class="text-muted text-nowrap"> $12.20
-											/ per item </small>
-									</div>
-								</div>
-								<div
-									class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-									<div class="float-md-end">
-										<a href="#!"
-											class="btn btn-light border px-2 icon-hover-primary"><i
-											class="fas fa-heart fa-lg px-1 text-secondary"></i></a> <a
-											href="#"
-											class="btn btn-light border text-danger icon-hover-danger">
-											Remove</a>
-									</div>
-								</div>
-							</div>
-
-							<div class="row gy-3">
-								<div class="col-lg-5">
-									<div class="me-lg-5">
-										<div class="d-flex">
-											<img
-												src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/13.webp"
-												class="border rounded me-3"
-												style="width: 96px; height: 96px;" />
-											<div class="">
-												<a href="#" class="nav-link">Blazer Suit Dress Jacket
-													for Men</a>
-												<p class="text-muted">XL size, Jeans, Blue</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div
-									class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-									<div class="">
-										<select style="width: 100px;" class="form-select me-4">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</div>
-									<div class="">
-										<text class="h6">$1156.00</text>
-										<br /> <small class="text-muted text-nowrap"> $460.00
-											/ per item </small>
-									</div>
-								</div>
-								<div
-									class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-									<div class="float-md-end">
-										<a href="#!"
-											class="btn btn-light border px-2 icon-hover-primary"><i
-											class="fas fa-heart fa-lg px-1 text-secondary"></i></a> <a
-											href="#"
-											class="btn btn-light border text-danger icon-hover-danger">
-											Remove</a>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 

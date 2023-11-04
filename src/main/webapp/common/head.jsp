@@ -12,7 +12,7 @@
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
 <!-- MDB -->
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/mdb/mdb.min.css" />
+	href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" />
 <!-- Swiper -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />

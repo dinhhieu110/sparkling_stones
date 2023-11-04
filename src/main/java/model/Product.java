@@ -71,6 +71,13 @@ public class Product {
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
+	
+	public int getFinalPrice() {
+		if (discount > 0) {
+			return discount;
+		}
+		return price;
+	}
 
 	public String getThumbnail() {
 		return thumbnail;
