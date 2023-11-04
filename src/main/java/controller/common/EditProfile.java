@@ -46,8 +46,9 @@ public class EditProfile extends HttpServlet {
 		String ulast_name = request.getParameter("lastName");
 		String uphone = request.getParameter("phone");
 		String uaddress = request.getParameter("address");
-		String uemail = request.getParameter("email");
-
+		/*
+		 * String uemail = request.getParameter("email");
+		 */
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
@@ -55,8 +56,9 @@ public class EditProfile extends HttpServlet {
 		user.setLastName(ulast_name);
 		user.setPhone(uphone);
 		user.setAddress(uaddress);
-		user.setEmail(uemail);
-
+		/*
+		 * user.setEmail(uemail);
+		 */
 
 		UserDAO userDao = new UserDAO();
 		userDao.editProfile(user);
