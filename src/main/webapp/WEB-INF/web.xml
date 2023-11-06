@@ -177,4 +177,14 @@
     <servlet-name>ManageUserController</servlet-name>
     <url-pattern>/manage-user</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminHomeController</display-name>
+    <servlet-name>AdminHomeController</servlet-name>
+    <servlet-class>controller.common.AdminHomeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminHomeController</servlet-name>
+    <url-pattern>/admin-home</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
 
-<title>My Account</title>
+<title>Admin Account</title>
 <%@include file="/common/head.jsp"%>
 <%
 User user = (User) session.getAttribute("user");
@@ -117,7 +117,7 @@ to {
 </head>
 <body>
 	<input type="hidden" id="status" value="<%= request.getParameter("status")%>">
-	<%@include file="/common/header.jsp"%>
+	<%@include file="/common/adminheader.jsp"%>
 
 	<!-- Heading -->
 	<div class="bg-primary">
@@ -142,20 +142,7 @@ to {
 			<div class="row">
 				<div class="col-lg-3 col-xl-3">
 					<nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
-						<a class="nav-link my-0 active" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Account main</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">New orders</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Orders history</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">My wishlist</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Transactions</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Profile setting</p></a> <a
-							class="nav-link my-0 bg-light" href="logout"><p
-								class="pb-0 mb-0" style="width: 100px">Log out</p></a>
+						
 					</nav>
 				</div>
 				<main class="col-lg-9 col-xl-9">
@@ -165,7 +152,7 @@ to {
 								class="d-flex align-items-center justify-content-center px-4">
 								<div class="me-3">
 									<img
-										src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/avatars/avatar.webp"
+										src="<%=request.getContextPath()%>/assets/img/david.jpg"
 										class="rounded-circle" style="height: 60px; width: 60px;" />
 								</div>
 								<div class="pt-2 ms-3 me-auto">
@@ -207,7 +194,7 @@ to {
 
 						<hr class="my-4" />
 
-						<h5 class="mb-3">Your orders</h5>
+						<h5 class="mb-3">Your accepted orders</h5>
 						<div class="card border border-primary mb-4 shadow-0">
 							<div class="card-body pb-0">
 								<header class="d-lg-flex">
@@ -398,8 +385,7 @@ to {
 								class="modal-label"> <i class="ti-email"></i> Address
 							</label> <input value="${user.getAddress()}" id="address" type="text"
 								name="address" class="modal-input">
-							<input type="hidden" value="user" name="role">
-
+							<input type="hidden" value="admin" name="role">
 
 							<button id="save-profile" type="submit" value="SAVE">Save</button>
 						</div>
@@ -440,8 +426,6 @@ to {
 			event.stopPropagation()
 		}) */
 	</script>
-
-	<%@include file="/common/footer.jsp"%>
 
 	<%@include file="/common/script.jsp"%>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

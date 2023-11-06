@@ -16,7 +16,8 @@ import dao.UserDAO;
  */
 public class EditProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String FOWARD_PAGE = "/main/myaccount.jsp";
+	private static final String FOWARD_USER = "/main/myaccount.jsp";
+	private static final String FOWARD_ADMIN = "/main/adminaccount.jsp";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -32,10 +33,16 @@ public class EditProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
-
+		String acc = request.getParameter("acc");
+		String foward="";
+		if(acc.equals("user")) {
+			foward = FOWARD_USER;
+		}
+		if(acc.equals("admin")) {
+			foward = FOWARD_ADMIN;
+		}
+		request.getRequestDispatcher(foward).forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -46,6 +53,8 @@ public class EditProfile extends HttpServlet {
 		String ulast_name = request.getParameter("lastName");
 		String uphone = request.getParameter("phone");
 		String uaddress = request.getParameter("address");
+		String hidInput = request.getParameter("role");
+		String foward ="";
 		/*
 		 * String uemail = request.getParameter("email");
 		 */
@@ -62,8 +71,13 @@ public class EditProfile extends HttpServlet {
 
 		UserDAO userDao = new UserDAO();
 		userDao.editProfile(user);
-		
-		request.getRequestDispatcher("/main/myaccount.jsp").forward(request, response);
+		if(hidInput.equals("user")) {
+			foward = "/main/myaccount.jsp";
+		} 
+		if(hidInput.equals("admin")) {
+			foward = "/main/adminaccount.jsp";
+		} 
+		request.getRequestDispatcher(foward).forward(request, response);
 
 	}
 
