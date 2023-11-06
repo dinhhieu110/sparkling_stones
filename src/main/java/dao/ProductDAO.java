@@ -224,5 +224,15 @@ public class ProductDAO extends DAOService {
 
 		return list;
 	}
+	
+	// Xóa sản phẩm
+		public void deleteProduct(String id) {
+
+			String sql = "delete from \"Product\"\n"
+					+ "where id=?";
+			List<Object> params = new ArrayList<Object>();
+			params.add(UUID.fromString(id));
+			update(sql, params);
+		}
 
 }

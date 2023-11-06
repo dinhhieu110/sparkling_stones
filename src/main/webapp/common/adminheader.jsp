@@ -55,7 +55,7 @@
 				</a> <a href="manage-user"
 					class="list-group-item list-group-item-action py-2 ripple"><i
 					class="fas fa-users fa-fw me-3"></i><span>Người dùng </span> </a> <a
-					href="#" class="list-group-item list-group-item-action py-2 ripple">
+					href="ManageProductController" class="list-group-item list-group-item-action py-2 ripple">
 					<i class="fab fa-product-hunt fa-fw me-3"></i><span>Sản phẩm</span>
 				</a> <a href="#"
 					class="list-group-item list-group-item-action py- ripple"><i

@@ -187,4 +187,14 @@
     <servlet-name>AdminHomeController</servlet-name>
     <url-pattern>/admin-home</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManageProductController</display-name>
+    <servlet-name>ManageProductController</servlet-name>
+    <servlet-class>controller.common.ManageProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageProductController</servlet-name>
+    <url-pattern>/ManageProductController</url-pattern>
+  </servlet-mapping>
 </web-app>
