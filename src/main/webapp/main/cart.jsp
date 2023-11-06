@@ -164,7 +164,6 @@
 			<header class="mb-4">
 				<h3>Sản phẩm đề xuất</h3>
 			</header>
-
 			<div class="row">
 				<c:forEach items="${listP}" var ="p">
 				<div class="col-lg-3 col-md-6 col-sm-6">

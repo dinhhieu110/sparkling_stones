@@ -213,10 +213,10 @@
 											<i class="fas fa-star"></i><span class="fw-bold ms-1">${p.rating}
 												(99+)</span>
 										</div>
+										<input type="hidden" id="quantity" value="1" />
 										<div
 											class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-											<a href="#!" class="btn btn-primary shadow-0 me-1">Add to
-												cart</a> <a href="#!"
+											<a href="#!" class="btn btn-primary shadow-0 me-1" onclick="addToCart(event, '${p.id}')">Thêm vào giỏ hàng</a> <a href="#!"
 												class="btn btn-light border icon-hover px-2 pt-2"><i
 												class="fas fa-heart fa-lg text-secondary px-1"></i></a>
 										</div>
