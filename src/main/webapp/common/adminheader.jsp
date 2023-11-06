@@ -48,7 +48,7 @@
 		class="collapse d-lg-block sidebar collapse bg-white">
 		<div class="position-sticky">
 			<div class="list-group list-group-flush mx-3 mt-4">
-				<a href="#"
+				<a href= "admin-home"
 					class="list-group-item list-group-item-action py-2 ripple"
 					aria-current="true"> <i
 					class="fas fa-tachometer-alt fa-fw me-3"></i><span>Thông số chung</span>
@@ -87,7 +87,7 @@
 			</button>
 
 			<!-- Brand -->
-			<a class="navbar-brand" href="#"> <img
+			<a class="navbar-brand" href="admin-home"> <img
 				src="<%=request.getContextPath()%>/assets/img/logo.png" height="45"
 				alt="" loading="lazy" />
 			</a>
@@ -106,13 +106,13 @@
 					id="navbarDropdownMenuLink" role="button"
 					data-mdb-toggle="dropdown" aria-expanded="false"> <i
 						class="fas fa-bell"></i> <span
-						class="badge rounded-pill badge-notification bg-danger">1</span>
+						class="badge rounded-pill badge-notification bg-danger">3</span>
 				</a>
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">Some news</a></li>
-						<li><a class="dropdown-item" href="#">Another news</a></li>
-						<li><a class="dropdown-item" href="#">Something else here</a></li>
+						<li><a class="dropdown-item" href="#">3 Users added successfully</a></li>
+						<li><a class="dropdown-item" href="#">17 Products added successfully</a></li>
+						<li><a class="dropdown-item" href="#">1 Admin added successfully</a></li>
 					</ul></li>
 
 				<!-- Icon -->
@@ -135,9 +135,8 @@
 				</a>
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">My profile</a></li>
-						<li><a class="dropdown-item" href="#">Settings</a></li>
-						<li><a class="dropdown-item" href="#">Logout</a></li>
+						<li><a class="dropdown-item" href="EditProfile?acc=admin">Thông tin</a></li>
+						<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
 					</ul></li>
 			</ul>
 		</div>
