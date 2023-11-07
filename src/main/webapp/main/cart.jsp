@@ -162,9 +162,8 @@
 	<section>
 		<div class="container my-5">
 			<header class="mb-4">
-				<h3>Sản phẩm đề xuất</h3>
+				<h3>Sản phẩm gợi ý cho bạn</h3>
 			</header>
-
 			<div class="row">
 				<c:forEach items="${listP}" var ="p">
 				<div class="col-lg-3 col-md-6 col-sm-6">
@@ -174,17 +173,15 @@
 								<h6>
 									<span class="badge bg-danger pt-1 mt-3 ms-2">New</span>
 								</h6>
-								<i
-									class=" disabled fas fa-heart text-primary fa-lg float-end pt-3 m-2"></i>
 							</div>
 						</div>
-						<a href="#" class=""> <img
+						<a href="detail?id=${p.id}" class=""> <img
 							src="${p.thumbnail}" />
 						</a>
 						<div class="card-body d-flex flex-column pt-3 border-top">
 							<a href="detail?id=${p.id}">
-								<p class="card-text mb-0 d-inline-block text-truncate"
-									style="max-width: 200px;">${p.title}</p>
+								<h6 class="card-text mb-0 d-inline-block text-truncate"
+									style="max-width: 200px;">${p.title}</h6>
 								</a>
 								<h6 class="card-title currency-style">
 									<fmt:formatNumber value="${p.discount}" type="currency"
@@ -196,8 +193,6 @@
 								</h6>
 							<div
 								class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-								<a href="#" class="btn btn-outline-primary w-100">Thêm vào
-									giỏ hàng</a>
 							</div>
 						</div>
 					</div>

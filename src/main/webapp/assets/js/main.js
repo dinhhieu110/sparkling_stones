@@ -42,18 +42,31 @@ function changeQuantity(target) {
 	quantity.value = value;
 }
 
+// Toast 
+function showToast(text) {
+	$('#toast').addClass("display");
+	$('#toast').text(text);
+	setTimeout(() => {
+		$('#toast').removeClass("display")
+	}, 2000)
+}
+
 function addToCart(event, id) {
 	event.preventDefault();
 	var path = getContextPath();
-
+	var quantity =  $('#quantity').val();
+	if(quantity == "null"){
+		quantity == "1";
+	}
 	$.ajax({
 		url: path + "/add-to-cart",
 		data: {
 			id: id,
-			quantity: $('#quantity').val(),
+			quantity: quantity,
 		},
 		type: "get",
 		success: function(response) {
+			showToast("Item added successfully!")
 			console.log("OK")
 		},
 		error: function(xhr) {
@@ -77,6 +90,7 @@ function updateCart(event, id, action) {
 		},
 		type: "post",
 		success: function(response) {
+			showToast("Item added successfully!")
 			$('#cart').html(response);
 		},
 		error: function(xhr) {
@@ -146,6 +160,5 @@ function addUser() {
 	$('[name="role"]').eq(0).prop("checked", true);
 	$('#fbtn').val("add");
 	$('#fbtn').text("Thêm");
-
-
 }
+
