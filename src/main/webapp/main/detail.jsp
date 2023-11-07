@@ -36,11 +36,52 @@
 	z-index: 1;
 	background-color: rgba(0, 0, 0, 0.25);
 }
+
+/* Toast style*/
+#toast{
+	min-width: 300px;
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	margin-left: -125px;
+	background: #333;
+	padding: 15px;
+	text-align: center;
+	z-index: 1;
+	font: 18px;
+	visibility: hidden;
+	color: white;
+}
+
+#toast.display{
+	visibility: visible;
+	animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+}
+
+@keyframes fadeIn {
+	from {
+		bottom: 0;
+		opacity: 0;
+	}
+	to {
+		bottom: 30px;
+		opacity: 1;
+	}
+}
+@keyframes fadeOut {
+	from{
+		bottom: 30px;
+		opacity: 1;
+	}
+	to {
+		bottom: 0;
+		opacity: 0;
+	}
+}
 </style>
 </head>
 <body>
 	<%@include file="/common/header.jsp"%>
-
 	<!-- Heading -->
 	<div class="bg-primary">
 		<div class="container py-4">
@@ -408,7 +449,8 @@
 			</div>
 		</div>
 	</section>
-
+	<!-- Toast -->
+	<div id="toast">This is toast text</div>
 	<%@include file="/common/footer.jsp"%>
 
 	<%@include file="/common/script.jsp"%>
