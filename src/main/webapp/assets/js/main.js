@@ -162,3 +162,4 @@ function addUser() {
 	$('#fbtn').text("Thêm");
 }
 
+

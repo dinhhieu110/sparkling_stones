@@ -44,6 +44,13 @@ public class CartDAO extends DAOService {
 		return cartId.toString();
 	}
 	
+	public void removeCart(String userId) {
+		String sql = "delete from \"Shopping_Session\" where user_id = ?";
+		List<Object> params = new ArrayList<>();
+		params.add(UUID.fromString(userId));		
+		update(sql, params);
+	}
+	
 	public Cart getCartByUserId(String id) {
 		String sql = "select c.id as item_id, p.*, s.id as session_id, quantity from \"Shopping_Session\" s \n"
 				+ "left join \"Cart_Item\" c on s.id = c.session_id\n"

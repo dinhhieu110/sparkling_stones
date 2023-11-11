@@ -13,6 +13,8 @@ import model.User;
 import java.io.IOException;
 import java.util.List;
 
+import com.google.gson.Gson;
+
 import dao.CartDAO;
 import dao.ProductDAO;
 
