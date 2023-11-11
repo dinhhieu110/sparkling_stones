@@ -37,7 +37,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               class="rounded border-bottom py-1 px-3 nav-link d-flex align-items-center"
             >
               <i class="fas fa-shopping-cart m-1 me-md-2"></i>
-              <p class="d-none d-md-block mb-0">Giỏ Hàng<span class="badge bg-danger px-1">${cart.items.size()}</span></p>
+              <p class="d-none d-md-flex align-items-center mb-0">Giỏ Hàng<span class="badge bg-danger px-1 ms-1" id="cart-quantity">${cart.items.size()}</span></p>
             </a>
             <c:if test="${user == null}">
               <a

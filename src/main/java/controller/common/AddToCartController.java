@@ -119,10 +119,12 @@ public class AddToCartController extends HttpServlet {
 					replacements.put("quantity", Integer.toString(cartItem.getQuantity()));
 					replacements.put("title", product.getTitle());
 					replacements.put("finalPrice", format.format(product.getFinalPrice()));
-					replacements.put("totalPrice", format.format(product.getFinalPrice() * item.getQuantity()));
+					replacements.put("totalPrice", format.format(product.getFinalPrice() * cartItem.getQuantity()));
 					output += template.getTemplate(replacements);
 				}
-				writer.write(output);
+				String json = output + "|||{\"quantity\": " + cart.getItems().size() + ", \"total\": "
+						+ cart.getTotal() + "}"; 
+				writer.write(json);
 			}
 		}
 	}

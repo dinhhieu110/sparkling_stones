@@ -56,4 +56,12 @@ public class Cart {
 			items.remove(item);
 	}
 	
+	public int getTotal() {
+		int total = 0;
+		for (Item item : items) {
+			total += item.getQuantity() * item.getProduct().getFinalPrice();
+		}
+		return total;
+	}
+	
 }

@@ -1,6 +1,3 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="dao.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -14,8 +11,6 @@
 <%@include file="/common/head.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<%@include file="/common/head.jsp"%>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
@@ -154,17 +149,13 @@
 							</form>
 						</div>
 					</div>
-					<c:forEach var="item" items="${cart.items}">
-						<c:set var="totalPrice"
-							value="${totalPrice + (item.product.finalPrice * item.quantity)}" />
-					</c:forEach>
 					<div class="card shadow-0 border">
 						<div class="card-body">
 							<div class="d-flex justify-content-between">
 								<p class="mb-2">Tổng hóa đơn:</p>
 								<p class="mb-2">
-									<text class="h6"> <fmt:formatNumber
-														value="${totalPrice}"
+									<text class="h6" id="total"> <fmt:formatNumber
+														value="${cart.total}"
 														type="currency" pattern="#,###₫" /> </text>
 								</p>
 							</div>
@@ -176,8 +167,8 @@
 							<div class="d-flex justify-content-between">
 								<p class="mb-2">Tổng hóa đơn:</p>
 								<p class="mb-2 fw-bold">
-									<text class="h6"> <fmt:formatNumber
-										value="${totalPrice}" type="currency" pattern="#,###₫" /> </text>
+									<text class="h6" id="summary"> <fmt:formatNumber
+										value="${cart.total}" type="currency" pattern="#,###₫" /> </text>
 								</p>
 							</div>
 
