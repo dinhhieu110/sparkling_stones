@@ -9,10 +9,12 @@
 <head>
 <title>Cart</title>
 <%@include file="/common/head.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<style type="text/css">
 </head>
 <body>
 	<%@include file="/common/header.jsp"%>
@@ -46,6 +48,9 @@
 								<c:if test="${cart.items.size() == 0}">
 									<div class="alert alert-warning" role="alert">Chưa có sản
 										phẩm nào trong giỏ hàng của bạn!</div>
+								</c:if>
+								<c:if test="${cart == null}">
+									<div class="alert alert-success" role="alert">Thanh toán đơn hàng thành công!</div>
 								</c:if>
 								<c:if test="${cart.items.size() != 0}">
 									<c:forEach items="${cart.items}" var="item">
@@ -197,7 +202,7 @@
 					<form action="check-out" method="post">
 						<div class="modal-header">
 							<h4 id="title" class="modal-title">Địa Chỉ Của Tôi</h4>
-							<button type="button" class="close" data-dismiss="modal"
+							<button type="button" class="close btn btn-light fs-4" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">
