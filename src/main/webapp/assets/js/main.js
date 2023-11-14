@@ -90,8 +90,13 @@ function updateCart(event, id, action) {
 		},
 		type: "post",
 		success: function(response) {
-			showToast("Item added successfully!")
-			$('#cart').html(response);
+			showToast("Item added successfully!");
+			var output = response.split("|||");
+			var cart = JSON.parse(output[1]);
+			$('#cart').html(output[0]);
+			$('#cart-quantity').html(cart.quantity);
+			$('#total').html(formatCurrency(cart.total));
+			$('#summary').html(formatCurrency(cart.total));
 		},
 		error: function(xhr) {
 			console.log("ERROR Ajax");
@@ -161,4 +166,10 @@ function addUser() {
 	$('#fbtn').val("add");
 	$('#fbtn').text("Thêm");
 }
+
+function formatCurrency(amount) {
+  // Sử dụng hàm toLocaleString để định dạng số tiền
+  return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+}
+
 

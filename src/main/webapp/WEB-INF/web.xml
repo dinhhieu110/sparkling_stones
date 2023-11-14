@@ -187,4 +187,14 @@
     <servlet-name>AdminHomeController</servlet-name>
     <url-pattern>/admin-home</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckOutController</display-name>
+    <servlet-name>CheckOutController</servlet-name>
+    <servlet-class>controller.common.CheckOutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckOutController</servlet-name>
+    <url-pattern>/check-out</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -79,6 +79,15 @@ public class UserDAO extends DAOService{
 		update(sql, params);
 
 	}
+	
+	public void updateAddress (String id, String address, String phone) {
+		String sql = "update \"User\" set address = ?,phone = ? where id = ?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(address);
+		params.add(phone);
+		params.add(UUID.fromString(id));	
+		update(sql, params);
+	}
     
     public User getUserByEmail(String email) {
     	String sql = "select * from \"User\" where email = ?";

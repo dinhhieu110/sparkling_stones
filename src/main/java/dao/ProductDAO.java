@@ -224,5 +224,4 @@ public class ProductDAO extends DAOService {
 
 		return list;
 	}
-
 }

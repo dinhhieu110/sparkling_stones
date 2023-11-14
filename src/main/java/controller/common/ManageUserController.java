@@ -95,14 +95,14 @@ public class ManageUserController extends HttpServlet {
 
 		}
 		case "delete": {
-			String id = request.getParameter("myDeleteHidden");
+			String id = request.getParameter("myDeleteHidden"); //get ID
 			uDao.deleteUser(id);
 			foward = SUCCESS_FORWARD + "?status=SuccessfullyRemoved";
 			break;
 		}
 
 		case "update": {
-			String id = request.getParameter("myUpdateHidden");
+			String id = request.getParameter("myUpdateHidden"); //get ID
 			uDao.updateUser(id, firstName, lastName, address, phone, role);
 			foward = SUCCESS_FORWARD + "?status=SuccessfullyUpdated";
 			break;
