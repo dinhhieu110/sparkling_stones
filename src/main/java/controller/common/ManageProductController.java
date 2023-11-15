@@ -69,7 +69,7 @@ public class ManageProductController extends HttpServlet {
 
 		switch (action) {
 		case "delete": {
-			String id = request.getParameter("myDeleteProduct");
+			String id = request.getParameter("myDeleteProductHidden");
 			productDao.deleteProduct(id);
 			foward = SUCCESS_FORWARD + "?status=SuccessfullyDeleted";
 			break;

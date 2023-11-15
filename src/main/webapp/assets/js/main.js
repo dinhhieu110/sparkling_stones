@@ -90,6 +90,11 @@ function deleteUser(id) {
 	deleteElement.value = id;
 }
 
+function deleteProduct(id) {
+	const deleteElement2 = document.getElementById("deleteProductHidden");
+	deleteElement2.value = id;
+}
+
 function updateUser(id) {
 	const updateElement = document.getElementById("updateHidden");
 	updateElement.value = id;
@@ -149,3 +154,5 @@ function addUser() {
 
 
 }
+
+

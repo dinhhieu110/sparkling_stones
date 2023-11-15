@@ -197,4 +197,24 @@
     <servlet-name>ManageProductController</servlet-name>
     <url-pattern>/ManageProductController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetProductByPriceRange</display-name>
+    <servlet-name>GetProductByPriceRange</servlet-name>
+    <servlet-class>controller.common.GetProductByPriceRange</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetProductByPriceRange</servlet-name>
+    <url-pattern>/GetProductByPriceRange</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetProductByCategoryAndPriceRange</display-name>
+    <servlet-name>GetProductByCategoryAndPriceRange</servlet-name>
+    <servlet-class>controller.common.GetProductByCategoryAndPriceRange</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetProductByCategoryAndPriceRange</servlet-name>
+    <url-pattern>/GetProductByCategoryAndPriceRange</url-pattern>
+  </servlet-mapping>
 </web-app>

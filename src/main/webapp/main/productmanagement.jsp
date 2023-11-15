@@ -612,7 +612,7 @@ table.table .avatar {
 										<small>Hành động này không thể quay lại.</small>
 									</p>
 								</div>
-								<input type="hidden" name="myDeleteProduct" id="deleteHidden" value=""/>
+								<input type="hidden" name="myDeleteProductHidden" id="deleteProductHidden" value =" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
@@ -698,5 +698,6 @@ table.table .avatar {
 		status = "";
 	}
 </script>
+		<%@include file="/common/script.jsp"%>
 
 </html>
