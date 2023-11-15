@@ -64,7 +64,7 @@
 										<ul class="list-unstyled">
 											<c:forEach items="${listOfCates}" var="cate">
 												<li><a href="shop?categoryId=${cate.id}&index=1"
-													class="text-dark">${cate.name}</a></li>
+													class="text-dark" >${cate.name}</a></li>
 											</c:forEach>
 										</ul>
 									</div>
@@ -251,6 +251,7 @@
 							<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 								class="page-link" <% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag-1)}" <%}%>
+								<% if(from=="range") { %> href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag-1)}" <%}%>
 								<% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag-1)}"
 								<%}%> aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -269,6 +270,7 @@
 							<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 								class="page-link" <% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag+1)}" <%}%>
+								<% if(from=="range") { %> href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag+1)}" <%}%>
 								<% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag+1)}"
 								<%}%> aria-label="Next"> <span aria-hidden="true">&raquo;</span>
@@ -413,5 +415,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 </script> -->
+<script>
+        function highlightCategory(element) {
+            // Remove the class from all elements with the class 'category-link'
+            var categoryLinks = document.getElementsByClassName("category-link");
+            for (var i = 0; i < categoryLinks.length; i++) {
+                categoryLinks[i].classList.remove("bold-category");
+            }
 
+            // Add the class to the clicked element
+            element.classList.add("bold-category");
+        }
+    </script>
 </html>

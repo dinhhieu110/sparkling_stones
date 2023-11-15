@@ -71,10 +71,7 @@ public class GetProductByPriceRange extends HttpServlet {
 		        // Tiếp tục xử lý với giá trị minPrice và maxPrice
 		        // ...
 		        
-		        // Lưu giữ giá trị vào request (để hiển thị lại trên trang JSP)
-		        request.setAttribute("minPrice", minPrice);
-		        request.setAttribute("maxPrice", maxPrice);
-		        
+
 		        // Gọi phương thức trong ProductDAO để lấy danh sách sản phẩm theo khoảng giá
 		        ProductDAO productDAO = new ProductDAO();
 		        CategoryDAO cDao = new CategoryDAO();
@@ -101,7 +98,7 @@ public class GetProductByPriceRange extends HttpServlet {
 		        request.setAttribute("listP", listByRange);
 		        request.setAttribute("listOfCates", listOfCates);
 
-		        request.setAttribute("from", "shop");
+		        request.setAttribute("from", "range");
 		        request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 
 		    } catch (NumberFormatException e) {
