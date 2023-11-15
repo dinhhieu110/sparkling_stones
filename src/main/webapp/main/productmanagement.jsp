@@ -287,10 +287,72 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+
+.swiper-slide {
+	height: 50%;
+}
+
+.swiper-slide>div {
+	padding-bottom: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: transparent;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+}
+
+.swiper-slide-thumb-active {
+	overflow: hidden;
+}
+
+.swiper-slide-thumb-active::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.description-wrapper {
+	max-height: 2em;
+	overflow: hidden;
+	position: relative;
+}
+
+.read-more-btn {
+	background: none;
+	border: none;
+	color: #4F4F4F; /* Set button color to blue (#007bff) */
+	cursor: pointer;
+	padding: 0;
+	font-size: 14px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0; /* Remove margin */
+}
+
+.full-description {
+	display: none;
+}
+
+.description-wrapper.expanded {
+	max-height: none;
+}
+
+.description-wrapper.expanded .read-more-btn {
+	display: none;
+}
 </style>
 </head>
 <body>
 	<%@include file="/common/adminheader.jsp"%>
+	<input type="hidden" id="status"
+		value="<%=request.getParameter("status")%>">
 	<main style="margin-top: 58px">
 		<div class="container pt-4">
 			<section class="mb-4">
@@ -323,51 +385,107 @@ table.table .avatar {
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Nhẫn Kim cương</td>
-									<td>80,000,000</td>
-									<td>75,000,000</td>
-									<td><img width="50px" height="50px"
-										src="https://cdn.pnj.io/images/detailed/105/gnddddw001977-nhan-nam-kim-cuong-vang-trang-14k-pnj.png" /></td>
-									<td>This diamond ring builds your beauty</td>
-									<td>Thư viện ảnh con added</td>
-									<td><a href="#editEmployeeModal" class="edit"
-										data-toggle="modal"><i class="material-icons"
-											data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-										href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-											class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>dinhhieu@gmail.com</td>
-									<td>Đình Hiệu</td>
-									<td>55 Lê Thiện Trị</td>
-									<td>0123 456 789</td>
-									<td><a href="#editEmployeeModal" class="edit"
-										data-toggle="modal"><i class="material-icons"
-											data-toggle="tooltip" title="Edit">&#xE254;</i></a> <a
-										href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-											class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-									</td>
-								</tr>
+								<c:forEach items="${listP}" var="o">
+									<tr>
+										<td>${o.title}</td>
+										<td>${o.price}</td>
+										<td>${o.discount}</td>
+										<td><img width="50px" height="50px" src="${o.thumbnail}" /></td>
+										<td class="description-wrapper"><span
+											class="full-description">${o.description}</span> <span
+											class="short-description"></span>
+											<button class="read-more-btn">Đọc thêm</button></td>
+
+										<td><c:forEach items="${o.gallery.array}" var="image">
+												<div class="swiper-slide">
+													<div style="background-image: url('${image}')"></div>
+												</div>
+											</c:forEach></td>
+										<td><a href="#editEmployeeModal" class="edit"
+											data-toggle="modal"><i class="material-icons"
+												data-toggle="tooltip" title="Edit">&#xE254;</i></a> <!-- Add data-pid attribute to store the product ID -->
+											<a href="#deleteEmployeeModal" class="delete"
+											data-toggle="modal" onclick="deleteProduct('${o.id}')">
+												<i class="material-icons" data-toggle="tooltip"
+												title="Delete">&#xE872;</i>
+										</a></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
-						<div class="clearfix">
-							<div class="hint-text">
-								Showing <b>5</b> out of <b>25</b> entries
-							</div>
+
+						<!-- Pagination -->
+						<%
+						String from = (String) request.getAttribute("from");
+						%>
+						<nav aria-label="Page navigation example"
+							class="d-flex justify-content-center mt-3">
 							<ul class="pagination">
-								<li class="page-item disabled"><a href="#">Previous</a></li>
-								<li class="page-item"><a href="#" class="page-link">1</a></li>
-								<li class="page-item"><a href="#" class="page-link">2</a></li>
-								<li class="page-item active"><a href="#" class="page-link">3</a></li>
-								<li class="page-item"><a href="#" class="page-link">4</a></li>
-								<li class="page-item"><a href="#" class="page-link">5</a></li>
-								<li class="page-item"><a href="#" class="page-link">Next</a></li>
+								<!-- First Button -->
+								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
+									class="page-link"
+									<c:if test="${from eq 'ManageProductController'}">
+           href="ManageProductController?index=1"
+       </c:if>
+									aria-label="First"> <span aria-hidden="true">First</span>
+								</a></li>
+
+								<!-- Backward Button -->
+								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
+									class="page-link"
+									<c:if test="${from eq 'ManageProductController'}">
+                   href="ManageProductController?index=${tag - 1}"
+               </c:if>
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+								<!-- Pagination Items -->
+								<c:set var="startPage" value="${tag - 2}" />
+								<c:choose>
+									<c:when test="${startPage < 1}">
+										<c:set var="startPage" value="1" />
+									</c:when>
+									<c:when test="${startPage > endP - 4}">
+										<c:set var="startPage" value="${endP - 4}" />
+									</c:when>
+								</c:choose>
+								<c:forEach begin="${startPage}" end="${startPage + 4}" var="i">
+									<li class="page-item ${tag == i ? 'active' : ''}"><a
+										class="page-link"
+										<c:if test="${from eq 'ManageProductController'}">
+                       href="ManageProductController?index=${i}"
+                   </c:if>>${i}</a>
+									</li>
+								</c:forEach>
+
+								<!-- Forward Button -->
+								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
+									class="page-link"
+									<c:if test="${from eq 'ManageProductController'}">
+                   href="ManageProductController?index=${tag + 1}"
+               </c:if>
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
+
+
+								<!-- Last Button -->
+								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
+									class="page-link"
+									<c:if test="${from eq 'ManageProductController'}">
+           href="ManageProductController?index=${endP}"
+       </c:if>
+									aria-label="Last"> <span aria-hidden="true">Last</span>
+								</a></li>
+
+
+
 							</ul>
-						</div>
+						</nav>
+
+						<!-- Pagination -->
 					</div>
 				</div>
+
 				<!-- Edit Modal HTML -->
 				<div id="addEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
@@ -379,27 +497,45 @@ table.table .avatar {
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<div class="form-group">
-										<label>Name</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" required> <label for="floatingInput">Tên
+											sản phẩm</label>
 									</div>
-									<div class="form-group">
-										<label>Email</label> <input type="email" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" required><label for="floatingInput">Giá</label>
 									</div>
-									<div class="form-group">
-										<label>Address</label>
-										<textarea class="form-control" required></textarea>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" required><label for="floatingInput">Giá
+											khuyến mãi</label>
 									</div>
-									<div class="form-group">
-										<label>Phone</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control"
+											id="floatingInputMainImg" placeholder="" required><label
+											for="floatingInputMainImg">Ảnh chính</label>
 									</div>
+
+
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control"
+											id="floatingInputSecondaryImg" placeholder="" required><label
+											for="floatingInputSecondaryImg">Ảnh phụ</label>
+									</div>
+
+									<div class="form-floating">
+										<textarea name="address" class="form-control" placeholder=" "
+											id="floatingTextarea"></textarea>
+										<label for="floatingTextarea">Mô tả</label>
+									</div>
+
 								</div>
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy"> <input type="submit"
-										class="btn btn-light" value="Thêm">
+										value="Hủy">
+									<button type="submit" class="btn btn-light" name="action"
+										value="add">Thêm</button>
 								</div>
 							</form>
 						</div>
@@ -416,27 +552,45 @@ table.table .avatar {
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<div class="form-group">
-										<label>Name</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" required> <label for="floatingInput">Tên
+											sản phẩm</label>
 									</div>
-									<div class="form-group">
-										<label>Email</label> <input type="email" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" required><label for="floatingInput">Giá</label>
 									</div>
-									<div class="form-group">
-										<label>Address</label>
-										<textarea class="form-control" required></textarea>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="floatingInput"
+											placeholder="" required><label for="floatingInput">Giá
+											khuyến mãi</label>
 									</div>
-									<div class="form-group">
-										<label>Phone</label> <input type="text" class="form-control"
-											required>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control"
+											id="floatingInputMainImg" placeholder="" required><label
+											for="floatingInputMainImg">Ảnh chính</label>
 									</div>
+
+
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control"
+											id="floatingInputSecondaryImg" placeholder="" required><label
+											for="floatingInputSecondaryImg">Ảnh phụ</label>
+									</div>
+
+									<div class="form-floating">
+										<textarea name="address" class="form-control" placeholder=" "
+											id="floatingTextarea"></textarea>
+										<label for="floatingTextarea">Mô tả</label>
+									</div>
+
 								</div>
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy"> <input type="submit"
-										class="btn btn-light" value="Lưu">
+										value="Hủy">
+									<button type="submit" class="btn btn-light" name="action"
+										value="edit">Sửa</button>
 								</div>
 							</form>
 						</div>
@@ -446,22 +600,24 @@ table.table .avatar {
 				<div id="deleteEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form>
+							<form action="ManageProductController" method="post">
 								<div class="modal-header">
 									<h4 class="modal-title">XÓA SẢN PHẨM</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<p>Are you sure you want to delete these Records?</p>
+									<p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
 									<p class="text-warning">
-										<small>This action cannot be undone.</small>
+										<small>Hành động này không thể quay lại.</small>
 									</p>
 								</div>
+								<input type="hidden" name="myDeleteProductHidden" id="deleteProductHidden" value =" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy"> <input type="submit"
-										class="btn btn-danger" value="Xóa">
+										value="Hủy">
+									<button type="submit" class="btn btn-danger" name="action"
+										value="delete">Xóa</button>
 								</div>
 							</form>
 						</div>
@@ -469,5 +625,79 @@ table.table .avatar {
 				</div>
 			</section>
 		</div>
+	</main>
 </body>
+
+
+<script type="text/javascript">
+	document
+			.addEventListener(
+					"DOMContentLoaded",
+					function() {
+						var descriptionWrappers = document
+								.querySelectorAll('.description-wrapper');
+
+						descriptionWrappers
+								.forEach(function(wrapper) {
+									var fullDescription = wrapper
+											.querySelector('.full-description').textContent;
+									var shortDescription = fullDescription
+											.substring(0, 100); // Lấy 100 ký tự đầu tiên
+
+									wrapper.querySelector('.short-description').textContent = shortDescription
+											+ '...';
+
+									var readMoreBtn = wrapper
+											.querySelector('.read-more-btn');
+
+									readMoreBtn
+											.addEventListener(
+													'click',
+													function(event) {
+														event.stopPropagation(); // Prevent click event from propagating to the body
+														wrapper.classList
+																.add('expanded');
+														wrapper
+																.querySelector('.short-description').style.display = 'none';
+														wrapper
+																.querySelector('.full-description').style.display = 'block';
+													});
+								});
+
+						// Add click event listener to the body to collapse description when clicked outside
+						document.body
+								.addEventListener(
+										'click',
+										function(event) {
+											descriptionWrappers
+													.forEach(function(wrapper) {
+														if (!wrapper
+																.contains(event.target)) {
+															wrapper.classList
+																	.remove('expanded');
+															wrapper
+																	.querySelector('.short-description').style.display = 'block';
+															wrapper
+																	.querySelector('.full-description').style.display = 'none';
+														}
+													});
+										});
+					});
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" href="alert/dist/sweetalert.css">
+<script type="text/javascript">
+	/* function setProductIdToDelete(id) {
+		var deleteForm = document.getElementById('deleteForm');
+		deleteForm.action = 'DeleteProductController?pid=' + id;
+	} */
+	
+	var status = document.getElementById("status").value;
+	if(status == "SuccessfullyDeleted") {
+		swal("Congrats", "Product Deleted Successfully", "success");
+		status = "";
+	}
+</script>
+		<%@include file="/common/script.jsp"%>
+
 </html>

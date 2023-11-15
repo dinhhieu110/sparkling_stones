@@ -85,7 +85,7 @@ div.container-fluid {
 			<nav class="row gy-4 ">
 				<c:forEach items="${listOfCates}" var="cate">
 					<div class="col">
-						<a href="#"
+						<a href="shop?categoryId=${cate.id}&index=1"
 							class="text-center d-flex flex-column justify-content-center">
 							<button type="button"
 								class="btn btn-outline-secondary mx-auto p-3 mb-2"

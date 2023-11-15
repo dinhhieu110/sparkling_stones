@@ -224,4 +224,176 @@ public class ProductDAO extends DAOService {
 
 		return list;
 	}
+		// Xóa sản phẩm
+		public void deleteProduct(String id) {
+
+			String sql = "delete from \"Product\"\n"
+					+ "where id=?";
+			List<Object> params = new ArrayList<Object>();
+			params.add(UUID.fromString(id));
+			update(sql, params);
+		}
+		
+	//lấy tất sản phẩm theo category
+		public List<Product> getAllByCategory(String category_id, int index) {
+			String sql = "SELECT * FROM \"ProductWithImages\"\n"
+					+ "WHERE category_id = ?\n"
+					+ "order by id offset ? ROWS FETCH NEXT 9 ROWS ONLY\n"
+					+ "";
+			List<Object> params = new ArrayList<Object>();
+			params.add(UUID.fromString(category_id));
+			params.add((index - 1) * 9);
+			ResultSet rs = select(sql, params);
+			List<Product> list = new ArrayList<Product>();
+
+			try {
+				while (rs.next()) {
+					list.add(new Product(rs.getString("id"),
+						  rs.getString("category_id"),
+						  rs.getString("title"),
+						  rs.getInt("price"), 
+						  rs.getInt("discount"),
+						  rs.getString("thumbnail"), 
+						  rs.getArray("gallery"),
+						  rs.getString("description"),
+						  rs.getDouble("rating"),
+						  rs.getTimestamp("created_at"),
+						  rs.getTimestamp("updated_at")));
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+		
+		
+		//đếm tất cả sản phẩm theo category
+		public int getTotalProductsByCategory(String categoryId) {
+	        String sql = "SELECT COUNT(*) FROM \"ProductWithImages\" WHERE category_id =?\n"
+	        		+ "";
+	        		
+	        List<Object> params = new ArrayList<>();
+	        params.add(UUID.fromString(categoryId));
+	        ResultSet rs = select(sql, params);
+
+	        try {
+	            if (rs.next()) {
+	                return rs.getInt(1);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return 0;
+	    }
+		
+		//list giá sản phẩm nằm trong khoảng
+		public List<Product> getProductsByPriceRange(int minPrice, int maxPrice, int index) {
+		    String sql = "SELECT * FROM \"ProductWithImages\" WHERE price BETWEEN ? AND ?\n"
+		            + "ORDER BY id OFFSET ? ROWS FETCH NEXT 9 ROWS ONLY";
+
+		    List<Object> params = new ArrayList<>();
+		    params.add(minPrice);
+		    params.add(maxPrice);
+		    params.add((index - 1) * 9);
+
+		    ResultSet rs = select(sql, params);
+		    List<Product> productList = new ArrayList<>();
+
+		    try {
+		        while (rs.next()) {
+		            productList.add(new Product(rs.getString("id"),
+		                    rs.getString("category_id"),
+		                    rs.getString("title"),
+		                    rs.getInt("price"),
+		                    rs.getInt("discount"),
+		                    rs.getString("thumbnail"),
+		                    rs.getArray("gallery"),
+		                    rs.getString("description"),
+		                    rs.getDouble("rating"),
+		                    rs.getTimestamp("created_at"),
+		                    rs.getTimestamp("updated_at")));
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return productList;
+		}
+		
+		//đếm tổng sản phẩm sau khi lọc theo giá
+		public int getTotalProductByRange(int maxPrice, int minPrice) {
+			String sql = "SELECT COUNT(*) AS total from \"ProductWithImages\" \n"
+					+ "where price between ? and ?";
+			List<Object> params = new ArrayList<>();
+	        params.add(minPrice);
+	        params.add(maxPrice);
+	        ResultSet rs = select(sql, params);
+
+	        try {
+	            if (rs.next()) {
+	                return rs.getInt(1);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+			return 0;
+		}
+		
+		
+		//list tất cả sản phẩm theo loại và nằm trong khoảng bao nhiêu
+		public List<Product> getProductsByCategoryPriceRange(String category_id, int minPrice, int maxPrice, int index) {
+		    String sql = "select * from \"ProductWithImages\" \n"
+		    		+ "where category_id = ? and price between ? and ?\n"
+		    		+ "order by id offset ? rows fetch next 9 rows only";
+
+		    List<Object> params = new ArrayList<>();
+	        params.add(UUID.fromString(category_id));
+		    params.add(minPrice);
+		    params.add(maxPrice);
+		    params.add((index - 1) * 9);
+
+		    ResultSet rs = select(sql, params);
+		    List<Product> productList = new ArrayList<>();
+
+		    try {
+		        while (rs.next()) {
+		            productList.add(new Product(rs.getString("id"),
+		                    rs.getString("category_id"),
+		                    rs.getString("title"),
+		                    rs.getInt("price"),
+		                    rs.getInt("discount"),
+		                    rs.getString("thumbnail"),
+		                    rs.getArray("gallery"),
+		                    rs.getString("description"),
+		                    rs.getDouble("rating"),
+		                    rs.getTimestamp("created_at"),
+		                    rs.getTimestamp("updated_at")));
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+
+		    return productList;
+		}
+		
+		//đếm tất cả sản phẩm theo loại và giá
+		public int getTotalByCategoryPriceRange(String category_id, int minPrice, int maxPrice) {
+			String sql = "SELECT COUNT(*) AS total from \"ProductWithImages\" \n"
+					+ "where category_id = ? and price between ? and ?";
+			List<Object> params = new ArrayList<>();
+	        params.add(UUID.fromString(category_id));
+		    params.add(minPrice);
+		    params.add(maxPrice);
+		    ResultSet rs = select(sql, params);
+		    try {
+	            if (rs.next()) {
+	                return rs.getInt(1);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+			return 0;
+		}
+
 }

@@ -52,6 +52,7 @@
 	}
 }
 </style>
+
 </head>
 <body>
 	<%@include file="/common/header.jsp"%>
@@ -105,7 +106,8 @@
 									<div class="accordion-body">
 										<ul class="list-unstyled">
 											<c:forEach items="${listOfCates}" var="cate">
-												<li><a href="#" class="text-dark">${cate.name}</a></li>
+												<li><a href="shop?categoryId=${cate.id}&index=1"
+													class="text-dark">${cate.name}</a></li>
 											</c:forEach>
 										</ul>
 									</div>
@@ -123,28 +125,35 @@
 									class="accordion-collapse collapse show"
 									aria-labelledby="headingThree">
 									<div class="accordion-body">
-										<div class="range">
-											<input type="range" class="form-range" id="customRange1" />
-										</div>
-										<div class="row mb-3">
-											<div class="col-6">
-												<p class="mb-0">Min</p>
-												<div class="form-outline">
-													<input type="number" id="typeNumber" class="form-control" />
-													<label class="form-label" for="typeNumber">0₫</label>
-												</div>
-											</div>
-											<div class="col-6">
-												<p class="mb-0">Max</p>
-												<div class="form-outline">
-													<input type="number" id="typeNumber" class="form-control" />
-													<label class="form-label" for="typeNumber">350000000₫</label>
+										<form id="filterForm" action="GetProductByPriceRange"
+											method="get">
 
-												</div>
+											<div class="range">
+												<input type="range" class="form-range" id="customRange1" />
 											</div>
-										</div>
-										<button type="button"
-											class="btn btn-white w-100 border border-secondary">apply</button>
+											<div class="row mb-3">
+												<div class="col-6">
+													<p class="mb-0">Min</p>
+													<div class="form-outline">
+														<input type="number" name="minPrice" id="minPrice"
+															class="form-control" value="${minPrice}" /> <label
+															class="form-label" for="typeNumber">0₫</label>
+													</div>
+												</div>
+												<div class="col-6">
+													<p class="mb-0">Max</p>
+													<div class="form-outline">
+														<input type="number" name="maxPrice" id="maxPrice"
+															class="form-control" value="${maxPrice}" /> <label
+															class="form-label" for="typeNumber">350000000₫</label>
+													</div>
+												</div>
+
+											</div>
+											<button type="submit"
+												class="btn btn-white w-100 border border-secondary"
+												id="applyPriceRangeButton">apply</button>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -233,12 +242,11 @@
 
 					<div class="row">
 						<c:forEach items="${listP}" var="p">
-
 							<div class="col-lg-4 col-md-6 col-sm-6 d-flex">
 								<div class="card w-100 my-2 shadow-2-strong">
-								<a href="detail?id=${p.id}">
-									<img src="${p.thumbnail}" class="card-img-top" />
-								</a>
+									<a href="detail?id=${p.id}"> <img src="${p.thumbnail}"
+										class="card-img-top" />
+									</a>
 									<div class="card-body d-flex flex-column">
 										<h5 class="card-title currency-style">
 											<fmt:formatNumber value="${p.discount}" type="currency"
@@ -249,8 +257,8 @@
 											</del>
 										</h5>
 										<a href="detail?id=${p.id}">
-										<p class="card-text mb-0 d-inline-block text-truncate"
-											style="max-width: 200px;">${p.title}</p>
+											<p class="card-text mb-0 d-inline-block text-truncate"
+												style="max-width: 200px;">${p.title}</p>
 										</a>
 										<div class="mt-4 text-warning">
 											<i class="fas fa-star"></i><span class="fw-bold ms-1">${p.rating}
@@ -270,57 +278,52 @@
 					</div>
 
 					<hr />
+
 					<!-- Pagination -->
-					<%String from = (String)request.getAttribute("from"); %>
-					<%String searchName = (String)request.getAttribute("searchName"); 
+					<%
+					String from = (String) request.getAttribute("from");
+					String categoryId = (String) request.getParameter("categoryId"); // Get categoryId from request parameters
 					%>
+					<%
+					String searchName = (String) request.getAttribute("searchName");
+					%>
+
 					<nav aria-label="Page navigation example"
 						class="d-flex justify-content-center mt-3">
 						<ul class="pagination">
-							<li class="page-item ${tag == 1 ?"disabled":" "}""><a
-								class="page-link" 
-								<% if(from=="shop")
-									{ %>
-									href="shop?index=${(tag-1)}"
-								<%}%>
-								<% if (from =="search")
-									{ %>
-									href="search?txt=${searchName}&index=${(tag-1)}"
-									<%}
-									%>
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
+								class="page-link" <% if(from=="shop") { %>
+								href="shop?categoryId=${categoryId}&index=${(tag-1)}" <%}%>
+								<% if (from =="search") { %>
+								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag-1)}"
+								<%}%> aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 							<c:forEach begin="1" end="${endP}" var="i">
-								<li class="page-item ${tag == i ?"active":" "}"><a
-									class="page-link" 
-									<% if(from=="shop")
-									{ %>
-										href="shop?index=${i}"
-									<%}%>
-									<% if (from =="search")
-									{ %>
-										href="search?txt=${searchName}&index=${i}"
-									<%}
-									%>
-									>${i}</a></li>
+								<li class="page-item ${tag == i ? 'active' : ''}"><c:url
+										var="paginationUrl" value="shop">
+										<c:param name="categoryId"
+											value="${not empty categoryId ? categoryId : ''}" />
+										<c:param name="index" value="${i}" />
+									</c:url> <a class="page-link pagination-link" href="${paginationUrl}">${i}</a>
+								</li>
 							</c:forEach>
-							<li class="page-item ${tag == endP ?"disabled":" "}""><a
-								class="page-link" 
-								<% if(from=="shop")
-									{ %>
-									href="shop?index=${(tag+1)}"
-								<%}%>
-								<% if (from =="search")
-									{ %>
-									href="search?txt=${searchName}&index=${(tag+1)}"
-									<%}
-									%>
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+
+
+							<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
+								class="page-link" <% if(from=="shop") { %>
+								href="shop?categoryId=${categoryId}&index=${(tag+1)}" <%}%>
+								<% if (from =="search") { %>
+								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag+1)}"
+								<%}%> aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
 						</ul>
+						<!-- <ul class="pagination" id="priceRangePagination">
+							Pagination links will be added here dynamically
+						</ul> -->
 					</nav>
-				
 					<!-- Pagination -->
+
+
 				</div>
 			</div>
 		</div>
@@ -333,4 +336,127 @@
 
 	<%@include file="/common/script.jsp"%>
 </body>
+
+<!-- Lưu giữ categoryId -->
+<!-- <script>
+	var categoryId = "${param.categoryId}";
+</script>
+ -->
+<!-- Thêm sự kiện cho nút phân trang theo categoryId -->
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var categoryId = "${param.categoryId}";
+
+		var categoryPaginationLinks = document
+				.querySelectorAll(".category-pagination-link");
+		categoryPaginationLinks.forEach(function(link) {
+			link.addEventListener("click", function(event) {
+				event.preventDefault();
+				var index = this.innerText;
+				redirectToCategoryServlet(categoryId, index);
+			});
+		});
+
+		function redirectToCategoryServlet(categoryId, index) {
+			var servletURL = "shop?categoryId=" + categoryId + "&index="
+					+ index;
+			window.location.href = servletURL;
+		}
+	});
+</script>
+
+<!-- Thêm vào script để hiển thị giá trị ban đầu và xử lý sự kiện khi form được submit -->
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		var minPriceValue = $
+		{
+			minPrice
+		}
+		;
+		var maxPriceValue = $
+		{
+			maxPrice
+		}
+		;
+
+		document.getElementById("minPrice").value = minPriceValue;
+		document.getElementById("maxPrice").value = maxPriceValue;
+
+		// Bắt sự kiện submit form
+		document.getElementById("filterForm").addEventListener(
+				"submit",
+				function(event) {
+					event.preventDefault();
+
+					// Lấy giá trị từ form và gửi đến servlet
+					var minPrice = document.getElementById("minPrice").value;
+					var maxPrice = document.getElementById("maxPrice").value;
+
+					window.location.href = "GetProductByPriceRange?minPrice="
+							+ minPrice + "&maxPrice=" + maxPrice;
+				});
+	});
+</script>
+
+
+
+
+<!-- <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    function redirectToServlet(categoryId, tag) {
+        var minPrice = document.getElementById("minPrice").value;
+        var maxPrice = document.getElementById("maxPrice").value;
+
+        if (isNaN(minPrice) || isNaN(maxPrice)) {
+            alert("Please enter valid values for the price range.");
+            return;
+        }
+
+        minPrice = parseInt(minPrice);
+        maxPrice = parseInt(maxPrice);
+
+        if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
+            alert("Please enter a valid price range.");
+            return;
+        }
+
+        var servletURL = "${pageContext.request.contextPath}/GetProductByPriceRange?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&categoryId=" + categoryId + "&index=" + tag;
+
+        window.location.href = servletURL;
+    }
+
+    var applyButton = document.getElementById("applyButton");
+    applyButton.addEventListener("click", function() {
+        var categoryId = "${param.categoryId}";
+        var tag = 1; // Set the default tag value
+        redirectToServlet(categoryId, tag);
+    });
+
+    var paginationLinks = document.querySelectorAll(".pagination-link");
+    paginationLinks.forEach(function(link) {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            var tag = this.innerText;
+            var categoryId = "${param.categoryId}";
+            redirectToServlet(categoryId, tag);
+        });
+    });
+});
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var categoryId = "${param.categoryId}";
+        var tag = "${tag}"; // Set the initial tag value
+        var paginationLinks = document.querySelectorAll(".pagination-link");
+        paginationLinks.forEach(function(link) {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                var index = this.innerText;
+                redirectToServlet(categoryId, index);
+            });
+        });
+    });
+</script> -->
+
 </html>
