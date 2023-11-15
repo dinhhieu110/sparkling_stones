@@ -294,6 +294,7 @@
 							<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 								class="page-link" <% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag-1)}" <%}%>
+								<% if(from=="range") { %> href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag-1)}" <%}%>
 								<% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag-1)}"
 								<%}%> aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -312,6 +313,7 @@
 							<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 								class="page-link" <% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag+1)}" <%}%>
+								<% if(from=="range") { %> href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag+1)}" <%}%>
 								<% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag+1)}"
 								<%}%> aria-label="Next"> <span aria-hidden="true">&raquo;</span>
