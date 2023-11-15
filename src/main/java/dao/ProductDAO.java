@@ -224,8 +224,7 @@ public class ProductDAO extends DAOService {
 
 		return list;
 	}
-	
-	// Xóa sản phẩm
+		// Xóa sản phẩm
 		public void deleteProduct(String id) {
 
 			String sql = "delete from \"Product\"\n"

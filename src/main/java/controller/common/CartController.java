@@ -5,15 +5,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Cart;
-import model.Item;
 import model.Product;
 import model.User;
 
 import java.io.IOException;
 import java.util.List;
 
-import dao.CartDAO;
 import dao.ProductDAO;
 
 /**
@@ -40,8 +37,10 @@ public class CartController extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		
+		ProductDAO pDao = new ProductDAO();
+		List<Product> listP = pDao.getRecommendedProducts();
 		if (user != null) {
+			request.setAttribute("listP", listP);
 			request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login");

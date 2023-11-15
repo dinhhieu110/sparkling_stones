@@ -9,6 +9,49 @@
 <head>
 <title>Shop</title>
 <%@include file="/common/head.jsp"%>
+<style>
+/* Toast style*/
+#toast{
+	min-width: 300px;
+	position: fixed;
+	bottom: 30px;
+	left: 50%;
+	margin-left: -125px;
+	background: #333;
+	padding: 15px;
+	text-align: center;
+	z-index: 1;
+	font: 18px;
+	visibility: hidden;
+	color: white;
+}
+
+#toast.display{
+	visibility: visible;
+	animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
+}
+
+@keyframes fadeIn {
+	from {
+		bottom: 0;
+		opacity: 0;
+	}
+	to {
+		bottom: 30px;
+		opacity: 1;
+	}
+}
+@keyframes fadeOut {
+	from{
+		bottom: 30px;
+		opacity: 1;
+	}
+	to {
+		bottom: 0;
+		opacity: 0;
+	}
+}
+</style>
 
 </head>
 <body>
@@ -221,10 +264,10 @@
 											<i class="fas fa-star"></i><span class="fw-bold ms-1">${p.rating}
 												(99+)</span>
 										</div>
+										<input type="hidden" id="quantity" value="1" />
 										<div
 											class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-											<a href="#!" class="btn btn-primary shadow-0 me-1">Add to
-												cart</a> <a href="#!"
+											<a href="#!" class="btn btn-primary shadow-0 me-1" onclick="addToCart(event, '${p.id}')">Thêm vào giỏ hàng</a> <a href="#!"
 												class="btn btn-light border icon-hover px-2 pt-2"><i
 												class="fas fa-heart fa-lg text-secondary px-1"></i></a>
 										</div>
@@ -286,7 +329,9 @@
 		</div>
 	</section>
 	<!-- sidebar + content -->
-
+	<!-- Toast -->
+	<div id="toast">This is toast text</div>
+	
 	<%@include file="/common/footer.jsp"%>
 
 	<%@include file="/common/script.jsp"%>
