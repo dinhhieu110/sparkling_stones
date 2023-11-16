@@ -61,13 +61,13 @@ to {
 	<!-- Heading -->
 	<div class="bg-primary mb-4">
 		<div class="container py-4">
-			<h3 class="text-white mt-2">Jewelry</h3>
+			<h3 class="text-white mt-2">Trang Sức</h3>
 			<!-- Breadcrumb -->
 			<nav class="d-flex mb-2">
 				<h6 class="mb-0">
-					<a href="home" class="text-white-50">Home</a> <span
+					<a href="home" class="text-white-50">Trang Chủ</a> <span
 						class="text-white-50 mx-2"> > </span> <a href="shop"
-						class="text-white"><u>Shop</u></a>
+						class="text-white"><u>Cửa Hàng</u></a>
 				</h6>
 			</nav>
 			<!-- Breadcrumb -->
@@ -99,7 +99,7 @@ to {
 										type="button" data-mdb-toggle="collapse"
 										data-mdb-target="#panelsStayOpen-collapseOne"
 										aria-expanded="true"
-										aria-controls="panelsStayOpen-collapseOne">Categories</button>
+										aria-controls="panelsStayOpen-collapseOne">Danh mục sản phẩm</button>
 								</h2>
 								<div id="panelsStayOpen-collapseOne"
 									class="accordion-collapse collapse show"
@@ -120,7 +120,7 @@ to {
 										type="button" data-mdb-toggle="collapse"
 										data-mdb-target="#panelsStayOpen-collapseThree"
 										aria-expanded="false"
-										aria-controls="panelsStayOpen-collapseThree">Price</button>
+										aria-controls="panelsStayOpen-collapseThree">Giá sản phẩm</button>
 								</h2>
 								<div id="panelsStayOpen-collapseThree"
 									class="accordion-collapse collapse show"
@@ -134,7 +134,7 @@ to {
 											</div>
 											<div class="row mb-3">
 												<div class="col-6">
-													<p class="mb-0">Min</p>
+													<p class="mb-0">Tối thiểu</p>
 													<div class="form-outline">
 														<input type="number" name="minPrice" id="minPrice"
 															class="form-control" value="${minPrice}" /> <label
@@ -142,7 +142,7 @@ to {
 													</div>
 												</div>
 												<div class="col-6">
-													<p class="mb-0">Max</p>
+													<p class="mb-0">Tối đa</p>
 													<div class="form-outline">
 														<input type="number" name="maxPrice" id="maxPrice"
 															class="form-control" value="${maxPrice}" /> <label
@@ -152,7 +152,7 @@ to {
 											</div>
 											<button type="submit"
 												class="btn btn-white w-100 border border-secondary"
-												id="applyPriceRangeButton">apply</button>
+												id="applyPriceRangeButton">Áp dụng</button>
 										</form>
 									</div>
 								</div>
@@ -163,7 +163,7 @@ to {
 										type="button" data-mdb-toggle="collapse"
 										data-mdb-target="#panelsStayOpen-collapseFive"
 										aria-expanded="false"
-										aria-controls="panelsStayOpen-collapseFive">Ratings</button>
+										aria-controls="panelsStayOpen-collapseFive">Đánh giá</button>
 								</h2>
 								<div id="panelsStayOpen-collapseFive"
 									class="accordion-collapse collapse show"
@@ -232,10 +232,8 @@ to {
 								value="${listP.size()} Items found" /> </strong>
 						<div class="ms-auto">
 							<select class="form-select d-inline-block w-auto border pt-1">
-								<option value="0">Best match</option>
-								<option value="1">Recommended</option>
-								<option value="2">High rated</option>
-								<option value="3">Randomly</option>
+								<option value="0">Sản phẩm bán chạy</option>
+								<option value="1">Sản phẩm mới</option>
 							</select>
 						</div>
 					</header>

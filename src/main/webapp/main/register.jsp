@@ -37,7 +37,7 @@ body {
 					<div class="card cascading-right"
 						style="background: hsla(0, 0%, 100%, 0.55); backdrop-filter: blur(30px);">
 						<div class="card-body p-5 shadow-5 text-center">
-							<h2 class="fw-bold mb-5">Sign up now</h2>
+							<h2 class="fw-bold mb-5">Đăng Kí</h2>
 							<form action="register" method="post">
 								<!-- 2 column grid layout with text inputs for the first and last names -->
 								<div class="row">
@@ -45,14 +45,14 @@ body {
 										<div class="form-outline">
 											<input type="text" id="form3Example1" class="form-control"
 												name="txtFirstName" /> <label class="form-label"
-												for="form3Example1">First name</label>
+												for="form3Example1">Tên</label>
 										</div>
 									</div>
 									<div class="col-md-6 mb-4">
 										<div class="form-outline">
 											<input type="text" id="form3Example2" class="form-control"
 												name="txtLastName" /> <label class="form-label"
-												for="form3Example2">Last name</label>
+												for="form3Example2">Họ</label>
 										</div>
 									</div>
 								</div>
@@ -61,37 +61,37 @@ body {
 								<div class="form-outline mb-4">
 									<input type="email" id="form3Example3" class="form-control"
 										name="txtEmail" /> <label class="form-label"
-										for="form3Example3">Email address</label>
+										for="form3Example3">Địa chỉ email</label>
 								</div>
 
 								<!-- Password input -->
 								<div class="form-outline mb-4">
 									<input type="password" id="form3Example4" class="form-control"
 										name="txtPassword" /> <label class="form-label"
-										for="form3Example4">Password</label>
+										for="form3Example4">Mật Khẩu</label>
 								</div>
 
 								<!-- Confirm Password input -->
 								<div class="form-outline mb-4">
 									<input type="password" id="form3Example5" class="form-control"
 										name="txtCfmPassword" /> <label class="form-label"
-										for="form3Example5">Confirm Password</label>
+										for="form3Example5">Xác nhận mật khẩu</label>
 								</div>
 
 								${error}
 
 								<!-- Submit button -->
 								<button type="submit" class="btn btn-primary btn-block mb-4">
-									Sign up</button>
+									Đăng kí</button>
 
 								<p class="small fw-bold mt-2 pt-1 mb-4">
-									You already have an account? <a href="login"
-										class="link-danger">Sign In</a>
+									Bạn đã có tài khoản? <a href="login"
+										class="link-danger">Đăng nhập</a>
 								</p>
 
 								<!-- Register buttons -->
 								<div class="text-center">
-									<p>or sign up with:</p>
+									<p>hoặc đăng nhập bằng</p>
 									<button type="button" class="btn btn-link btn-floating mx-1">
 										<i class="fab fa-facebook-f"></i>
 									</button>
