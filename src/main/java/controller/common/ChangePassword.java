@@ -11,6 +11,7 @@ import util.Template;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import dao.UserDAO;
@@ -46,19 +47,21 @@ public class ChangePassword extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		final String SUCCESS_FORWARD = request.getContextPath() + "/my-account";
+		final String USER_SUCCESS_FORWARD = request.getContextPath() + "/my-account";
+		final String ADMIN_SUCCESS_FORWARD = request.getContextPath() + "/admin-account";
+
 		
 		String email = request.getParameter("email");
 		String oldPassword = request.getParameter("oldpass");
 		String newPassword = request.getParameter("newpass");
 		String cfmNewPassword = request.getParameter("comfirmnewpass");
-
+		String role = request.getParameter("role");
 		UserDAO dao = new UserDAO();
 
 		User user = dao.getUserByEmail(email);
 		String type = "";
 		String error = "";
-
+		String forward ="";
 		EncryptionService ecrypt = new EncryptionService();
 		oldPassword = ecrypt.encryptMD5(oldPassword);
 		if (oldPassword.equals(user.getPassword())) {
@@ -80,8 +83,13 @@ public class ChangePassword extends HttpServlet {
 		}
 		dao.close();
 		if (error.equals("") && type.equals("")) {
-			
-			response.sendRedirect(SUCCESS_FORWARD + "?status=SuccessfullyChangePassword");
+			if(role.equals("admin")) {
+				forward = ADMIN_SUCCESS_FORWARD;
+			}
+			if(role.equals("user")) {
+				forward = USER_SUCCESS_FORWARD;
+			}
+			response.sendRedirect(forward + "?status=SuccessfullyChangePassword");
 		} else {
 			// Lấy template thông báo lỗi
 			Template template = new Template("template/alert.html");
