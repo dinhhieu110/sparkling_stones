@@ -11,7 +11,7 @@
 <%@include file="/common/head.jsp"%>
 <style>
 /* Toast style*/
-#toast{
+#toast {
 	min-width: 300px;
 	position: fixed;
 	bottom: 30px;
@@ -26,30 +26,31 @@
 	color: white;
 }
 
-#toast.display{
+#toast.display {
 	visibility: visible;
 	animation: fadeIn 0.5s, fadeOut 0.5s 2.5s;
 }
 
-@keyframes fadeIn {
-	from {
-		bottom: 0;
-		opacity: 0;
-	}
-	to {
-		bottom: 30px;
-		opacity: 1;
-	}
+@
+keyframes fadeIn {from { bottom:0;
+	opacity: 0;
 }
-@keyframes fadeOut {
-	from{
-		bottom: 30px;
-		opacity: 1;
-	}
-	to {
-		bottom: 0;
-		opacity: 0;
-	}
+
+to {
+	bottom: 30px;
+	opacity: 1;
+}
+
+}
+@
+keyframes fadeOut {from { bottom:30px;
+	opacity: 1;
+}
+
+to {
+	bottom: 0;
+	opacity: 0;
+}
 }
 </style>
 
@@ -148,7 +149,6 @@
 															class="form-label" for="typeNumber">350000000₫</label>
 													</div>
 												</div>
-
 											</div>
 											<button type="submit"
 												class="btn btn-white w-100 border border-secondary"
@@ -267,7 +267,9 @@
 										<input type="hidden" id="quantity" value="1" />
 										<div
 											class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-											<a href="#!" class="btn btn-primary shadow-0 me-1" onclick="addToCart(event, '${p.id}')">Thêm vào giỏ hàng</a> <a href="#!"
+											<a href="#!" class="btn btn-primary shadow-0 me-1"
+												onclick="addToCart(event, '${p.id}')">Thêm vào giỏ hàng</a>
+											<a href="#!"
 												class="btn btn-light border icon-hover px-2 pt-2"><i
 												class="fas fa-heart fa-lg text-secondary px-1"></i></a>
 										</div>
@@ -294,34 +296,47 @@
 							<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 								class="page-link" <% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag-1)}" <%}%>
-								<% if(from=="range") { %> href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag-1)}" <%}%>
-								<% if (from =="search") { %>
+								<% if(from=="range") { %>
+								href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag-1)}"
+								<%}%> <% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag-1)}"
 								<%}%> aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
 							<c:forEach begin="1" end="${endP}" var="i">
 								<li class="page-item ${tag == i ? 'active' : ''}"><c:url
-										var="paginationUrl" value="shop">
-										<c:param name="categoryId"
-											value="${not empty categoryId ? categoryId : ''}" />
+										var="paginationUrl"
+										value="${from == 'range' ? 'GetProductByPriceRange' : from}">
+										<!-- Add minPrice and maxPrice only if the 'from' is 'range' -->
+										<c:if test="${from == 'range'}">
+											<c:param name="minPrice" value="${minPrice}" />
+											<c:param name="maxPrice" value="${maxPrice}" />
+										</c:if>
+
+										<!-- Add categoryId only if it's not empty -->
+										<c:choose>
+											<c:when test="${not empty categoryId and from != 'range'}">
+												<c:param name="categoryId" value="${categoryId}" />
+											</c:when>
+										</c:choose>
+
 										<c:param name="index" value="${i}" />
 									</c:url> <a class="page-link pagination-link" href="${paginationUrl}">${i}</a>
 								</li>
 							</c:forEach>
 
 
+
 							<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 								class="page-link" <% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag+1)}" <%}%>
-								<% if(from=="range") { %> href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag+1)}" <%}%>
-								<% if (from =="search") { %>
+								<% if(from=="range") { %>
+								href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag+1)}"
+								<%}%> <% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag+1)}"
 								<%}%> aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
 						</ul>
-						<!-- <ul class="pagination" id="priceRangePagination">
-							Pagination links will be added here dynamically
-						</ul> -->
+
 					</nav>
 					<!-- Pagination -->
 
@@ -333,17 +348,14 @@
 	<!-- sidebar + content -->
 	<!-- Toast -->
 	<div id="toast">This is toast text</div>
-	
+
 	<%@include file="/common/footer.jsp"%>
 
 	<%@include file="/common/script.jsp"%>
 </body>
 
-<!-- Lưu giữ categoryId -->
-<!-- <script>
-	var categoryId = "${param.categoryId}";
-</script>
- -->
+
+
 <!-- Thêm sự kiện cho nút phân trang theo categoryId -->
 <script>
 	document.addEventListener("DOMContentLoaded", function() {
@@ -364,101 +376,26 @@
 					+ index;
 			window.location.href = servletURL;
 		}
+
+		// Add the new function for filtering by price range
+		var applyPriceRangeButton = document
+				.getElementById("applyPriceRangeButton");
+		if (applyPriceRangeButton) {
+			applyPriceRangeButton.addEventListener("click", function(event) {
+				event.preventDefault();
+				filterByPriceRange();
+			});
+		}
+
+		function filterByPriceRange() {
+			var minPrice = document.getElementById("minPrice").value;
+			var maxPrice = document.getElementById("maxPrice").value;
+			var index = 1; // Set your default index here or get it from somewhere else
+
+			var servletURL = "GetProductByPriceRange?minPrice=" + minPrice
+					+ "&maxPrice=" + maxPrice + "&index=" + index;
+			window.location.href = servletURL;
+		}
 	});
 </script>
-
-<!-- Thêm vào script để hiển thị giá trị ban đầu và xử lý sự kiện khi form được submit -->
-<script>
-	document.addEventListener("DOMContentLoaded", function() {
-		var minPriceValue = $
-		{
-			minPrice
-		}
-		;
-		var maxPriceValue = $
-		{
-			maxPrice
-		}
-		;
-
-		document.getElementById("minPrice").value = minPriceValue;
-		document.getElementById("maxPrice").value = maxPriceValue;
-
-		// Bắt sự kiện submit form
-		document.getElementById("filterForm").addEventListener(
-				"submit",
-				function(event) {
-					event.preventDefault();
-
-					// Lấy giá trị từ form và gửi đến servlet
-					var minPrice = document.getElementById("minPrice").value;
-					var maxPrice = document.getElementById("maxPrice").value;
-
-					window.location.href = "GetProductByPriceRange?minPrice="
-							+ minPrice + "&maxPrice=" + maxPrice;
-				});
-	});
-</script>
-
-
-
-
-<!-- <script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-    function redirectToServlet(categoryId, tag) {
-        var minPrice = document.getElementById("minPrice").value;
-        var maxPrice = document.getElementById("maxPrice").value;
-
-        if (isNaN(minPrice) || isNaN(maxPrice)) {
-            alert("Please enter valid values for the price range.");
-            return;
-        }
-
-        minPrice = parseInt(minPrice);
-        maxPrice = parseInt(maxPrice);
-
-        if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice) {
-            alert("Please enter a valid price range.");
-            return;
-        }
-
-        var servletURL = "${pageContext.request.contextPath}/GetProductByPriceRange?minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&categoryId=" + categoryId + "&index=" + tag;
-
-        window.location.href = servletURL;
-    }
-
-    var applyButton = document.getElementById("applyButton");
-    applyButton.addEventListener("click", function() {
-        var categoryId = "${param.categoryId}";
-        var tag = 1; // Set the default tag value
-        redirectToServlet(categoryId, tag);
-    });
-
-    var paginationLinks = document.querySelectorAll(".pagination-link");
-    paginationLinks.forEach(function(link) {
-        link.addEventListener("click", function(event) {
-            event.preventDefault();
-            var tag = this.innerText;
-            var categoryId = "${param.categoryId}";
-            redirectToServlet(categoryId, tag);
-        });
-    });
-});
-
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var categoryId = "${param.categoryId}";
-        var tag = "${tag}"; // Set the initial tag value
-        var paginationLinks = document.querySelectorAll(".pagination-link");
-        paginationLinks.forEach(function(link) {
-            link.addEventListener("click", function(event) {
-                event.preventDefault();
-                var index = this.innerText;
-                redirectToServlet(categoryId, index);
-            });
-        });
-    });
-</script> -->
-
 </html>
