@@ -44,14 +44,14 @@ body {
 									<div class="col-md-6 mb-4">
 										<div class="form-outline">
 											<input type="text" id="form3Example1" class="form-control"
-												name="txtFirstName" /> <label class="form-label"
+												name="txtFirstName" required/> <label class="form-label"
 												for="form3Example1">Tên</label>
 										</div>
 									</div>
 									<div class="col-md-6 mb-4">
 										<div class="form-outline">
 											<input type="text" id="form3Example2" class="form-control"
-												name="txtLastName" /> <label class="form-label"
+												name="txtLastName" required/> <label class="form-label"
 												for="form3Example2">Họ</label>
 										</div>
 									</div>
@@ -60,21 +60,29 @@ body {
 								<!-- Email input -->
 								<div class="form-outline mb-4">
 									<input type="email" id="form3Example3" class="form-control"
-										name="txtEmail" /> <label class="form-label"
+										name="txtEmail" required/> <label class="form-label"
 										for="form3Example3">Địa chỉ email</label>
 								</div>
 
 								<!-- Password input -->
 								<div class="form-outline mb-4">
 									<input type="password" id="form3Example4" class="form-control"
-										name="txtPassword" /> <label class="form-label"
+										name="txtPassword" 
+										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+										title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường và 1 ký tự đặc biệt" 
+										required
+										/> <label class="form-label"
 										for="form3Example4">Mật Khẩu</label>
 								</div>
 
 								<!-- Confirm Password input -->
 								<div class="form-outline mb-4">
 									<input type="password" id="form3Example5" class="form-control"
-										name="txtCfmPassword" /> <label class="form-label"
+										name="txtCfmPassword" 
+										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+										title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường và 1 ký tự đặc biệt" 
+										required
+										/> <label class="form-label"
 										for="form3Example5">Xác nhận mật khẩu</label>
 								</div>
 

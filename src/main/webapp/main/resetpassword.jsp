@@ -26,7 +26,10 @@
 								<div class="form-group">
 									<label for="email" class="form-label fw-bold">Your new
 										password</label> <input type="password" class="form-control"
-										name="newpass" placeholder="Enter Your New Password" required>
+										name="newpass" placeholder="Enter Your New Password" 
+										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+										title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường và 1 ký tự đặc biệt" 
+										required>
 								</div>
 								<div class="form-group">
 									<label for="email" class="form-label fw-bold">Repeat

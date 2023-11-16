@@ -125,10 +125,10 @@ to {
 			<!-- Breadcrumb -->
 			<nav class="d-flex">
 				<h6 class="mb-0">
-					<a href="" class="text-white-50">Home</a> <span
+					<a href="" class="text-white-50">Trang chủ</a> <span
 						class="text-white-50 mx-2"> > </span> <a href=""
-						class="text-white-50">Profile</a> <span class="text-white-50 mx-2">
-						> </span> <a href="" class="text-white"><u>Shopping cart</u></a>
+						class="text-white-50">Hồ sơ</a> <span class="text-white-50 mx-2">
+						> </span> <a href="" class="text-white"><u>Tài Khoản</u></a>
 				</h6>
 			</nav>
 			<!-- Breadcrumb -->
@@ -174,7 +174,7 @@ to {
 									<p class="mb-0">Phone: ${profile.getPhone()}</p> --%>
 								</div>
 								<button class="btn btn-primary js-change-profile ms-3">
-									Change Profile</button>
+									Cật nhật thông tin</button>
 
 							</div>
 						</div>
@@ -380,9 +380,12 @@ to {
 								name="lastName" type="text" class="modal-input"> <label
 								for="phone" class="modal-label"> <i class="ti-email"></i>
 								Phone
-							</label> <input value="${user.getPhone()}" id="phone" type="text"
-								name="phone" class="modal-input"> <label for="address"
-								class="modal-label"> <i class="ti-email"></i> Address
+							</label> <input value="${user.getPhone()}" id="phone"
+								type="text" name="phone" class="modal-input"
+								pattern="(\+84|0)(3[2-9]|5[689]|7[06-9]|8[1-689]|9\d)(\d{7})"
+								title="Số điện thoại không hợp lệ" required> <label
+								for="address" class="modal-label"> <i class="ti-email"></i>
+								Address
 							</label> <input value="${user.getAddress()}" id="address" type="text"
 								name="address" class="modal-input">
 							<input type="hidden" value="admin" name="role">

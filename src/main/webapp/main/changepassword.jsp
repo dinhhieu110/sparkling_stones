@@ -40,9 +40,11 @@ if (user == null) {
 								<label for="newpass" class="form-label fw-bold">New
 									Password</label> <input type="password" id="newpass"
 									class="form-control" name="newpass"
-									placeholder="Enter Your New PassWord" required> <label
-									for="comfirmnewpass" class="form-label fw-bold">Comfirm
-									Password</label> <input type="password" id="comfirmnewpass"
+									placeholder="Enter Your New PassWord"
+									pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+									title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường và 1 ký tự đặc biệt"
+									required> <label for="comfirmnewpass"
+									class="form-label fw-bold">Comfirm Password</label> <input type="password" id="comfirmnewpass"
 									class="form-control" name="comfirmnewpass"
 									placeholder="Comfirm PassWord" required>
 							</div>
