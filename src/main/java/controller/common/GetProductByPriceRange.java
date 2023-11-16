@@ -35,30 +35,6 @@ public class GetProductByPriceRange extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/*
-		 * // Lấy giá trị tối thiểu và tối đa từ yêu cầu HTTP int minPrice =
-		 * Integer.parseInt(request.getParameter("minPrice")); int maxPrice =
-		 * Integer.parseInt(request.getParameter("maxPrice"));
-		 * request.setAttribute("minPrice", minPrice); request.setAttribute("maxPrice",
-		 * maxPrice); // Gọi phương thức trong ProductDAO để lấy danh sách sản phẩm theo
-		 * khoảng giá ProductDAO productDAO = new ProductDAO(); CategoryDAO cDao = new
-		 * CategoryDAO(); int countProducts =
-		 * productDAO.getTotalProductByRange(maxPrice, minPrice); int size = 9; int
-		 * endPage = countProducts/size; if(countProducts % size != 0) { endPage++; }
-		 * 
-		 * String indexPage = request.getParameter("index"); if(indexPage == null) {
-		 * indexPage = "1"; } List<Category> listOfCates = cDao.getCategories();
-		 * 
-		 * int index = Integer.parseInt(indexPage); List<Product> listByRange =
-		 * productDAO.getProductsByPriceRange(minPrice, maxPrice, index);
-		 * 
-		 * System.out.println(listByRange); request.setAttribute("tag", index);
-		 * request.setAttribute("endP",endPage); request.setAttribute("listP",
-		 * listByRange); request.setAttribute("listOfCates", listOfCates);
-		 * 
-		 * request.setAttribute("from", "shop");
-		 * request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
-		 */
 		String minPriceParam = request.getParameter("minPrice");
 		String maxPriceParam = request.getParameter("maxPrice");
 
@@ -68,12 +44,6 @@ public class GetProductByPriceRange extends HttpServlet {
 		        int minPrice = Integer.parseInt(minPriceParam);
 		        int maxPrice = Integer.parseInt(maxPriceParam);
 
-		        // Tiếp tục xử lý với giá trị minPrice và maxPrice
-		        // ...
-		        
-		        // Lưu giữ giá trị vào request (để hiển thị lại trên trang JSP)
-		      
-		        
 		        // Gọi phương thức trong ProductDAO để lấy danh sách sản phẩm theo khoảng giá
 		        ProductDAO productDAO = new ProductDAO();
 		        CategoryDAO cDao = new CategoryDAO();

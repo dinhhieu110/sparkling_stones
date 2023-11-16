@@ -46,11 +46,6 @@ public class GetProductByCategoryAndPriceRange extends HttpServlet {
 
                 // Nếu categoryId không rỗng, lấy tổng số sản phẩm cho danh mục đó
                 int countProducts = pagingDao.getTotalByCategoryPriceRange(categoryId, minPrice, maxPrice);
-
-                // Lưu giữ giá trị vào request (để hiển thị lại trên trang JSP)
-                request.setAttribute("minPrice", minPrice);
-                request.setAttribute("maxPrice", maxPrice);
-
                 // Gọi phương thức trong ProductDAO để lấy danh sách sản phẩm theo khoảng giá
                 ProductDAO productDAO = new ProductDAO();
 
@@ -67,13 +62,16 @@ public class GetProductByCategoryAndPriceRange extends HttpServlet {
                 List<Category> listOfCates = cDao.getCategories();
 
                 int index = Integer.parseInt(indexPage);
-                List<Product> listByRange = productDAO.getProductsByPriceRange(minPrice, maxPrice, index);
-
+                
+                List<Product> listByRange = productDAO.getProductsByCategoryPriceRange(categoryId, minPrice, maxPrice, index);
+                
+                request.setAttribute("minPrice", minPrice);
+                request.setAttribute("maxPrice", maxPrice);
                 request.setAttribute("tag", index);
                 request.setAttribute("endP", endPage);
                 request.setAttribute("listP", listByRange);
                 request.setAttribute("listOfCates", listOfCates);
-                request.setAttribute("from", "shop");
+                request.setAttribute("from", "rangeCategory");
                 request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
             } else {
                 System.out.println("CategoryId không hợp lệ");
