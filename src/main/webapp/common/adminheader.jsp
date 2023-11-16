@@ -136,6 +136,7 @@
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="navbarDropdownMenuLink">
 						<li><a class="dropdown-item" href="EditProfile?acc=admin">Thông tin</a></li>
+						<li><a class="dropdown-item" href="ChangePassword?role=admin">Đổi mật khẩu</a></li>
 						<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
 					</ul></li>
 			</ul>

@@ -47,6 +47,7 @@ if (user == null) {
 									class="form-label fw-bold">Comfirm Password</label> <input type="password" id="comfirmnewpass"
 									class="form-control" name="comfirmnewpass"
 									placeholder="Comfirm PassWord" required>
+									<input type="hidden" name= "role" value ="<%=request.getParameter("role")%>">
 							</div>
 							${error}
 							<div class="mb-3 d-grid">

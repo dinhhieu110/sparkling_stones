@@ -68,7 +68,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               aria-labelledby="navbarDropdownMenuLink"
               >
             	<li><a class="dropdown-item" href="EditProfile?acc=user">Thông tin</a></li>
-            	<li><a class="dropdown-item" href="ChangePassword">Đổi mật khẩu</a></li>
+            	<li><a class="dropdown-item" href="ChangePassword?role=user">Đổi mật khẩu</a></li>
             	<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
           	</ul>
           	</li>

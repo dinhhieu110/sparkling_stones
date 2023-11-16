@@ -227,4 +227,14 @@
     <servlet-name>GetProductByCategoryAndPriceRange</servlet-name>
     <url-pattern>/GetProductByCategoryAndPriceRange</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminAccountController</display-name>
+    <servlet-name>AdminAccountController</servlet-name>
+    <servlet-class>controller.common.AdminAccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminAccountController</servlet-name>
+    <url-pattern>/admin-account</url-pattern>
+  </servlet-mapping>
 </web-app>
