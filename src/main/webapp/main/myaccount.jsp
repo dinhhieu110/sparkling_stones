@@ -125,10 +125,10 @@ to {
 			<!-- Breadcrumb -->
 			<nav class="d-flex">
 				<h6 class="mb-0">
-					<a href="" class="text-white-50">Home</a> <span
+					<a href="" class="text-white-50">Trang chủ</a> <span
 						class="text-white-50 mx-2"> > </span> <a href=""
-						class="text-white-50">Profile</a> <span class="text-white-50 mx-2">
-						> </span> <a href="" class="text-white"><u>Shopping cart</u></a>
+						class="text-white-50">Hồ sơ</a> <span class="text-white-50 mx-2">
+						> </span> <a href="" class="text-white"><u>Tài khoản</u></a>
 				</h6>
 			</nav>
 			<!-- Breadcrumb -->
@@ -143,19 +143,17 @@ to {
 				<div class="col-lg-3 col-xl-3">
 					<nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
 						<a class="nav-link my-0 active" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Account main</p></a> <a
+								style="width: 100px">TRANG CÁ NHÂN</p></a> <a
 							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">New orders</p></a> <a
+								style="width: 100px">Đơn hàng mới</p></a> <a
 							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Orders history</p></a> <a
+								style="width: 100px">Đơn hàng cũ</p></a><a
 							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">My wishlist</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Transactions</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Profile setting</p></a> <a
+								style="width: 100px">Giao dịch</p></a> <a
+							class="nav-link my-0 bg-light js-change-profile" href="#"><p class="pb-0 mb-0"
+								style="width: 100px">Đổi Thông tin</p></a> <a
 							class="nav-link my-0 bg-light" href="logout"><p
-								class="pb-0 mb-0" style="width: 100px">Log out</p></a>
+								class="pb-0 mb-0" style="width: 100px">Đăng xuất</p></a>
 					</nav>
 				</div>
 				<main class="col-lg-9 col-xl-9">
@@ -165,7 +163,7 @@ to {
 								class="d-flex align-items-center justify-content-center px-4">
 								<div class="me-3">
 									<img
-										src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/avatars/avatar.webp"
+										src="<%=request.getContextPath()%>/assets/img/david.jpg"
 										class="rounded-circle" style="height: 60px; width: 60px;" />
 								</div>
 								<div class="pt-2 ms-3 me-auto">
@@ -207,7 +205,7 @@ to {
 
 						<hr class="my-4" />
 
-						<h5 class="mb-3">Your orders</h5>
+						<h5 class="mb-3">Đơn hàng của bạn</h5>
 						<div class="card border border-primary mb-4 shadow-0">
 							<div class="card-body pb-0">
 								<header class="d-lg-flex">
@@ -393,12 +391,14 @@ to {
 								name="lastName" type="text" class="modal-input"> <label
 								for="phone" class="modal-label"> <i class="ti-email"></i>
 								Phone
-							</label> <input value="${user.getPhone()}" id="phone" type="text"
-								name="phone" class="modal-input"> <label for="address"
-								class="modal-label"> <i class="ti-email"></i> Address
-							</label> <input value="${user.getAddress()}" id="address" type="text"
-								name="address" class="modal-input">
-							<input type="hidden" value="user" name="role">
+							</label> <input value="${user.getPhone()}" id="phone"
+								type="text" name="phone" class="modal-input"
+								pattern="(\+84|0)(3[2-9]|5[689]|7[06-9]|8[1-689]|9\d)(\d{7})"
+								title="Số điện thoại không hợp lệ" required> <label
+								for="address" class="modal-label"> <i class="ti-email"></i>
+								Address
+							</label> <input value="${user.getAddress()}" id="address"
+								type="text" name="address" class="modal-input"> <input type="hidden" value="user" name="role">
 
 
 							<button id="save-profile" type="submit" value="SAVE">Save</button>
