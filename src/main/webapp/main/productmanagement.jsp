@@ -375,6 +375,7 @@ table.table .avatar {
 						<table class="table table-hover">
 							<thead>
 								<tr>
+									<th>Loại</th>
 									<th>Tên sản phẩm</th>
 									<th>Giá</th>
 									<th>Giá khuyến mãi</th>
@@ -387,6 +388,7 @@ table.table .avatar {
 							<tbody>
 								<c:forEach items="${listP}" var="o">
 									<tr>
+										<td>${o.category}</td>
 										<td>${o.title}</td>
 										<td>${o.price}</td>
 										<td>${o.discount}</td>
@@ -497,30 +499,35 @@ table.table .avatar {
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" required> <label for="floatingInput">Tên
+								<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="category"
+											placeholder="category" name="category" required> <label for="floatingInput">Loại
 											sản phẩm</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" required><label for="floatingInput">Giá</label>
+										<input type="text" class="form-control" id="name"
+											placeholder="name" name="name" required> <label for="floatingInput">Tên
+											sản phẩm</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" required><label for="floatingInput">Giá
+										<input type="text" class="form-control" id="price"
+											placeholder="price" name="price" required><label for="floatingInput">Giá</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="dícount"
+											placeholder="dícount" name="dícount" required><label for="floatingInput">Giá
 											khuyến mãi</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control"
-											id="floatingInputMainImg" placeholder="" required><label
+											id="thubnail" placeholder="thubnail" name="thubnail" required><label
 											for="floatingInputMainImg">Ảnh chính</label>
 									</div>
 
 
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control"
-											id="floatingInputSecondaryImg" placeholder="" required><label
+										<input type="file" class="form-control"
+											id="galerry" placeholder="galerry" name="galerry" required><label
 											for="floatingInputSecondaryImg">Ảnh phụ</label>
 									</div>
 

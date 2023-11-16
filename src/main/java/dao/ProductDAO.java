@@ -147,8 +147,8 @@ public class ProductDAO extends DAOService {
 
 	public List<Product> getProductsEachPage(int index) {
 
-		String sql = "select * from \"ProductWithImages\"\r\n" + "order by id\r\n"
-				+ "offset ? rows fetch next 9 rows only;";
+		String sql = "select p.*, c.name as categoryName from \"ProductWithImages\" p join \"Category\" c "
+				+ "on p.category_id = c.id order by id offset ? rows fetch next 9 rows only";
 		List<Object> params = new ArrayList<Object>();
 		params.add((index - 1) * 9);
 
@@ -157,7 +157,7 @@ public class ProductDAO extends DAOService {
 		List<Product> list = new ArrayList<Product>();
 		try {
 			while (rs.next()) {
-				list.add(new Product(rs.getString("id"), rs.getString("category_id"), rs.getString("title"),
+				list.add(new Product(rs.getString("id"), rs.getString("categoryName"), rs.getString("title"),
 						rs.getInt("price"), rs.getInt("discount"), rs.getString("thumbnail"), rs.getArray("gallery"),
 						rs.getString("description"), rs.getDouble("rating"), rs.getTimestamp("created_at"),
 						rs.getTimestamp("updated_at")));
