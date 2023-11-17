@@ -150,7 +150,6 @@ function updateUser(id) {
   });
 }
 
-// Chưa xong
 function updateProduct(id) {
   const updateElement = document.getElementById("updateHidden");
   updateElement.value = id;
@@ -166,11 +165,10 @@ function updateProduct(id) {
     success: function (response) {
       const product = JSON.parse(response);
       $("#category").val(product.category);
-      $("#name").val(product);
+      $("#name").val(product.title);
   	  $("#price").val(product.price);
       $("#discount").val(product.discount);
-      $("#thubnail").val(product.thumbnail);
-      $("#galerry").val(product.gallery);
+      $("#description").val(product.description);
       $("#fbtn").val("update");
     },
     error: function (xhr) {
@@ -198,7 +196,7 @@ function addUser() {
 }
 
 function addProduct() {
-  $("#title").text("Thêm Sản phẩm mới Mới");
+  $("#title").text("Thêm Sản phẩm mới");
   $("#category").val("");
   $("#name").val("");
   $("#price").val("");

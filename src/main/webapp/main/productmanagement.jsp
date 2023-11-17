@@ -366,7 +366,7 @@ table.table .avatar {
 									</h2>
 								</div>
 								<div class="col-sm-6">
-									<a href="#addEmployeeModal" class="btn btn-light text-dark"
+									<a href="#openModal" onclick="addProduct()" class="btn btn-light text-dark"
 										data-toggle="modal"><i class="material-icons">&#xE147;</i>
 										<span>THÊM SẢN PHẨM MỚI</span></a>
 								</div>
@@ -403,7 +403,8 @@ table.table .avatar {
 													<div style="background-image: url('${image}')"></div>
 												</div>
 											</c:forEach></td>
-										<td><a href="#editEmployeeModal" class="edit"
+										<td><a href="#openModal" class="edit" 
+											onclick="updateProduct('${o.id}')"
 											data-toggle="modal"><i class="material-icons"
 												data-toggle="tooltip" title="Edit">&#xE254;</i></a> <!-- Add data-pid attribute to store the product ID -->
 											<a href="#deleteEmployeeModal" class="delete"
@@ -489,7 +490,7 @@ table.table .avatar {
 				</div>
 
 				<!-- Add Modal HTML -->
-				<div id="addEmployeeModal" class="modal fade">
+				<div id="openModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<form action ="manage-product" method="post" enctype="multipart/form-data">
@@ -515,7 +516,7 @@ table.table .avatar {
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="discount"
-											placeholder="dícount" name="discount" required><label for="discount">Giá
+											placeholder="discount" name="discount" required><label for="discount">Giá
 											khuyến mãi</label>
 									</div>
 									<div class="form-floating mb-3">
@@ -538,68 +539,12 @@ table.table .avatar {
 									</div>
 
 								</div>
+								<input type="hidden" name="myUpdateHidden" id="updateHidden" value =" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
-									<button type="submit" class="btn btn-light" name="action"
+									<button id ="fbtn" type="submit" class="btn btn-light" name="action"
 										value="add">Thêm</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<!-- Edit Modal HTML -->
-				<div id="editEmployeeModal" class="modal fade">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<form>
-								<div class="modal-header">
-									<h4 class="modal-title">CHỈNH SỬA</h4>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
-								</div>
-								<div class="modal-body">
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" required> <label for="floatingInput">Tên
-											sản phẩm</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" required><label for="floatingInput">Giá</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="floatingInput"
-											placeholder="" required><label for="floatingInput">Giá
-											khuyến mãi</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control"
-											id="floatingInputMainImg" placeholder="" required><label
-											for="floatingInputMainImg">Ảnh chính</label>
-									</div>
-
-
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control"
-											id="floatingInputSecondaryImg" placeholder="" required><label
-											for="floatingInputSecondaryImg">Ảnh phụ</label>
-									</div>
-
-									<div class="form-floating">
-										<textarea name="address" class="form-control" placeholder=" "
-											id="floatingTextarea"></textarea>
-										<label for="floatingTextarea">Mô tả</label>
-									</div>
-
-								</div>
-								<input type="hidden" name="myUpdateHidden" id="updateHidden"
-									value=" " />
-								<div class="modal-footer">
-									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy">
-									<button type="submit" class="btn btn-light" name="action"
-										value="edit">Sửa</button>
 								</div>
 							</form>
 						</div>

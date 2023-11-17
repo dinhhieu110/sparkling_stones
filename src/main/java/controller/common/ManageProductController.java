@@ -71,7 +71,7 @@ public class ManageProductController extends HttpServlet {
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
 	}else {
 		ProductDAO pDao = new ProductDAO();
-		Product product = pDao.getProductById(id);
+		Product product = pDao.getProductByIdForUpdate(id);
 		if (product != null) {
 			PrintWriter out = response.getWriter();
 			Gson gson = new Gson();

@@ -19,6 +19,18 @@ public class Product {
 	
 	
 	
+	public Product(String id, String category, String title, int price, int discount,
+			String description, double rating) {
+		super();
+		this.id = id;
+		this.category = category;
+		this.title = title;
+		this.price = price;
+		this.discount = discount;
+		this.description = description;
+		this.rating = rating;
+	}
+
 	public Product(String category, String title, int price, int discount, String thumbnail, String description) {
 		super();
 		this.category = category;
