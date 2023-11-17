@@ -1,4 +1,4 @@
-package dao;
+	package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -394,6 +394,23 @@ public class ProductDAO extends DAOService {
 	            e.printStackTrace();
 	        }
 			return 0;
+		}
+		
+		// Admin - add product
+		public String addProduct(Product product) {
+			String sql = "insert into \"Product\" (id, category_id, title, price, discount, thumbnail, description) values (?, ?, ?, ?, ?, ?, ?)";
+			List<Object> params = new ArrayList<Object>();
+			UUID productId = UUID.randomUUID();
+			params.add(productId);
+			params.add(UUID.fromString(product.getCategory()));
+			params.add(product.getTitle());
+			params.add(product.getPrice());
+			params.add(product.getDiscount());
+			params.add(product.getThumbnail());
+			params.add(product.getDescription());
+			update(sql, params);
+			
+			return productId.toString();
 		}
 
 }
