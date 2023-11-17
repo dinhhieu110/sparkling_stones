@@ -106,44 +106,7 @@ public class ManageProductController extends HttpServlet {
 			int price = Integer.parseInt(request.getParameter("price"));
 			int discount = Integer.parseInt(request.getParameter("discount"));
 			String description = request.getParameter("description");
-			String category = (request.getParameter("category")).toLowerCase().trim();
-			switch (category) {
-			case "nhẫn": {
-				category = "1e24d5e1-75e6-40a5-a0da-a627b197adbc";
-				break;
-			}
-			case "dây cổ": {
-				category = "9daa5471-4f60-4d94-ab54-0522def8f2c9";
-				break;
-			}
-			case "đồng hồ": {
-				category = "08bdf646-2a0b-489e-b514-3bb6d7ba24b1";
-				break;
-			}
-			case "charm": {
-				category = "9f0d6083-3ae3-4b88-8c0f-9f11f38f3212";
-				break;
-			}
-			case "kiềng": {
-				category = "11181f57-9f96-45e5-84bf-0cb01a4c4a14";
-				break;
-			}
-			case "vòng tay": {
-				category = "907b0854-00c5-4dac-bd7c-41e1179632d0";
-				break;
-			}
-			case "bông tai": {
-				category = "a4992f1b-20ce-4222-96f7-505c807e297a";
-				break;
-			}
-			case "dây chuyền": {
-				category = "bb853667-f697-4920-9931-bc056c9a2dc3";
-				break;
-			}
-			
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + category);
-			}
+			String category = request.getParameter("category");
 			//Start Xử lí các ảnh con
 			List<Part> fileParts = request.getParts().stream().filter(part -> "galerry".equals(part.getName()))
 					.collect(Collectors.toList());

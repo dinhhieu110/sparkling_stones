@@ -203,6 +203,7 @@ function addProduct() {
   $("#discount").val("");
   $("#thubnail").val("");
   $("#galerry").val("");
+  $("#description").val("");
   $("#fbtn").val("add");
   $("#fbtn").text("Thêm");
 }

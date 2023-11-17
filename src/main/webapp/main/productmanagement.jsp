@@ -500,10 +500,17 @@ table.table .avatar {
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-								<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="category"
-											placeholder="category" name="category" required> <label for="category">Loại
-											sản phẩm</label>
+									<div class="form-floating mb-3">
+										<select name ="category"class="form-select" id="category">
+											<option selected value="9daa5471-4f60-4d94-ab54-0522def8f2c9">Dây cổ</option>
+											<option value="08bdf646-2a0b-489e-b514-3bb6d7ba24b1">Đồng hồ</option>
+											<option value="1e24d5e1-75e6-40a5-a0da-a627b197adbc">Nhẫn</option>
+											<option value="9f0d6083-3ae3-4b88-8c0f-9f11f38f3212">Charm</option>
+											<option value="11181f57-9f96-45e5-84bf-0cb01a4c4a14">Kiềng</option>
+											<option value="907b0854-00c5-4dac-bd7c-41e1179632d0">Vòng tay</option>
+											<option value="a4992f1b-20ce-4222-96f7-505c807e297a">Bông tai</option>
+											<option value="bb853667-f697-4920-9931-bc056c9a2dc3">Dây chuyền</option>
+										</select> <label for="category">Loại sản phẩm</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="name"

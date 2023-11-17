@@ -426,7 +426,7 @@ public class ProductDAO extends DAOService {
 			List<Object> params = new ArrayList<Object>();
 			UUID productId = UUID.randomUUID();
 			params.add(productId);
-			params.add(UUID.fromString(product.getCategory()));
+			params.add(product.getCategory()));
 			params.add(product.getTitle());
 			params.add(product.getPrice());
 			params.add(product.getDiscount());
