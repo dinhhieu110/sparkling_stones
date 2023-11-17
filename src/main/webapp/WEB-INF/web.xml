@@ -205,7 +205,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ManageProductController</servlet-name>
-    <url-pattern>/ManageProductController</url-pattern>
+    <url-pattern>/manage-product</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

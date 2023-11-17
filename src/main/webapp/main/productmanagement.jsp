@@ -427,7 +427,7 @@ table.table .avatar {
 								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 									class="page-link"
 									<c:if test="${from eq 'ManageProductController'}">
-           href="ManageProductController?index=1"
+           href="manage-product?index=1"
        </c:if>
 									aria-label="First"> <span aria-hidden="true">First</span>
 								</a></li>
@@ -436,7 +436,7 @@ table.table .avatar {
 								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 									class="page-link"
 									<c:if test="${from eq 'ManageProductController'}">
-                   href="ManageProductController?index=${tag - 1}"
+                   href="manage-product?index=${tag - 1}"
                </c:if>
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
@@ -455,7 +455,7 @@ table.table .avatar {
 									<li class="page-item ${tag == i ? 'active' : ''}"><a
 										class="page-link"
 										<c:if test="${from eq 'ManageProductController'}">
-                       href="ManageProductController?index=${i}"
+                       href="manage-product?index=${i}"
                    </c:if>>${i}</a>
 									</li>
 								</c:forEach>
@@ -464,7 +464,7 @@ table.table .avatar {
 								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 									class="page-link"
 									<c:if test="${from eq 'ManageProductController'}">
-                   href="ManageProductController?index=${tag + 1}"
+                   href="manage-product?index=${tag + 1}"
                </c:if>
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
@@ -474,7 +474,7 @@ table.table .avatar {
 								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 									class="page-link"
 									<c:if test="${from eq 'ManageProductController'}">
-           href="ManageProductController?index=${endP}"
+           href="manage-product?index=${endP}"
        </c:if>
 									aria-label="Last"> <span aria-hidden="true">Last</span>
 								</a></li>
@@ -488,53 +488,53 @@ table.table .avatar {
 					</div>
 				</div>
 
-				<!-- Edit Modal HTML -->
+				<!-- Add Modal HTML -->
 				<div id="addEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form>
+							<form action ="manage-product" method="post" enctype="multipart/form-data">
 								<div class="modal-header">
-									<h4 class="modal-title">THÊM SẢN PHẨM</h4>
+									<h4 id ="title" class="modal-title">THÊM SẢN PHẨM</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
 								<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="category"
-											placeholder="category" name="category" required> <label for="floatingInput">Loại
+											placeholder="category" name="category" required> <label for="category">Loại
 											sản phẩm</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="floatingInput">Tên
+											placeholder="name" name="name" required> <label for="name">Tên
 											sản phẩm</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="price"
-											placeholder="price" name="price" required><label for="floatingInput">Giá</label>
+											placeholder="price" name="price" required><label for="price">Giá</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="dícount"
-											placeholder="dícount" name="dícount" required><label for="floatingInput">Giá
+										<input type="text" class="form-control" id="discount"
+											placeholder="dícount" name="discount" required><label for="discount">Giá
 											khuyến mãi</label>
 									</div>
 									<div class="form-floating mb-3">
-										<input type="text" class="form-control"
-											id="thubnail" placeholder="thubnail" name="thubnail" required><label
-											for="floatingInputMainImg">Ảnh chính</label>
+										<input type="file" class="form-control"
+											id="thumbnail" placeholder="thumbnail" name="thumbnail" required><label
+											for="thumbnail">Ảnh chính</label>
 									</div>
 
 
 									<div class="form-floating mb-3">
 										<input type="file" class="form-control"
-											id="galerry" placeholder="galerry" name="galerry" required><label
-											for="floatingInputSecondaryImg">Ảnh phụ</label>
+											id="galerry" placeholder="Enter at least an image" name="galerry" multiple required><label
+											for="galerry">Ảnh phụ</label>
 									</div>
 
 									<div class="form-floating">
-										<textarea name="address" class="form-control" placeholder=" "
-											id="floatingTextarea"></textarea>
-										<label for="floatingTextarea">Mô tả</label>
+										<textarea name="description" class="form-control" placeholder=" "
+											id="description"></textarea>
+										<label for="description">Mô tả</label>
 									</div>
 
 								</div>
@@ -593,6 +593,8 @@ table.table .avatar {
 									</div>
 
 								</div>
+								<input type="hidden" name="myUpdateHidden" id="updateHidden"
+									value=" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
@@ -607,7 +609,7 @@ table.table .avatar {
 				<div id="deleteEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action="ManageProductController" method="post">
+							<form action="manage-product" method="post" enctype="multipart/form-data">
 								<div class="modal-header">
 									<h4 class="modal-title">XÓA SẢN PHẨM</h4>
 									<button type="button" class="close" data-dismiss="modal"
@@ -700,9 +702,17 @@ table.table .avatar {
 	} */
 	
 	var status = document.getElementById("status").value;
-	if(status == "SuccessfullyDeleted") {
+	switch (status) {
+	case "SuccessfullyDeleted":
 		swal("Congrats", "Product Deleted Successfully", "success");
 		status = "";
+		break;
+	case "SuccessfullyAdded":
+		swal("Congrats", "Product Added Successfully", "success");
+		status = "";
+		break;
+	default:
+		break;
 	}
 </script>
 		<%@include file="/common/script.jsp"%>

@@ -150,6 +150,35 @@ function updateUser(id) {
   });
 }
 
+// Chưa xong
+function updateProduct(id) {
+  const updateElement = document.getElementById("updateHidden");
+  updateElement.value = id;
+  var path = getContextPath();
+  $("#title").text("Cập Nhật Sản Phẩm");
+  $("#fbtn").text("Cập Nhật");
+  $.ajax({
+    url: path + "/manage-product",
+    data: {
+      id: id,
+    },
+    type: "get",
+    success: function (response) {
+      const product = JSON.parse(response);
+      $("#category").val(product.category);
+      $("#name").val(product);
+  	  $("#price").val(product.price);
+      $("#discount").val(product.discount);
+      $("#thubnail").val(product.thumbnail);
+      $("#galerry").val(product.gallery);
+      $("#fbtn").val("update");
+    },
+    error: function (xhr) {
+      console.log("ERROR Ajax");
+    },
+  });
+}
+
 function addUser() {
   $("#title").text("Thêm Người Dùng Mới");
   $("#email").val("");
@@ -164,6 +193,18 @@ function addUser() {
     $(this).prop("checked", false);
   });
   $('[name="role"]').eq(0).prop("checked", true);
+  $("#fbtn").val("add");
+  $("#fbtn").text("Thêm");
+}
+
+function addProduct() {
+  $("#title").text("Thêm Sản phẩm mới Mới");
+  $("#category").val("");
+  $("#name").val("");
+  $("#price").val("");
+  $("#discount").val("");
+  $("#thubnail").val("");
+  $("#galerry").val("");
   $("#fbtn").val("add");
   $("#fbtn").text("Thêm");
 }

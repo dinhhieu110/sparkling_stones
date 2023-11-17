@@ -16,6 +16,34 @@ public class Product {
 	public Timestamp createdAt;
 	public Timestamp updatedAt;
 
+	
+	
+	
+	public Product(String category, String title, int price, int discount, String thumbnail, String description) {
+		super();
+		this.category = category;
+		this.title = title;
+		this.price = price;
+		this.discount = discount;
+		this.thumbnail = thumbnail;
+		this.description = description;
+	}
+
+	public Product(String category, String title, int price, int discount, String thumbnail, Array gallery,
+			String description, double rating, Timestamp createdAt, Timestamp updatedAt) {
+		super();
+		this.category = category;
+		this.title = title;
+		this.price = price;
+		this.discount = discount;
+		this.thumbnail = thumbnail;
+		this.gallery = gallery;
+		this.description = description;
+		this.rating = rating;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
 	public Product(String id, String category, String title, int price, int discount, String thumbnail, Array gallery,
 			String description, double rating, Timestamp createdAt, Timestamp updatedAt) {
 		super();
