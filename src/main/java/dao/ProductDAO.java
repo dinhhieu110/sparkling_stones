@@ -41,6 +41,30 @@ public class ProductDAO extends DAOService {
 		}
 		return product;
 	}
+	
+	public Product getProductByIdForUpdate(String id) {
+		String sql = "select * from \"ProductWithImages\" where id = ?";
+		List<Object> params = new ArrayList<>();
+		params.add(UUID.fromString(id));
+
+		ResultSet rs = select(sql, params);
+		Product product = null;
+
+		try {
+			if (rs.next()) {
+    			product = new Product(rs.getString("id"),
+									  rs.getString("category_id"),
+									  rs.getString("title"),
+									  rs.getInt("price"), 
+									  rs.getInt("discount"),
+									  rs.getString("description"),
+									  rs.getDouble("rating"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return product;
+	}
 
 	// 8 new products
 	public List<Product> getNewProducts() {
@@ -402,7 +426,7 @@ public class ProductDAO extends DAOService {
 			List<Object> params = new ArrayList<Object>();
 			UUID productId = UUID.randomUUID();
 			params.add(productId);
-			params.add(UUID.fromString(product.getCategory()));
+			params.add(product.getCategory()));
 			params.add(product.getTitle());
 			params.add(product.getPrice());
 			params.add(product.getDiscount());
