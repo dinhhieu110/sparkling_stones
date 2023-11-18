@@ -659,7 +659,7 @@ table.table .avatar {
 		swal("Congrats", "Product Deleted Successfully", "success");
 		status = "";
 		break;
-	case "SuccessfullyAdded":
+	case "SuccessfullAdded":
 		swal("Congrats", "Product Added Successfully", "success");
 		status = "";
 		break;
