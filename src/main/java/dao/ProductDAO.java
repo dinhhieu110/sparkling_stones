@@ -436,5 +436,19 @@ public class ProductDAO extends DAOService {
 			
 			return productId.toString();
 		}
+		
+		// Admin - update product
+		public void updateProduct(String productId, String title, int price, int discount, String thumbnail, String description) {
+			String sql = "update \"Product\" set title = ?, price = ?, discount = ?, thumbnail =?, description =? where id = ?";
+			List<Object> params = new ArrayList<Object>();
+			params.add(title);
+			params.add(price);
+			params.add(discount);
+			params.add(thumbnail);
+			params.add(description);
+			params.add(UUID.fromString(productId));
+			
+			update(sql, params);
+		}
 
 }
