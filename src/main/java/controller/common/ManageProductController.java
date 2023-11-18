@@ -9,13 +9,16 @@ import jakarta.servlet.http.Part;
 import model.Gallery;
 import model.Product;
 import model.User;
+import util.Template;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -88,9 +91,13 @@ public class ManageProductController extends HttpServlet {
 
 		String action = request.getParameter("action");
 		ProductDAO pDao = new ProductDAO();
+		GalleryDAO gDao = new GalleryDAO();
 		String foward = "";
+		String type="";
+		String error ="";
 		
 		List<String> fileNameList = new ArrayList<String>();
+		List<String> fileNameListUpdate = new ArrayList<String>();
 		switch (action) {
 		case "delete": {
 			String id = request.getParameter("myDeleteProductHidden");
@@ -98,15 +105,57 @@ public class ManageProductController extends HttpServlet {
 			foward = SUCCESS_FORWARD + "?status=SuccessfullyDeleted";
 			break;
 		}
-		case "edit": {
-
-		}
-		case "add": {
+		case "update": {
+			String productId = request.getParameter("myUpdateHidden");
+//			String category = request.getParameter("category");
 			String name = request.getParameter("name");
 			int price = Integer.parseInt(request.getParameter("price"));
 			int discount = Integer.parseInt(request.getParameter("discount"));
 			String description = request.getParameter("description");
+			
+			// Start xử lí ảnh chính
+			 Part filePart = request.getPart("thumbnail"); // Lấy part của file từ request bằng tên thuộc tính
+		        
+		        String thumbnail = getSubmittedFileName(filePart); // Lấy tên của file
+		        
+		        thumbnail = "/SparklingStones/assets/img/" +thumbnail;
+		    // End xử lí ảnh chính
+			
+			//Start Xử lí các ảnh con
+			List<Part> fileParts = request.getParts().stream().filter(part -> "galerry".equals(part.getName()))
+					.collect(Collectors.toList());
+			for (Part filePart2 : fileParts) {
+				  // Xử lý từng tập tin ở đây, ví dụ: lưu tập tin vào một thư mục, xử lý hình ảnh, v.v.
+	            String fileName = Paths.get(filePart2.getSubmittedFileName()).getFileName().toString(); // Tên tập tin
+	            fileNameListUpdate.add(fileName);
+//	            InputStream fileContent = filePart.getInputStream(); // Dữ liệu tập tin
+	            // Thực hiện xử lý với tập tin ở đây
+			}	        
+				response.getWriter().println("Files processed successfully!");
+			//End Xử lí các ảnh con
+			
+			// Update product and gallery tables
+				Product updatedProduct = pDao.getProductById(productId);
+				if(updatedProduct != null) {
+					pDao.updateProduct(productId, name, price, discount, thumbnail, description);					
+					for (String fileName : fileNameListUpdate) {
+						fileName = "/SparklingStones/assets/img/"+fileName;
+						gDao.updateGallery(productId, fileName);
+					}
+				} else {
+					error ="The product does not exist in database!";
+					type="danger";
+				}
+				foward = SUCCESS_FORWARD + "?status=SuccessfullyUpdated";
+				
+		}
+				break;
+		case "add": {
 			String category = request.getParameter("category");
+			String name = request.getParameter("name");
+			int price = Integer.parseInt(request.getParameter("price"));
+			int discount = Integer.parseInt(request.getParameter("discount"));
+			String description = request.getParameter("description");
 			//Start Xử lí các ảnh con
 			List<Part> fileParts = request.getParts().stream().filter(part -> "galerry".equals(part.getName()))
 					.collect(Collectors.toList());
@@ -127,10 +176,10 @@ public class ManageProductController extends HttpServlet {
 			        
 			        String thumbnail = getSubmittedFileName(filePart); // Lấy tên của file
 			        
-			       
+			        thumbnail = "/SparklingStones/assets/img/" +thumbnail;
 			// End xử lí ảnh chính
-			thumbnail = "/SparklingStones/assets/img/" +thumbnail;
-			GalleryDAO gDao = new GalleryDAO();
+			
+			// Add to product and gallery tables 
 			Product product = new Product(category, name, price, discount, thumbnail, description);
 			String productId = pDao.addProduct(product);
 //			Product newProduct = pDao.getProductById(productId);
@@ -141,10 +190,22 @@ public class ManageProductController extends HttpServlet {
 			}
 			foward = SUCCESS_FORWARD + "?status=SuccessfullAdded";
 		}
-
+			break;
 		}
 		pDao.close();
-		response.sendRedirect(foward);
+		if (error.equals("") && type.equals("")) {
+			response.sendRedirect(foward);
+		} else {
+			// Lấy template thông báo lỗi
+			Template template = new Template("template/alert.html");
+			Map<String, String> replacements = new HashMap<String, String>();
+			replacements.put("type", type);
+			replacements.put("content", error);
+
+			String alert = template.getTemplate(replacements);
+			request.setAttribute("error", alert);
+			doGet(request, response);
+		}
 
 	}
 	 private String getSubmittedFileName(Part part) {

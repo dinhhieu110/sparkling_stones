@@ -248,7 +248,7 @@ table.table .avatar {
 }
 /* Modal styles */
 .modal .modal-dialog {
-	max-width: 400px;
+	max-width: 600px;
 }
 
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
@@ -354,6 +354,7 @@ table.table .avatar {
 	<input type="hidden" id="status"
 		value="<%=request.getParameter("status")%>">
 	<main style="margin-top: 58px">
+	${error}
 		<div class="container pt-4">
 			<section class="mb-4">
 				<div class="table-responsive">
@@ -547,6 +548,7 @@ table.table .avatar {
 
 								</div>
 								<input type="hidden" name="myUpdateHidden" id="updateHidden" value =" " />
+								<input type="hidden" name="galleryHidden" id="galleryHidden" value =" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
@@ -659,8 +661,12 @@ table.table .avatar {
 		swal("Congrats", "Product Deleted Successfully", "success");
 		status = "";
 		break;
-	case "SuccessfullyAdded":
+	case "SuccessfullAdded":
 		swal("Congrats", "Product Added Successfully", "success");
+		status = "";
+		break;
+	case "SuccessfullyUpdated":
+		swal("Congrats", "Product Updated Successfully", "success");
 		status = "";
 		break;
 	default:

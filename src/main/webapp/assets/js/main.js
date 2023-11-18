@@ -165,6 +165,7 @@ function updateProduct(id) {
     success: function (response) {
       const product = JSON.parse(response);
       $("#category").val(product.category);
+      $("#category").prop("disabled", true);
       $("#name").val(product.title);
   	  $("#price").val(product.price);
       $("#discount").val(product.discount);
@@ -198,6 +199,7 @@ function addUser() {
 function addProduct() {
   $("#title").text("Thêm Sản phẩm mới");
   $("#category").val("");
+  $("#category").prop("disabled", false);
   $("#name").val("");
   $("#price").val("");
   $("#discount").val("");
