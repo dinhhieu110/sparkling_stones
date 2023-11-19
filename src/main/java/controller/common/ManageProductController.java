@@ -127,6 +127,7 @@ public class ManageProductController extends HttpServlet {
 			for (Part filePart2 : fileParts) {
 				  // Xử lý từng tập tin ở đây, ví dụ: lưu tập tin vào một thư mục, xử lý hình ảnh, v.v.
 	            String fileName = Paths.get(filePart2.getSubmittedFileName()).getFileName().toString(); // Tên tập tin
+	            fileName = "/SparklingStones/assets/img/"+fileName;
 	            fileNameListUpdate.add(fileName);
 //	            InputStream fileContent = filePart.getInputStream(); // Dữ liệu tập tin
 	            // Thực hiện xử lý với tập tin ở đây
@@ -137,11 +138,11 @@ public class ManageProductController extends HttpServlet {
 			// Update product and gallery tables
 				Product updatedProduct = pDao.getProductById(productId);
 				if(updatedProduct != null) {
-					pDao.updateProduct(productId, name, price, discount, thumbnail, description);					
-					for (String fileName : fileNameListUpdate) {
-						fileName = "/SparklingStones/assets/img/"+fileName;
-						gDao.updateGallery(productId, fileName);
-					}
+					pDao.updateProduct(productId, name, price, discount, thumbnail, description);		
+					
+					//get List of gallery
+					List<Gallery> listOfGallery = gDao.getListGalleryByProductId(productId);
+					gDao.updateGallery(productId, fileNameListUpdate, listOfGallery);
 				} else {
 					error ="The product does not exist in database!";
 					type="danger";
