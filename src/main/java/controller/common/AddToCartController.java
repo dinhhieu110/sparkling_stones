@@ -62,6 +62,11 @@ public class AddToCartController extends HttpServlet {
 				proDao.close();
 			}
 			cartDao.close();
+			
+			PrintWriter out = response.getWriter();
+			String gson = "{\"size\": "+ cart.getItems().size()+ "}";
+			out.print(gson);
+					
 		}
 	}
 
