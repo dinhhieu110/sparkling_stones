@@ -49,9 +49,6 @@
 									<div class="alert alert-warning" role="alert">Chưa có sản
 										phẩm nào trong giỏ hàng của bạn!</div>
 								</c:if>
-								<c:if test="${cart == null}">
-									<div class="alert alert-success" role="alert">Thanh toán đơn hàng thành công!</div>
-								</c:if>
 								<c:if test="${cart.items.size() != 0}">
 									<c:forEach items="${cart.items}" var="item">
 										<div class="row gy-3 mb-4">
@@ -184,7 +181,7 @@
 										placeholder="Lời nhắn của khách hàng..." id=""note""></textarea>
 									<br />
 									<button class="btn btn-primary w-100 shadow-0 mb-2"
-										name="action" value="checkOut" type="submit">THANH TOÁN</button>
+										name="action" value="checkOut" type="submit">Thanh Toán Đơn Hàng</button>
 								</form>
 								<a href="shop" class="btn btn-light w-100 border mt-2"> TIẾP
 									TỤC MUA SẮM </a>

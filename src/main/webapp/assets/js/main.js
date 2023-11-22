@@ -66,7 +66,8 @@ function addToCart(event, id) {
     type: "get",
     success: function (response) {
       showToast("Item added successfully!");
-      console.log("OK");
+      const cart = JSON.parse(response);
+      $("#cart-quantity").html(cart.size);
     },
     error: function (xhr) {
       console.log("ERROR Ajax");
