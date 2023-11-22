@@ -143,15 +143,9 @@ to {
 				<div class="col-lg-3 col-xl-3">
 					<nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
 						<a class="nav-link my-0 active" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">TRANG CÁ NHÂN</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Đơn hàng mới</p></a> <a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Đơn hàng cũ</p></a><a
-							class="nav-link my-0 bg-light" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Giao dịch</p></a> <a
-							class="nav-link my-0 bg-light js-change-profile" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">Đổi Thông tin</p></a> <a
+								style="width: 100px">TRANG CÁ NHÂN</p></a><a
+							class="nav-link my-0 bg-light js-change-profile" href="ChangePassword?role=user"><p class="pb-0 mb-0"
+								style="width: 100px">Đổi Mật khẩu</p></a> <a
 							class="nav-link my-0 bg-light" href="logout"><p
 								class="pb-0 mb-0" style="width: 100px">Đăng xuất</p></a>
 					</nav>
@@ -185,7 +179,7 @@ to {
 									<p class="mb-0">Phone: ${profile.getPhone()}</p> --%>
 								</div>
 								<button class="btn btn-primary js-change-profile ms-3">
-									Change Profile</button>
+									Chỉnh sửa thông tin</button>
 
 							</div>
 						</div>
@@ -205,7 +199,7 @@ to {
 
 						<hr class="my-4" />
 
-						<h5 class="mb-3">Đơn hàng của bạn</h5>
+						<h5 id ="order" class="mb-3">Đơn hàng của bạn</h5>
 						<div class="card border border-primary mb-4 shadow-0">
 							<div class="card-body pb-0">
 								<header class="d-lg-flex">
@@ -372,8 +366,7 @@ to {
 					</div>
 					<header class="modal-header">
 
-						<i class="fa-solid fa-user" style="margin-right: 16px"></i> Change
-						Profile
+						<i class="fa-solid fa-user" style="margin-right: 16px"></i> Chỉnh sửa thông tin
 					</header>
 					<form action="EditProfile" method="post">
 						<div class="modal-body">
@@ -382,26 +375,26 @@ to {
 							</label> --> <input value="${user.getId()}" id="email" type="hidden"
 								readonly name="email" class="modal-input"> <label
 								for="first-name" class="modal-label"> <i
-								class="ti-email"></i> First Name
+								class="ti-email"></i> Tên
 							</label> <input value="${user.getFirstName()}" id="first-name"
 								name="firstName" type="text" class="modal-input"> <label
 								for="last-name" class="modal-label"> <i class="ti-email"></i>
-								Last Name
+								Họ
 							</label> <input value="${user.getLastName()}" id="last-name"
 								name="lastName" type="text" class="modal-input"> <label
 								for="phone" class="modal-label"> <i class="ti-email"></i>
-								Phone
+								Số điện thoại
 							</label> <input value="${user.getPhone()}" id="phone"
 								type="text" name="phone" class="modal-input"
 								pattern="(\+84|0)(3[2-9]|5[689]|7[06-9]|8[1-689]|9\d)(\d{7})"
 								title="Số điện thoại không hợp lệ" required> <label
 								for="address" class="modal-label"> <i class="ti-email"></i>
-								Address
+								Địa chỉ
 							</label> <input value="${user.getAddress()}" id="address"
 								type="text" name="address" class="modal-input"> <input type="hidden" value="user" name="role">
 
 
-							<button id="save-profile" type="submit" value="SAVE">Save</button>
+							<button id="save-profile" type="submit" value="SAVE">Lưu thay đổi</button>
 						</div>
 					</form>
 				</div>
