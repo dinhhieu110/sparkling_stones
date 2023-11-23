@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 	private String id;
@@ -13,6 +15,7 @@ public class Order {
 	private int status;
 	private int total_money;
 	private String address;
+	private List<Item> items;
 	
 	public Order() {
 		super();
@@ -30,6 +33,7 @@ public class Order {
 		this.status = status;
 		this.total_money = total_money;
 		this.address = address;
+		items = new ArrayList<>();
 	}
 
 	public Order(String id, String user_id, String fullname, String email, String phone_number, String note,
@@ -45,6 +49,7 @@ public class Order {
 		this.status = status;
 		this.total_money = total_money;
 		this.address = address;
+		items = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -125,6 +130,14 @@ public class Order {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 	
 	

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="model.User"%>
@@ -116,7 +118,8 @@ to {
 </style>
 </head>
 <body>
-	<input type="hidden" id="status" value="<%= request.getParameter("status")%>">
+	<input type="hidden" id="status"
+		value="<%=request.getParameter("status")%>">
 	<%@include file="/common/header.jsp"%>
 
 	<!-- Heading -->
@@ -142,9 +145,12 @@ to {
 			<div class="row">
 				<div class="col-lg-3 col-xl-3">
 					<nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
-						<a class="nav-link my-0 active" href="#"><p class="pb-0 mb-0"
-								style="width: 100px">TRANG CÁ NHÂN</p></a><a
-							class="nav-link my-0 bg-light js-change-profile" href="ChangePassword?role=user"><p class="pb-0 mb-0"
+						<a class="nav-link my-0 active" href="my-account?acc=user"><p class="pb-0 mb-0"
+								style="width: 100px">TRANG CÁ NHÂN</p></a> <a
+							class="nav-link my-0 bg-light" href="my-order"><p
+								class="pb-0 mb-0" style="width: 100px">Đơn hàng</p></a><a
+							class="nav-link my-0 bg-light"
+							href="ChangePassword?role=user"><p class="pb-0 mb-0"
 								style="width: 100px">Đổi Mật khẩu</p></a> <a
 							class="nav-link my-0 bg-light" href="logout"><p
 								class="pb-0 mb-0" style="width: 100px">Đăng xuất</p></a>
@@ -156,24 +162,27 @@ to {
 							<div
 								class="d-flex align-items-center justify-content-center px-4">
 								<div class="me-3">
-									<img
-										src="<%=request.getContextPath()%>/assets/img/david.jpg"
+									<img src="<%=request.getContextPath()%>/assets/img/david.jpg"
 										class="rounded-circle" style="height: 60px; width: 60px;" />
 								</div>
 								<div class="pt-2 ms-3 me-auto">
 									<div class="mb-2">
-										<h6 class="d-inline mb-0">Full Name:</h6>
+										<h6 class="d-inline mb-0">Họ và tên:</h6>
 										<span class="mx-1">${user.getFirstName()}
 											${user.getLastName()}</span>
 									</div>
 									<div class="mb-2">
-										<h6 class="d-inline mb-0">Email:</h6>
+										<h6 class="d-inline mb-0">Địa chỉ email:</h6>
 										<span class="mx-1">${user.getEmail()}</span>
 									</div>
 
 									<div class="mb-2">
-										<h6 class="d-inline mb-0">Phone:</h6>
+										<h6 class="d-inline mb-0">Số điện thoại:</h6>
 										<span class="mx-1">${user.getPhone()}</span>
+									</div>
+									<div class="mb-2">
+										<h6 class="d-inline mb-0">Vai trò:</h6>
+										<span class="mx-1"><c:out value="${user.getRole() == '6d48747d-8781-460e-9b2e-b9dc8c44a6f4' ? 'User' :'Admin'}"></c:out></span>
 									</div>
 									<%-- <p class="mb-1">Email: ${profile.getEmail()}</p>
 									<p class="mb-0">Phone: ${profile.getPhone()}</p> --%>
@@ -194,167 +203,6 @@ to {
 							</div>
 
 						</div>
-
-
-
-						<hr class="my-4" />
-
-						<h5 id ="order" class="mb-3">Đơn hàng của bạn</h5>
-						<div class="card border border-primary mb-4 shadow-0">
-							<div class="card-body pb-0">
-								<header class="d-lg-flex">
-									<div class="flex-grow-1">
-										<h6 class="mb-0">
-											Order ID: 8924 <i class="dot"></i> <span class="text-success">
-												Shipped</span>
-										</h6>
-										<span class="text-muted">Date: 16 December 2022</span>
-									</div>
-									<div>
-										<a href="#" class="btn btn-sm btn-outline-danger">Cancel
-											order</a> <a href="#" class="btn btn-sm btn-primary shadow-0">Track
-											order</a>
-									</div>
-								</header>
-								<hr />
-								<div class="row">
-									<div class="col-lg-4">
-										<p class="mb-0 text-muted">Contact</p>
-										<p class="m-0">
-											Mike Johnatan <br /> Phone: 371-295-9131 <br /> Email:
-											info@mywebsite.com
-										</p>
-									</div>
-									<div class="col-lg-4 border-start">
-										<p class="mb-0 text-muted">Shipping address</p>
-										<p class="m-0">
-											United States <br /> 3601 Old Capitol Trail, Unit A-7, Suite
-											170777, Wilmington, DE 19808
-										</p>
-									</div>
-									<div class="col-lg-4 border-start">
-										<p class="mb-0 text-muted">Payment</p>
-										<p class="m-0">
-											<span class="text-success"> Visa **** 4216 </span> <br />
-											Shipping fee: $56 <br /> Total paid: $456
-										</p>
-									</div>
-								</div>
-								<hr />
-								<ul class="row list-unstyled">
-									<li class="col-xl-4 col-lg-6">
-										<div class="d-flex mb-3 mb-xl-0">
-											<div class="me-3">
-												<img width="72" height="72"
-													src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp"
-													class="img-sm rounded border" />
-											</div>
-											<div class="">
-												<p class="mb-0">T-shirts with multiple colors</p>
-												<strong> 2x = $25.98 </strong>
-											</div>
-										</div>
-									</li>
-									<li class="col-xl-4 col-lg-6">
-										<div class="d-flex mb-3 mb-xl-0">
-											<div class="me-3">
-												<img width="72" height="72"
-													src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp"
-													class="img-sm rounded border" />
-											</div>
-											<div class="">
-												<p class="mb-0">Gaming Headset 32db Black</p>
-												<strong> 2x = $339.90 </strong>
-											</div>
-										</div>
-									</li>
-									<li class="col-xl-4 col-lg-6">
-										<div class="d-flex mb-3 mb-md-0">
-											<div class="me-3">
-												<img width="72" height="72"
-													src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/5.webp"
-													class="img-sm rounded border" />
-											</div>
-											<div class="">
-												<p class="mb-0">Apple Watch Series 4 Space Gray</p>
-												<strong> 2x = $339.90 </strong>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="card border border-primary shadow-0">
-							<div class="card-body pb-0">
-								<header class="d-lg-flex">
-									<div class="flex-grow-1">
-										<h6 class="mb-0">
-											Order ID: 9088 <i class="dot"></i> <span class="text-danger">
-												Pending </span>
-										</h6>
-										<span class="text-muted">Date: 16 December 2022</span>
-									</div>
-									<div>
-										<a href="#" class="btn btn-sm btn-outline-danger">Cancel
-											order</a> <a href="#" class="btn btn-sm btn-primary shadow-0">Track
-											order</a>
-									</div>
-								</header>
-								<hr />
-								<div class="row">
-									<div class="col-lg-4">
-										<p class="mb-0 text-muted">Contact</p>
-										<p class="m-0">
-											Mike Johnatan <br /> Phone: 371-295-9131 <br /> Email:
-											info@mywebsite.com
-										</p>
-									</div>
-									<div class="col-lg-4 border-start">
-										<p class="mb-0 text-muted">Shipping address</p>
-										<p class="m-0">
-											United States <br /> 600 Markley Street, Suite 170777 Port
-											Reading, NJ 07064
-										</p>
-									</div>
-									<div class="col-lg-4 border-start">
-										<p class="mb-0 text-muted">Payment</p>
-										<p class="m-0">
-											<span class="text-success"> Visa **** 4216 </span> <br />
-											Shipping fee: $56 <br /> Total paid: $456
-										</p>
-									</div>
-								</div>
-								<hr />
-								<ul class="row list-unstyled">
-									<li class="col-xl-4 col-lg-6">
-										<div class="d-flex mb-3 mb-lg-0">
-											<div class="me-3 mb-xl-0">
-												<img width="72" height="72"
-													src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/10.webp"
-													class="img-sm rounded border" />
-											</div>
-											<div class="info">
-												<p class="mb-0">T-shirts with multiple colors</p>
-												<strong> 2x = $25.98 </strong>
-											</div>
-										</div>
-									</li>
-									<li class="col-xl-4 col-lg-6">
-										<div class="d-flex mb-0 mb-md-0">
-											<div class="me-3">
-												<img width="72" height="72"
-													src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/7.webp"
-													class="img-sm rounded border" />
-											</div>
-											<div class="info">
-												<p class="mb-0">Gaming Headset 32db Black</p>
-												<strong> 2x = $339.90 </strong>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</div>
 					</div>
 				</main>
 
@@ -366,14 +214,16 @@ to {
 					</div>
 					<header class="modal-header">
 
-						<i class="fa-solid fa-user" style="margin-right: 16px"></i> Chỉnh sửa thông tin
+						<i class="fa-solid fa-user" style="margin-right: 16px"></i> Chỉnh
+						sửa thông tin
 					</header>
 					<form action="EditProfile" method="post">
 						<div class="modal-body">
 							<!-- <label for="email" class="modal-label"> <i
 								class="ti-email"></i> Email
-							</label> --> <input value="${user.getId()}" id="email" type="hidden"
-								readonly name="email" class="modal-input"> <label
+							</label> -->
+							<input value="${user.getId()}" id="email" type="hidden" readonly
+								name="email" class="modal-input"> <label
 								for="first-name" class="modal-label"> <i
 								class="ti-email"></i> Tên
 							</label> <input value="${user.getFirstName()}" id="first-name"
@@ -384,17 +234,19 @@ to {
 								name="lastName" type="text" class="modal-input"> <label
 								for="phone" class="modal-label"> <i class="ti-email"></i>
 								Số điện thoại
-							</label> <input value="${user.getPhone()}" id="phone"
-								type="text" name="phone" class="modal-input"
+							</label> <input value="${user.getPhone()}" id="phone" type="text"
+								name="phone" class="modal-input"
 								pattern="(\+84|0)(3[2-9]|5[689]|7[06-9]|8[1-689]|9\d)(\d{7})"
 								title="Số điện thoại không hợp lệ" required> <label
 								for="address" class="modal-label"> <i class="ti-email"></i>
 								Địa chỉ
-							</label> <input value="${user.getAddress()}" id="address"
-								type="text" name="address" class="modal-input"> <input type="hidden" value="user" name="role">
+							</label> <input value="${user.getAddress()}" id="address" type="text"
+								name="address" class="modal-input"> <input type="hidden"
+								value="user" name="role">
 
 
-							<button id="save-profile" type="submit" value="SAVE">Lưu thay đổi</button>
+							<button id="save-profile" type="submit" value="SAVE">Lưu
+								thay đổi</button>
 						</div>
 					</form>
 				</div>

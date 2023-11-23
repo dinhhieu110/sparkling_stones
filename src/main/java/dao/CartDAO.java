@@ -65,7 +65,7 @@ public class CartDAO extends DAOService {
 		Product product = null;
 		
 		try {
-			if (rs.next()) {
+			while (rs.next()) {
 				cart = new Cart(rs.getString("session_id"));
 				
 				do {

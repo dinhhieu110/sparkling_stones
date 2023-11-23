@@ -37,7 +37,7 @@ public class OrderDAO extends DAOService{
 		String sql ="select * from \"Orders\" order by id asc limit 1";
 		ResultSet rs = select(sql);
 		try {
-			if(rs.next()) {
+			while(rs.next()) {
 				Order order = new Order(rs.getString("id"),
 										rs.getString("user_id"), 
 										rs.getString("fullname"), 
@@ -63,7 +63,7 @@ public class OrderDAO extends DAOService{
 		ResultSet rs = select(sql, params);
 		int countOrders = 0;
 		try {
-			if(rs.next()) {
+			while(rs.next()) {
 				countOrders = rs.getInt("count");
 			}
 		} catch (Exception e) {
@@ -71,5 +71,30 @@ public class OrderDAO extends DAOService{
 		}
 		return countOrders;
 		
+	}
+	
+	public List<Order> OrdersByUserId(String userId) {
+		String sql = "select * from \"Orders\" where user_id = ? ";
+		List<Object> params = new ArrayList<Object>();
+		params.add(UUID.fromString(userId));
+		List<Order> listOrders = new ArrayList<Order>();
+		ResultSet rs = select(sql, params);
+		try {
+			while(rs.next()) {
+				listOrders.add(new Order(rs.getString("id"), 
+										rs.getString("user_id"), 
+										rs.getString("fullname"), 
+										rs.getString("email"), 
+										rs.getString("phone_number"), 
+										rs.getString("note"), 
+										rs.getTimestamp("order_date"), 
+										rs.getInt("status"), 
+										rs.getInt("total_money"),
+										rs.getString("address")));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return listOrders;
 	}
 }	
