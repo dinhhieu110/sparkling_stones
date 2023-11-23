@@ -165,7 +165,7 @@ public class CheckOutController extends HttpServlet {
 			        String vnp_SecureHash = Config.hmacSHA512(Config.secretKey, hashData.toString());
 			        queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
 			        String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-			        response.sendRedirect(paymentUrl);
+			        forward = paymentUrl;
 //			        com.google.gson.JsonObject job = new JsonObject();
 //			        job.addProperty("code", "00");
 //			        job.addProperty("message", "success");
@@ -174,8 +174,8 @@ public class CheckOutController extends HttpServlet {
 //			        response.getWriter().write(gson.toJson(job));
 		    }
 			}
+			response.sendRedirect(forward);
 		}
 		uDao.close();
-//		response.sendRedirect(forward);
 	}
 }
