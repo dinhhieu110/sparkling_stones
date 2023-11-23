@@ -96,13 +96,11 @@ public class CheckOutController extends HttpServlet {
 					OrderDetailDAO oDetailDAO = new OrderDetailDAO();
 					oDetailDAO.addOrderDetail(orderDetail);
 				}
-				ItemDAO iDao = new ItemDAO();
-				iDao.removeAllItemsByCartId(cart.getId());
 				CartDAO cartDao = new CartDAO();
 				cartDao.removeCart(user.getId());
 				String cartId = cartDao.addCart(user.getId());
 				cart = new Cart(cartId);
-				session.setAttribute("cart", cart);
+				session.setAttribute("cart", cart); 
 				forward = SUCCESS_FORWARD;
 
 				 String vnp_Version = "2.1.0";

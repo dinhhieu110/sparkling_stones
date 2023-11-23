@@ -247,4 +247,14 @@
     <servlet-name>PrintBillController</servlet-name>
     <url-pattern>/print-bill</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyOrderController</display-name>
+    <servlet-name>MyOrderController</servlet-name>
+    <servlet-class>controller.common.MyOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrderController</servlet-name>
+    <url-pattern>/my-order</url-pattern>
+  </servlet-mapping>
 </web-app>

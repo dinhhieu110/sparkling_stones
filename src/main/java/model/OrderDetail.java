@@ -6,6 +6,7 @@ public class OrderDetail {
 	private String product_id;
 	private int price;
 	private int quantity;
+	private Product product;
 	public OrderDetail() {
 		super();
 	}
@@ -30,6 +31,18 @@ public class OrderDetail {
 		this.price = price;
 		this.quantity = quantity;
 	}
+	
+	
+	public OrderDetail(String id, String order_id, String product_id, int price, int quantity, Product product) {
+		super();
+		this.id = id;
+		this.order_id = order_id;
+		this.product_id = product_id;
+		this.price = price;
+		this.quantity = quantity;
+		this.product = product;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -60,6 +73,20 @@ public class OrderDetail {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	
+	public Product getProduct() {
+		return product;
+	}
+
+
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "OrderDetail [id=" + id + ", order_id=" + order_id + ", product_id=" + product_id + ", price=" + price
