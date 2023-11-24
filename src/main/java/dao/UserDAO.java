@@ -98,7 +98,7 @@ public class UserDAO extends DAOService{
     	User user = null;
     	
     	try {
-    		if (rs.next()) {
+    		while (rs.next()) {
     			user = new User(rs.getString("id"),
 		    					rs.getString("email"),
 		    					rs.getString("password"), 
@@ -124,7 +124,7 @@ public class UserDAO extends DAOService{
     	User user = null;
     	
     	try {
-    		if (rs.next()) {
+    		while (rs.next()) {
     			user = new User(rs.getString("id"),
 		    					rs.getString("email"),
 		    					rs.getString("password"), 

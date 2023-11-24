@@ -23,7 +23,7 @@ public class ProductDAO extends DAOService {
 		Product product = null;
 
 		try {
-			if (rs.next()) {
+			while (rs.next()) {
     			product = new Product(rs.getString("id"),
 									  rs.getString("category_id"),
 									  rs.getString("title"),
@@ -51,7 +51,7 @@ public class ProductDAO extends DAOService {
 		Product product = null;
 
 		try {
-			if (rs.next()) {
+			while (rs.next()) {
     			product = new Product(rs.getString("id"),
 									  rs.getString("category_id"),
 									  rs.getString("title"),
@@ -355,7 +355,7 @@ public class ProductDAO extends DAOService {
 	        ResultSet rs = select(sql, params);
 
 	        try {
-	            if (rs.next()) {
+	        	while (rs.next()) {
 	                return rs.getInt(1);
 	            }
 	        } catch (SQLException e) {

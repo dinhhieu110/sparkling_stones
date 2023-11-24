@@ -239,6 +239,26 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>PrintBillController</display-name>
+    <servlet-name>PrintBillController</servlet-name>
+    <servlet-class>controller.common.PrintBillController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PrintBillController</servlet-name>
+    <url-pattern>/print-bill</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyOrderController</display-name>
+    <servlet-name>MyOrderController</servlet-name>
+    <servlet-class>controller.common.MyOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrderController</servlet-name>
+    <url-pattern>/my-order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>SortProductByPrice</display-name>
     <servlet-name>SortProductByPrice</servlet-name>
     <servlet-class>controller.common.SortProductByPrice</servlet-class>

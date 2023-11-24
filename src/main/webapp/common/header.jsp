@@ -67,7 +67,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
               >
-            	<li><a class="dropdown-item" href="EditProfile?acc=user">Thông tin</a></li>
+            	<li><a class="dropdown-item" href="my-account?acc=user">Thông tin cá nhân</a></li>
             	<li><a class="dropdown-item" href="ChangePassword?role=user">Đổi mật khẩu</a></li>
             	<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
           	</ul>
@@ -130,40 +130,18 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
           <li class="nav-item my-li">
             <a class="nav-link rounded text-dark" href="shop">Cửa Hàng</a>
           </li>
+           <li class="nav-item my-li">
+            <a class="nav-link rounded text-dark" href="#">Bài Viết</a>
+          </li>
           <li class="nav-item my-li">
             <a class="nav-link rounded text-dark" href="#">Thương Hiệu</a>
           </li>
           <li class="nav-item my-li">
-            <a class="nav-link rounded text-dark" href="#">Quà Tặng</a>
-          </li>
-          <li class="nav-item my-li">
-            <a class="nav-link rounded text-dark" href="#">Bài Viết</a>
+            <a class="nav-link rounded text-dark" href="#">Về Sparkling Stones</a>
           </li>
           <li class="nav-item my-li">
             <a class="nav-link rounded text-dark" href="#">Khuyến Mãi</a>
           </li>
-          <!-- Navbar dropdown -->
-          <li class="nav-item dropdown my-li">
-            <a
-              class="nav-link rounded dropdown-toggle text-dark"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-mdb-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Khác
-            </a>
-            <!-- Dropdown menu -->
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-        </ul>
-        <!-- Left links -->
       </div>
     </div>
     <!-- Container wrapper -->
