@@ -257,4 +257,14 @@
     <servlet-name>MyOrderController</servlet-name>
     <url-pattern>/my-order</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SortProductByPrice</display-name>
+    <servlet-name>SortProductByPrice</servlet-name>
+    <servlet-class>controller.common.SortProductByPrice</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SortProductByPrice</servlet-name>
+    <url-pattern>/SortProductByPrice</url-pattern>
+  </servlet-mapping>
 </web-app>
