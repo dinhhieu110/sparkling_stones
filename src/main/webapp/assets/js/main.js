@@ -231,6 +231,7 @@ function viewOrderDetail(orderId) {
 		success: function(response) {
 			const orderDetails = JSON.parse(response);
 			$("#append-code").html("");
+			console.log(orderDetails)
 			orderDetails.forEach((detail) => {
 				const formattedAmount = formatCurrency(detail.product.discount * detail.quantity); // Format số tiền
 				console.log(formattedAmount);
@@ -267,6 +268,62 @@ function viewOrderDetail(orderId) {
 								</div>
 				`;		
 			$("#append-code").append(appendCode)
+			})
+		},
+		error: function(xhr) {
+			console.log("ERROR Ajax");
+		},
+	});
+}
+
+function viewBillDetail(orderId){
+	var path = getContextPath();
+	$.ajax({
+		url: path + "/print-bill",
+		data: {
+			id: orderId,
+		},
+		type: "get",
+		success: function(response) {
+			const details = JSON.parse(response);
+			console.log(details);
+			$("#append-code").html("");
+			details.forEach((detail) => {
+				const formattedAmount = formatCurrency(detail.product.discount * detail.quantity); // Format số tiền 
+				console.log(formattedAmount); 
+				const append = `
+				<div class="row">
+									<div class="col">
+										<div class="card card-2">
+											<div class="card-body">
+												<div class="media">
+													<div class="sq align-self-center ">
+														<img id="thumbnail"
+															class="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
+															src="${detail.product.thumbnail}" width="135"
+															height="135" />
+													</div>
+													<div class="media-body my-auto text-right">
+														<div class="row  my-auto">
+															<div class="col-6 m-auto">
+																<small>${detail.product.title}</small>
+															</div>
+															<div class="col-2 my-auto">
+																<h6 class="mb-0">SL:${detail.quantity}</h6>
+															</div>
+															<div class="col-4 my-auto">
+																<h6 class="mb-0">${formattedAmount}</h6>
+															</div>
+														</div>
+													</div>
+												</div>
+												<hr class="my-3 ">
+											</div>
+										</div>
+									</div>
+								</div>
+			`;
+			$("#append-code").append(append)
 			})
 		},
 		error: function(xhr) {

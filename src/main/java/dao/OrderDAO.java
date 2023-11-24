@@ -97,4 +97,29 @@ public class OrderDAO extends DAOService{
 		}
 		return listOrders;
 	}
+	
+	public Order getLatestOrder(String userId) {
+		String sql ="select * from \"Orders\" where user_id = ? order by order_date desc limit 1;";
+		List<Object> params = new ArrayList<Object>();
+		params.add(UUID.fromString(userId));
+		ResultSet rs = select(sql, params);
+		Order order = null;
+		try {
+			while(rs.next()) {
+				order = new Order(rs.getString("id"), 
+								  rs.getString("user_id"),
+								  rs.getString("fullname"), 
+								  rs.getString("email"), 
+								  rs.getString("phone_number"), 
+								  rs.getString("note"), 
+								  rs.getTimestamp("order_date"), 
+								  rs.getInt("status"), 
+								  rs.getInt("total_money"), 
+								  rs.getString("address"));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return order;
+	}
 }	

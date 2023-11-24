@@ -7,12 +7,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Cart;
+import model.Order;
+import model.OrderDetail;
 import model.User;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import com.google.gson.Gson;
 
 import dao.CartDAO;
 import dao.OrderDAO;
+import dao.OrderDetailDAO;
 
 /**
  * Servlet implementation class TrackingController
@@ -26,6 +33,8 @@ public class PrintBillController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String orderId = request.getParameter("id");
+		if(orderId == null) {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		long amount = Long.parseLong(request.getParameter("vnp_Amount"));
@@ -33,7 +42,7 @@ public class PrintBillController extends HttpServlet {
 		String userId = user.getId();
 		OrderDAO oDao = new OrderDAO();
 		int countOrders = oDao.countOrderByUId(userId);
-		Cart cart = (Cart) session.getAttribute("cart");
+		Order order = oDao.getLatestOrder(userId);
 		
 //		CartDAO cartDao = new CartDAO();
 //		if (cartDao.isExist(user.getId())) {
@@ -44,10 +53,18 @@ public class PrintBillController extends HttpServlet {
 //		cartDao.close();
 		
 		oDao.close();
-		request.setAttribute("cart", cart);
-		request.setAttribute("fullName", fullName);
+		request.setAttribute("order", order);
+		request.setAttribute("user", user);
 		request.setAttribute("countOrders", countOrders);
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);
+		} else {
+			OrderDetailDAO odtDao = new OrderDetailDAO();
+			List<OrderDetail> listOrderDetails = odtDao.getListOrderDetails(orderId);
+			PrintWriter out = response.getWriter();
+			Gson gson = new Gson();
+			String listOrderDetailsJson = gson.toJson(listOrderDetails);
+			out.println(listOrderDetailsJson);
+		}
 	}
 
 	/**
