@@ -450,5 +450,66 @@ public class ProductDAO extends DAOService {
 			
 			update(sql, params);
 		}
+		
+		//sắp xếp giá theo tăng dần
+				public List<Product> getProductByPriceLowToHigh(int index){
+						String sql = "select * from \"ProductWithImages\"\n"
+								+ "order by price asc\n"
+								+ " offset ? ROWS FETCH NEXT 9 ROWS ONLY;";
+					    List<Object> params = new ArrayList<>();
+					    params.add((index - 1) * 9);
+						ResultSet rs = select(sql,params);
+					    List<Product> productList = new ArrayList<>();
+					    
+					    try {
+					        while (rs.next()) {
+					            productList.add(new Product(rs.getString("id"),
+					                    rs.getString("category_id"),
+					                    rs.getString("title"),
+					                    rs.getInt("price"),
+					                    rs.getInt("discount"),
+					                    rs.getString("thumbnail"),
+					                    rs.getArray("gallery"),
+					                    rs.getString("description"),
+					                    rs.getDouble("rating"),
+					                    rs.getTimestamp("created_at"),
+					                    rs.getTimestamp("updated_at")));
+					        }
+					    } catch (SQLException e) {
+					        e.printStackTrace();
+					    }
+					return productList;
+				}
+				
+				//sắp xếp giá theo giảm dần
+				public List<Product> getProductByPriceHighToLow(int index){
+					String sql = "select * from \"ProductWithImages\"\n"
+							+ "order by price desc offset ? ROWS FETCH NEXT 9 ROWS ONLY;";
+				    List<Object> params = new ArrayList<>();
+				    params.add((index - 1) * 9);			
+					ResultSet rs = select(sql,params);
+				    List<Product> productList = new ArrayList<>();
+				    
+				    try {
+				        while (rs.next()) {
+				            productList.add(new Product(rs.getString("id"),
+				                    rs.getString("category_id"),
+				                    rs.getString("title"),
+				                    rs.getInt("price"),
+				                    rs.getInt("discount"),
+				                    rs.getString("thumbnail"),
+				                    rs.getArray("gallery"),
+				                    rs.getString("description"),
+				                    rs.getDouble("rating"),
+				                    rs.getTimestamp("created_at"),
+				                    rs.getTimestamp("updated_at")));
+				        }
+				    } catch (SQLException e) {
+				        e.printStackTrace();
+				    }
+					
+				return productList;
+			}
+
 
 }

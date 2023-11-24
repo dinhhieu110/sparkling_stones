@@ -52,6 +52,17 @@ to {
 	opacity: 0;
 }
 }
+
+input[type=number] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 </style>
 
 </head>
@@ -106,6 +117,7 @@ to {
 									aria-labelledby="headingOne">
 									<div class="accordion-body">
 										<ul class="list-unstyled">
+										<li><a href="shop?index=1" class="text-dark">Tất cả</a></li>
 											<c:forEach items="${listOfCates}" var="cate">
 												<li><a href="shop?categoryId=${cate.id}&index=1"
 													class="text-dark">${cate.name}</a></li>
@@ -136,16 +148,18 @@ to {
 												<div class="col-6">
 													<p class="mb-0">Tối thiểu</p>
 													<div class="form-outline">
-														<input type="number" name="minPrice" id="minPrice"
-															class="form-control" value="${minPrice}" /> <label
+														<input type="text" name="minPrice" id="minPrice"
+															class="form-control" value="${minPrice}" oninput="formatNumber(this)"
+               onblur="revertFormatting(this)"  /> <label
 															class="form-label" for="typeNumber">0₫</label>
 													</div>
 												</div>
 												<div class="col-6">
 													<p class="mb-0">Tối đa</p>
 													<div class="form-outline">
-														<input type="number" name="maxPrice" id="maxPrice"
-															class="form-control" value="${maxPrice}" /> <label
+														<input type="text" name="maxPrice" id="maxPrice"
+															class="form-control" value="${maxPrice}" oninput="formatNumber(this)"
+               onblur="revertFormatting(this)"  /> <label
 															class="form-label" for="typeNumber">350000000₫</label>
 													</div>
 												</div>
@@ -220,6 +234,56 @@ to {
 									</div>
 								</div>
 							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingThree">
+									<button class="accordion-button text-dark bg-light"
+										type="button" data-mdb-toggle="collapse"
+										data-mdb-target="#panelsStayOpen-collapseTh"
+										aria-expanded="false"
+										aria-controls="panelsStayOpen-collapseTh">Giá sản
+										phẩm</button>
+								</h2>
+								<div id="panelsStayOpen-collapseTh"
+									class="accordion-collapse collapse show"
+									aria-labelledby="headingThree">
+									<div class="accordion-body">
+										<form
+											action="GetProductByCategoryAndPriceRange"
+											method="get">
+											<select id="categoryId" name="categoryId" class="form-select form-select-lg">
+												<!-- Populate the options dynamically based on your data -->
+												<c:forEach items="${listOfCates}" var="cate">
+													<option value="${cate.id}">${cate.name}</option>
+												</c:forEach>
+											</select>
+											
+											<div class="row mb-3">
+												<div class="col-6">
+													<p class="mb-0">Tối thiểu</p>
+													<div class="form-outline">
+														<input type="text" name="minPrice" id="minPrice"
+															class="form-control" value="${session.getAttribute('minPrice')}" oninput="formatNumber(this)"
+               onblur="revertFormatting(this)" /> <label
+															class="form-label" for="typeNumber">0₫</label>
+													</div>
+												</div>
+												<div class="col-6">
+													<p class="mb-0">Tối đa</p>
+													<div class="form-outline">
+														<input type="text" name="maxPrice" id="maxPrice"
+															class="form-control" value="${session.getAttribute('maxPrice')}" oninput="formatNumber(this)"
+               onblur="revertFormatting(this)"/> <label
+															class="form-label" for="typeNumber">350000000₫</label>
+													</div>
+												</div>
+											</div>
+											<button type="submit"
+												class="btn btn-white w-100 border border-secondary"
+												id="applyPriceCategoryRangeButton">Áp dụng</button>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -231,10 +295,13 @@ to {
 						<strong class="d-block py-2"><c:out
 								value="${listP.size()} Items found" /> </strong>
 						<div class="ms-auto">
-							<select class="form-select d-inline-block w-auto border pt-1">
-								<option value="0">Sản phẩm bán chạy</option>
-								<option value="1">Sản phẩm mới</option>
+						<form id="sortForm" action="SortProductByPrice" method="get">
+							<select class="form-select d-inline-block w-auto border pt-1" id="sortOption">
+								<option value="none">Không sắp xếp</option>
+								<option value="lowtohigh">Thấp đến cao</option>
+								<option value="hightolow">Cao đến thấp</option>
 							</select>
+							</form>
 						</div>
 					</header>
 
@@ -292,18 +359,68 @@ to {
 						class="d-flex justify-content-center mt-3">
 						<ul class="pagination">
 							<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
-								class="page-link" <% if(from=="shop") { %>
-								href="shop?categoryId=${categoryId}&index=${(tag-1)}" <%}%>
+								class="page-link"
+								<c:choose>
+								<c:when test="${from=='rangeCategory'}">
+						               href="GetProductByCategoryAndPriceRange?categoryId=<%=request.getParameter("categoryId") %>&minPrice=${minPrice}&maxPrice=${maxPrice}&index=1"
+						           </c:when>
+								   <c:when test="${from=='sort'}">
+								       href="SortProductByPrice?sortOption=${sortOption}&index=1"
+								   </c:when>
+								   <c:when test="${from=='shop'}">
+								       href="shop?categoryId=${categoryId}&index=1"
+								   </c:when>
+								   <c:when test="${from=='range'}">
+								       href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=1"
+								   </c:when>
+								   <c:when test="${from=='search'}">
+								       href="search?txt=${searchName}&categoryId=${categoryId}&index=1"
+								    </c:when>
+								</c:choose>
+								aria-label="First">First</a></li>
+							<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
+								class="page-link"
+								<% if(from=="rangeCategory") { %>
+								href="GetProductByCategoryAndPriceRange?categoryId=<%=request.getParameter("categoryId") %>&minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag-1)}" <%}%>
+								<% if(from=="sort") { %>
+								href="SortProductByPrice?sortOption=${sortOption}&index=${(tag-1)}" <%}%>
+								<% if(from=="shop") { %>
+								href="shop?categoryId=${categoryId}&index=${(tag-1)}"<%}%>
 								<% if(from=="range") { %>
 								href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag-1)}"
 								<%}%> <% if (from =="search") { %>
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag-1)}"
 								<%}%> aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 							</a></li>
-							<c:forEach begin="1" end="${endP}" var="i">
+
+							<%-- <c:set var="startPage" value="${tag - 2}" />
+							<c:choose>
+								<c:when test="${startPage < 1}">
+									<c:set var="startPage" value="1" />
+								</c:when>
+								<c:when test="${startPage > endP - 4}">
+									<c:set var="startPage" value="${endP - 4}" />
+								</c:when>
+								<c:otherwise>
+									<c:choose>
+										<c:when test="${startPage + 4 > endP}">
+											<c:set var="startPage" value="${endP - 4}" />
+										</c:when>
+										<c:otherwise>
+											<!-- Do nothing or handle other cases if needed -->
+										</c:otherwise>
+									</c:choose>
+								</c:otherwise>
+							</c:choose> --%>
+
+
+							<c:forEach begin="${Math.max(1, tag - 3)}"
+								end="${(endP < tag + 3) ? endP : (tag + 3)}" var="i">
 								<li class="page-item ${tag == i ? 'active' : ''}"><c:url
 										var="paginationUrl"
-										value="${from == 'range' ? 'GetProductByPriceRange' : from}">
+										
+										value="${from == 'range' ? 'GetProductByPriceRange' : (from == 'sort' ? 'SortProductByPrice' : (from == 'rangeCategory' ? 'GetProductByCategoryAndPriceRange' : from))}">
+										
 										<!-- Add minPrice and maxPrice only if the 'from' is 'range' -->
 										<c:if test="${from == 'range'}">
 											<c:param name="minPrice" value="${minPrice}" />
@@ -316,6 +433,17 @@ to {
 												<c:param name="categoryId" value="${categoryId}" />
 											</c:when>
 										</c:choose>
+										
+										<!-- Add sorting option only if the 'from' is 'sort' -->
+										<c:if test="${from == 'sort'}">
+											<c:param name="sortOption" value="${sortOption}" />
+										</c:if>
+										<c:if test="${from == 'rangeCategory'}">
+										
+											<c:param name="categoryId" value="${session.getAttribute('categoryId')}" />
+											<c:param name="minPrice" value="${minPrice}" />
+											<c:param name="maxPrice" value="${maxPrice}" />
+										</c:if>
 
 										<c:param name="index" value="${i}" />
 									</c:url> <a class="page-link pagination-link" href="${paginationUrl}">${i}</a>
@@ -325,7 +453,12 @@ to {
 
 
 							<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
-								class="page-link" <% if(from=="shop") { %>
+								class="page-link" 
+								<% if(from=="rangeCategory") { %>
+								href="GetProductByCategoryAndPriceRange?categoryId=<%=request.getParameter("categoryId") %>&minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag+1)}" <%}%>
+								<% if(from=="sort") { %>
+								href="SortProductByPrice?sortOption=${sortOption}&index=${(tag+1)}" <%}%>
+								<% if(from=="shop") { %>
 								href="shop?categoryId=${categoryId}&index=${(tag+1)}" <%}%>
 								<% if(from=="range") { %>
 								href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${(tag+1)}"
@@ -333,6 +466,27 @@ to {
 								href="search?txt=${searchName}&categoryId=${categoryId}&index=${(tag+1)}"
 								<%}%> aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 							</a></li>
+
+							<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
+								class="page-link"
+								<c:choose>
+								<c:when test="${from=='rangeCategory'}">
+						               href="GetProductByCategoryAndPriceRange?categoryId=<%=request.getParameter("categoryId") %>&minPrice=${minPrice}&maxPrice=${maxPrice}&index=${endP}"
+						           </c:when>
+						           <c:when test="${from=='sort'}">
+						               href="SortProductByPrice?sortOption=${sortOption}&index=${endP}"
+						           </c:when>
+						           <c:when test="${from=='shop'}">
+						               href="shop?categoryId=${categoryId}&index=${endP}"
+						           </c:when>
+						           <c:when test="${from=='range'}">
+						               href="GetProductByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}&index=${endP}"
+						           </c:when>
+						           <c:when test="${from=='search'}">
+						               href="search?txt=${searchName}&categoryId=${categoryId}&index=${endP}"
+						           </c:when>
+						       </c:choose>
+								aria-label="Last">Last</a></li>
 						</ul>
 
 					</nav>
@@ -394,6 +548,63 @@ to {
 					+ "&maxPrice=" + maxPrice + "&index=" + index;
 			window.location.href = servletURL;
 		}
+
+		
 	});
 </script>
+
+<!-- lọc theo giá tăng giảm -->
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", function() {
+		var sortOptionSelect = document.getElementById("sortOption");
+		if (sortOptionSelect) {
+			sortOptionSelect.addEventListener("change", function() {
+				sortProductsByPrice();
+			});
+		}
+
+		function sortProductsByPrice() {
+			var selectedSortOption = sortOptionSelect.value;
+			var index = 1; // Set your default index here or get it from somewhere else
+			var servletURL;
+
+			if (selectedSortOption === "lowtohigh") {
+				servletURL = "SortProductByPrice?sortOption=lowtohigh&index="
+						+ index;
+			} else if (selectedSortOption === "hightolow") {
+				servletURL = "SortProductByPrice?sortOption=hightolow&index="
+						+ index;
+			} else {
+				servletURL = "shop?index=" + index; // Default sorting, you can adjust it accordingly
+			}
+
+			window.location.href = servletURL;
+		}
+	});
+</script>
+
+ <script>
+    function formatNumber(input) {
+        // Remove non-numeric characters
+        let unformattedValue = input.value.replace(/[^0-9]/g, '');
+
+        // Format with commas as thousands separators
+        let formattedValue = new Intl.NumberFormat('vi-VN').format(unformattedValue);
+        formattedValue += '₫';
+
+        // Set the formatted value back to the input field for display
+        input.value = formattedValue;
+
+        // Set the unformatted value as a data attribute to be used when submitting the form
+        input.setAttribute('data-unformatted-value', unformattedValue);
+    }
+
+    // Additional function to revert the formatting for submission
+    function revertFormatting(input) {
+        let unformattedValue = input.getAttribute('data-unformatted-value');
+        input.value = unformattedValue;
+    }
+</script>
+
+
 </html>
