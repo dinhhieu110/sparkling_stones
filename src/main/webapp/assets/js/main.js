@@ -331,3 +331,10 @@ function viewBillDetail(orderId){
 		},
 	});
 }
+
+// Order Management -  Admin
+function cancelOrder(orderId){
+	const orderIdElement = document.getElementById("orderId");
+	orderIdElement.value = orderId;
+}
+

@@ -269,6 +269,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>ManageOrderController</display-name>
+    <servlet-name>ManageOrderController</servlet-name>
+    <servlet-class>controller.common.ManageOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageOrderController</servlet-name>
+    <url-pattern>/manage-order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>BlogController</display-name>
     <servlet-name>BlogController</servlet-name>
     <servlet-class>controller.common.BlogController</servlet-class>

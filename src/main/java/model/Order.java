@@ -35,6 +35,20 @@ public class Order {
 		this.address = address;
 		items = new ArrayList<>();
 	}
+	
+	public Order(String id, String user_id, String fullname, String phone_number, Timestamp order_date,
+			int status, int total_money, String address) {
+		super();
+		this.id = id;
+		this.user_id = user_id;
+		this.fullname = fullname;
+		this.phone_number = phone_number;
+		this.order_date = order_date;
+		this.status = status;
+		this.total_money = total_money;
+		this.address = address;
+		items = new ArrayList<>();
+	}
 
 	public Order(String id, String user_id, String fullname, String email, String phone_number, String note,
 			Timestamp order_date, int status, int total_money, String address) {
