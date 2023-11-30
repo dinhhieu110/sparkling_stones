@@ -117,7 +117,7 @@ input[type=number] {
 									aria-labelledby="headingOne">
 									<div class="accordion-body">
 										<ul class="list-unstyled">
-										<li><a href="shop?index=1" class="text-dark">Tất cả</a></li>
+										<li><a id="allCategoriesLink" href="shop?index=1" class="text-dark">Tất cả</a></li>
 											<c:forEach items="${listOfCates}" var="cate">
 												<li><a href="shop?categoryId=${cate.id}&index=1"
 													class="text-dark">${cate.name}</a></li>
@@ -429,18 +429,20 @@ input[type=number] {
 
 										<!-- Add categoryId only if it's not empty -->
 										<c:choose>
-											<c:when test="${not empty categoryId and from != 'range'}">
+											<c:when
+												test="${not empty categoryId and from != 'range' and from != 'rangeCategoryId'}">
 												<c:param name="categoryId" value="${categoryId}" />
 											</c:when>
 										</c:choose>
-										
+
+
 										<!-- Add sorting option only if the 'from' is 'sort' -->
 										<c:if test="${from == 'sort'}">
 											<c:param name="sortOption" value="${sortOption}" />
 										</c:if>
 										<c:if test="${from == 'rangeCategory'}">
 										
-											<c:param name="categoryId" value="${session.getAttribute('categoryId')}" />
+											<c:param name="categoryId" value="${categoryId}" />
 											<c:param name="minPrice" value="${minPrice}" />
 											<c:param name="maxPrice" value="${maxPrice}" />
 										</c:if>
@@ -605,6 +607,42 @@ input[type=number] {
         input.value = unformattedValue;
     }
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var allCategoriesLink = document.getElementById("allCategoriesLink");
+
+        if (allCategoriesLink) {
+            allCategoriesLink.addEventListener("click", function(event) {
+                event.preventDefault();
+                resetCategoryAndRedirect();
+            });
+        }
+
+        function resetCategoryAndRedirect() {
+            // Capture the current categoryId from the URL
+            var currentCategoryId = new URLSearchParams(window.location.search).get('categoryId');
+
+            // Remove the categoryId session attribute
+            removeSessionAttribute("categoryId");
+
+            // Redirect to the new URL without the categoryId
+            window.location.href = "shop?index=1";
+        }
+
+        function removeSessionAttribute(attributeName) {
+            // Simulated AJAX call
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log("Session attribute removed successfully");
+                }
+            };
+            xhr.open("GET", "removeSessionAttribute?attributeName=" + attributeName, true);
+            xhr.send();
+        }
+    });
+</script>
+
 
 
 </html>

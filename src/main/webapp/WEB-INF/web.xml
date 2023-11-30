@@ -267,4 +267,24 @@
     <servlet-name>SortProductByPrice</servlet-name>
     <url-pattern>/SortProductByPrice</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BlogController</display-name>
+    <servlet-name>BlogController</servlet-name>
+    <servlet-class>controller.common.BlogController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BlogController</servlet-name>
+    <url-pattern>/BlogController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BlogDetailController</display-name>
+    <servlet-name>BlogDetailController</servlet-name>
+    <servlet-class>controller.common.BlogDetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BlogDetailController</servlet-name>
+    <url-pattern>/BlogDetailController</url-pattern>
+  </servlet-mapping>
 </web-app>

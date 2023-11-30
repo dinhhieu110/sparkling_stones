@@ -52,8 +52,9 @@ public class GetProductByCategoryAndPriceRange extends HttpServlet {
             if (categoryId != null && !categoryId.isEmpty()) {
                 CategoryDAO cDao = new CategoryDAO();
                 ProductDAO pagingDao = new ProductDAO();
-                session.setAttribute("categoryId", categoryId);
-                int countProducts = pagingDao.getTotalByCategoryPriceRange(categoryId, minPrice, maxPrice);
+				/*
+				 * session.setAttribute("categoryId", categoryId);
+				 */                int countProducts = pagingDao.getTotalByCategoryPriceRange(categoryId, minPrice, maxPrice);
                 ProductDAO productDAO = new ProductDAO();
 
                 int size = 9;
@@ -71,6 +72,7 @@ public class GetProductByCategoryAndPriceRange extends HttpServlet {
                 int index = Integer.parseInt(indexPage);
 
                 List<Product> listByRange = productDAO.getProductsByCategoryPriceRange(categoryId, minPrice, maxPrice, index);
+                request.setAttribute("categoryId", categoryId);
 
                 request.setAttribute("minPrice", minPrice);
                 request.setAttribute("maxPrice", maxPrice);
