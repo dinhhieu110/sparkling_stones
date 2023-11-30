@@ -168,4 +168,17 @@ public class OrderDAO extends DAOService{
 		}
 		return num;
 }	
+	public long getTotaIncome() {
+		String sql ="select sum(total_money) from \"Orders\"";
+		ResultSet rs = select(sql);
+		long income = 0L;
+		try {
+			while(rs.next()) {
+				income = rs.getLong("sum");
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return income;
+	}
 }

@@ -171,8 +171,8 @@ public class ProductDAO extends DAOService {
 
 	public List<Product> getProductsEachPage(int index) {
 
-		String sql = "select p.*, c.name as categoryName from \"ProductWithImages\" p join \"Category\" c "
-				+ "on p.category_id = c.id order by id offset ? rows fetch next 9 rows only";
+		String sql = "select p.*, c.name as categoryName from \"ProductWithImages\" p join \"Category\" c \r\n"
+				+ "   on p.category_id = c.id order by created_at desc offset ? rows fetch next 9 rows only";
 		List<Object> params = new ArrayList<Object>();
 		params.add((index - 1) * 9);
 
@@ -510,6 +510,18 @@ public class ProductDAO extends DAOService {
 					
 				return productList;
 			}
-
+		public long getTotalSpend() {
+			String sql ="select sum(discount) from \"ProductWithImages\"";
+			ResultSet rs = select(sql);
+			long totalSpend = 0L;
+			try {
+				while(rs.next()) {
+					totalSpend = rs.getLong("sum");
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return totalSpend;
+		}
 
 }
