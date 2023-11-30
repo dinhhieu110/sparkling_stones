@@ -67,9 +67,9 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
               >
-            	<li><a class="dropdown-item" href="my-account?acc=user">Thông tin cá nhân</a></li>
-            	<li><a class="dropdown-item" href="ChangePassword?role=user">Đổi mật khẩu</a></li>
-            	<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+            	<li><a class="dropdown-item" href="my-account?acc=user"><span><i class="fas fa-user-alt m-1 me-md-2"></i></span>Thông tin cá nhân</a></li>
+            	<li><a class="dropdown-item" href="ChangePassword?role=user"><span><i class="fa-solid fa-key m-1 me-md-2"></i></span>Đổi mật khẩu</a></li>
+            	<li><a class="dropdown-item" href="logout"><span><i class="fa-solid fa-right-from-bracket m-1 me-md-2"></i></span>Đăng xuất</a></li>
           	</ul>
           	</li>
             </c:if>

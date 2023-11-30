@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quản Lí Sản Phẩm</title>
+<title>Quản Lí Đơn Hàng</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" type="text/css"
@@ -87,14 +87,6 @@ table.table tr th, table.table tr td {
 	vertical-align: middle;
 }
 
-table.table tr th:first-child {
-	width: 60px;
-}
-
-table.table tr th:last-child {
-	width: 100px;
-}
-
 table.table-striped tbody tr:nth-of-type(odd) {
 	background-color: #fcfcfc;
 }
@@ -143,6 +135,14 @@ table.table .avatar {
 	border-radius: 50%;
 	vertical-align: middle;
 	margin-right: 10px;
+}
+
+table.table tr th:first-child {
+	width: 200px;
+}
+
+table.table tr th:last-child {
+	width: 200px;
 }
 
 .pagination {
@@ -352,70 +352,88 @@ table.table .avatar {
 </head>
 <body>
 	<%@include file="/common/adminheader.jsp"%>
-	<input type="hidden" id="status"
-		value="<%=request.getParameter("status")%>">
+	<input type="hidden" id="notify"
+		value="<%=request.getParameter("notify")%>">
 	<main style="margin-top: 58px">
-	${error}
+		${error}
 		<div class="container pt-4">
 			<section class="mb-4">
 				<div class="table-responsive">
 					<div class="table-wrapper">
 						<div class="table-title">
 							<div class="row">
-								<div class="col-sm-6">
+								<div class="text-center">
 									<h2>
-										QUẢN LÍ <b>SẢN PHẨM</b>
+										<b>QUẢN LÍ ĐƠN HÀNG</b>
 									</h2>
-								</div>
-								<div class="col-sm-6">
-									<a href="#openModal" onclick="addProduct()" class="btn btn-light text-dark"
-										data-toggle="modal"><i class="material-icons">&#xE147;</i>
-										<span>THÊM SẢN PHẨM MỚI</span></a>
 								</div>
 							</div>
 						</div>
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>Loại</th>
-									<th>Tên sản phẩm</th>
+									<th>Mã đơn hàng</th>
+									<th>Khách</th>
+									<th>Liên hệ</th>
+									<th>Địa chỉ</th>
+									<th>Ngày đặt</th>
 									<th>Giá</th>
-									<th>Giá khuyến mãi</th>
-									<th>Ảnh chính</th>
-									<th>Mô tả</th>
-									<th>Ảnh phụ</th>
-									<th>Action</th>
+									<th>Xem đơn</th>
+									<th class="text-center">Trạng thái</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listP}" var="o">
+								<c:forEach items="${allOrders}" var="o">
 									<tr>
-										<td>${o.category}</td>
-										<td>${o.title}</td>
-										<td class="card-title currency-style"><fmt:formatNumber value="${o.price}" type="currency"
-										pattern="#,##0₫" /></td>
-										<td class="card-title currency-style"><fmt:formatNumber value="${o.discount}" type="currency"
-										pattern="#,##0₫" /></td>
-										<td><img width="50px" height="50px" src="${o.thumbnail}" /></td>
-										<td class="description-wrapper"><span
-											class="full-description">${o.description}</span> <span
-											class="short-description"></span>
-											<button class="read-more-btn">Đọc thêm</button></td>
+										<td>${o.id}</td>
+										<td>${o.fullname}</td>
+										<td>${o.phone_number}</td>
+										<td>${o.address}</td>
+										<td>${o.order_date}</td>
+										<td class="card-title currency-style"><fmt:formatNumber
+												value="${o.total_money}" type="currency" pattern="#,##0₫" />
+										</td>
+										<td><a href="#openModal"
+											onclick="viewOrderDetail('${o.id}')"
+											class="btn btn-light text-primary" data-toggle="modal"><span><i
+													class="fa-solid fa-eye"></i></span></a></td>
+										<c:choose>
+											<c:when test="${o.status == 0}">
+												<td>
+													<div class="row text-center text-sm">
+														<form action="manage-order" method="post"
+															class="col-5 m-2">
+															<input type="hidden" name="orderId" value="${o.id}" /> <input
+																type="hidden" name="status" value="1" />
+															<button name="action" value="accept" type="submit"
+																class="btn btn-primary text-light">
+																<span><i class="fa-solid fa-check"></i></span>
+															</button>
+														</form>
+														<a href="#cancelOrderModal"
+															class="cancel col-5 btn btn-danger m-2 text-light"
+															data-toggle="modal" onclick="cancelOrder('${o.id}')"
+															type="submit"> <span><i class="fa-solid fa-x"></i></span>
+														</a>
+													</div>
+												</td>
+											</c:when>
+											<c:when test="${o.status == 1}">
+												<td>
+													<button disabled class="col btn btn-warning m-2">
+														<span>Đã duyệt</span>
+													</button>
+												</td>
+											</c:when>
 
-										<td><c:forEach items="${o.gallery.array}" var="image">
-												<div class="swiper-slide">
-													<div style="background-image: url('${image}')"></div>
-												</div>
-											</c:forEach></td>
-										<td><a href="#openModal" class="edit" 
-											onclick="updateProduct('${o.id}')"
-											data-toggle="modal"><i class="material-icons"
-												data-toggle="tooltip" title="Edit">&#xE254;</i></a> <!-- Add data-pid attribute to store the product ID -->
-											<a href="#deleteEmployeeModal" class="delete"
-											data-toggle="modal" onclick="deleteProduct('${o.id}')">
-												<i class="material-icons" data-toggle="tooltip"
-												title="Delete">&#xE872;</i>
-										</a></td>
+											<c:otherwise>
+												<td>
+													<button disabled class="col btn btn-info m-2">
+														<span>Đã từ chối</span>
+													</button>
+												</td>
+											</c:otherwise>
+										</c:choose>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -431,8 +449,8 @@ table.table .avatar {
 								<!-- First Button -->
 								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-           href="manage-product?index=1"
+									<c:if test="${from eq 'ManageOrderController'}">
+           href="manage-order?index=1"
        </c:if>
 									aria-label="First"> <span aria-hidden="true">First</span>
 								</a></li>
@@ -440,8 +458,8 @@ table.table .avatar {
 								<!-- Backward Button -->
 								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
 									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-                   href="manage-product?index=${tag - 1}"
+									<c:if test="${from eq 'ManageOrderController'}">
+                   href="manage-order?index=${tag - 1}"
                </c:if>
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
@@ -459,8 +477,8 @@ table.table .avatar {
 								<c:forEach begin="${startPage}" end="${startPage + 4}" var="i">
 									<li class="page-item ${tag == i ? 'active' : ''}"><a
 										class="page-link"
-										<c:if test="${from eq 'ManageProductController'}">
-                       href="manage-product?index=${i}"
+										<c:if test="${from eq 'ManageOrderController'}">
+                       href="manage-order?index=${i}"
                    </c:if>>${i}</a>
 									</li>
 								</c:forEach>
@@ -468,8 +486,8 @@ table.table .avatar {
 								<!-- Forward Button -->
 								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-                   href="manage-product?index=${tag + 1}"
+									<c:if test="${from eq 'ManageOrderController'}">
+                   href="manage-order?index=${tag + 1}"
                </c:if>
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
@@ -478,8 +496,8 @@ table.table .avatar {
 								<!-- Last Button -->
 								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
 									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-           href="manage-product?index=${endP}"
+									<c:if test="${from eq 'ManageOrderController'}">
+           href="manage-order?index=${endP}"
        </c:if>
 									aria-label="Last"> <span aria-hidden="true">Last</span>
 								</a></li>
@@ -493,99 +511,69 @@ table.table .avatar {
 					</div>
 				</div>
 
-				<!-- Add Modal HTML -->
-				<div id="openModal" class="modal fade">
+				<!-- Cancel Modal HTML -->
+				<div id="cancelOrderModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action ="manage-product" method="post" enctype="multipart/form-data">
+							<form action="manage-order" method="post">
 								<div class="modal-header">
-									<h4 id ="title" class="modal-title">THÊM SẢN PHẨM</h4>
+									<h4 class="modal-title">Từ chối đơn hàng</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<div class="form-floating mb-3">
-										<select name ="category"class="form-select" id="category">
-											<option selected value="9daa5471-4f60-4d94-ab54-0522def8f2c9">Dây cổ</option>
-											<option value="08bdf646-2a0b-489e-b514-3bb6d7ba24b1">Đồng hồ</option>
-											<option value="1e24d5e1-75e6-40a5-a0da-a627b197adbc">Nhẫn</option>
-											<option value="9f0d6083-3ae3-4b88-8c0f-9f11f38f3212">Charm</option>
-											<option value="11181f57-9f96-45e5-84bf-0cb01a4c4a14">Kiềng</option>
-											<option value="907b0854-00c5-4dac-bd7c-41e1179632d0">Vòng tay</option>
-											<option value="a4992f1b-20ce-4222-96f7-505c807e297a">Bông tai</option>
-											<option value="bb853667-f697-4920-9931-bc056c9a2dc3">Dây chuyền</option>
-										</select> <label for="category">Loại sản phẩm</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Tên
-											sản phẩm</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="price"
-											placeholder="price" name="price" required><label for="price">Giá</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="discount"
-											placeholder="discount" name="discount" required><label for="discount">Giá
-											khuyến mãi</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="file" class="form-control"
-											id="thumbnail" placeholder="thumbnail" name="thumbnail" required><label
-											for="thumbnail">Ảnh chính</label>
-									</div>
-
-
-									<div class="form-floating mb-3">
-										<input type="file" class="form-control"
-											id="galerry" placeholder="Enter at least an image" name="galerry" multiple required><label
-											for="galerry">Ảnh phụ</label>
-									</div>
-
-									<div class="form-floating">
-										<textarea name="description" class="form-control" placeholder=" "
-											id="description"></textarea>
-										<label for="description">Mô tả</label>
-									</div>
-
+									<p>Bạn có chắc chắn muốn từ chối đơn hàng này không?</p>
+									<p class="text-warning">
+										<small>Hành động này không thể quay lại.</small>
+									</p>
 								</div>
-								<input type="hidden" name="myUpdateHidden" id="updateHidden" value =" " />
-								<input type="hidden" name="galleryHidden" id="galleryHidden" value =" " />
+								<input type="hidden" name="status" value="2" /> <input
+									type="hidden" name="orderId" id="orderId" value=" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
-									<button id ="fbtn" type="submit" class="btn btn-light" name="action"
-										value="add">Thêm</button>
+									<button type="submit" class="btn btn-danger" name="action"
+										value="cancel">Từ chối</button>
 								</div>
 							</form>
 						</div>
 					</div>
 				</div>
-				<!-- Delete Modal HTML -->
-				<div id="deleteEmployeeModal" class="modal fade">
-					<div class="modal-dialog">
+				<!-- View OrderDetail Modal HTML -->
+				<div id="openModal" class="modal fade">
+					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
-							<form action="manage-product" method="post" enctype="multipart/form-data">
-								<div class="modal-header">
-									<h4 class="modal-title">XÓA SẢN PHẨM</h4>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-hidden="true">&times;</button>
+							<div class="container-fluid my-5  d-flex  justify-content-center">
+								<div class="card card-1">
+									<div class="card-header bg-white">
+										<div
+											class="media flex-sm-row flex-column-reverse justify-content-between  ">
+											<div class="col my-auto">
+												<h4 class="mb-0">
+													Xin chào <span class="fw-bold">Admin</span> 
+													
+												</h4>
+											</div>
+											<div class="col-auto text-center  my-auto pl-0 pt-sm-4">
+												<img class="img-fluid my-auto align-items-center mb-0 pt-3"
+													src="<%=request.getContextPath()%>/assets/img/logo.png"
+													width="115" height="115">
+												<p class="mb-4 pt-0 Glasses text-primary">Trang Sức Cho
+													Mọi Nhà</p>
+											</div>
+										</div>
+									</div>
+									<div class="card-body">
+										<div class="row justify-content-between mb-3">
+											<div class="col-auto">
+												<h6 class="color-1 mb-0 change-color">Đơn hàng này
+													gồm có</h6>
+											</div>
+										</div>
+										<div id="append-code"></div>
+									</div>
 								</div>
-								<div class="modal-body">
-									<p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
-									<p class="text-warning">
-										<small>Hành động này không thể quay lại.</small>
-									</p>
-								</div>
-								<input type="hidden" name="myDeleteProductHidden" id="deleteProductHidden" value =" " />
-								<div class="modal-footer">
-									<input type="button" class="btn btn-light" data-dismiss="modal"
-										value="Hủy">
-									<button type="submit" class="btn btn-danger" name="action"
-										value="delete">Xóa</button>
-								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -651,26 +639,31 @@ table.table .avatar {
 					});
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<link rel="stylesheet" href="alert/dist/sweetalert.css">
+<link rel="stylesheet" href="alert/dist/sweetalert.css">
 <script type="text/javascript">
-	var status = document.getElementById("status").value;
-	switch (status) {
-	case "SuccessfullyDeleted":
-		swal("Hoàn thành", "Xóa sản phẩm thành công", "success");
-		status = "";
+	/* function setProductIdToDelete(id) {
+		var deleteForm = document.getElementById('deleteForm');
+		deleteForm.action = 'DeleteProductController?pid=' + id;
+	} */
+
+	var notify = document.getElementById("notify").value;
+	switch (notify) {
+	case "CancelSuccessfully":
+		swal("Hoàn thành!", "Đã từ chối đơn hàng thành công", "success");
+		notify = "";
 		break;
-	case "SuccessfullAdded":
-		swal("Hoàn thành", "Thêm sản phẩm thành công", "success");
-		status = "";
+	case "AcceptSuccessfully":
+		swal("Chúc mừng!", "Phê duyệt đơn hàng thành công", "success");
+		notify = "";
 		break;
 	case "SuccessfullyUpdated":
-		swal("Hoàn thành", "Cập nhật sản phẩm thành công", "success");
-		status = "";
+		swal("Congrats", "Product Updated Successfully", "success");
+		notify = "";
 		break;
 	default:
 		break;
 	}
 </script>
-		<%@include file="/common/script.jsp"%>
+<%@include file="/common/script.jsp"%>
 
 </html>

@@ -47,13 +47,23 @@
 				<div class="col-lg-3 col-xl-3">
 					<nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
 						<a class="nav-link my-0 bg-light" href="my-account?acc=user"><p
-								class="pb-0 mb-0" style="width: 100px">TRANG CÁ NHÂN</p></a> <a
-							class="nav-link my-0 active" href="my-order"><p
-								class="pb-0 mb-0" style="width: 100px">Đơn hàng</p></a><a
-							class="nav-link my-0 bg-light" href="ChangePassword?role=user"><p
-								class="pb-0 mb-0" style="width: 100px">Đổi Mật khẩu</p></a> <a
-							class="nav-link my-0 bg-light" href="logout"><p
-								class="pb-0 mb-0" style="width: 100px">Đăng xuất</p></a>
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i class="fas fa-user-alt m-1 me-md-2"></i></span>Thông
+								Tin
+							</p></a> <a class="nav-link my-0 active" href="my-order"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i class="fas fa-chart-bar fa-fw m-1 me-md-2"></i></span>Đơn
+								hàng
+							</p></a><a class="nav-link my-0 bg-light" href="ChangePassword?role=user"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i class="fa-solid fa-key m-1 me-md-2"></i></span>Mật
+								khẩu
+							</p></a> <a class="nav-link my-0 bg-light" href="logout"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i
+									class="fa-solid fa-right-from-bracket m-1 me-md-2"></i></span>Đăng
+								xuất
+							</p></a>
 					</nav>
 				</div>
 				<main class="col-lg-9 col-xl-9">
@@ -76,10 +86,24 @@
 												${order.order_date}</span>
 										</div>
 										<div>
-											<a href="#" class="btn btn-sm btn-outline-danger disabled">
-												<c:out
-													value="${order.status == 0?'Chờ xác nhận':'Đã xác nhận'}" />
-											</a>
+												<c:choose>
+											<c:when test="${order.status == 0}">
+												<button disabled class="col btn btn-warning m-2">
+														<span>Chờ duyệt đơn</span>
+													</button>
+											</c:when>
+												<c:when test="${order.status == 1}">
+													<button disabled class="col btn btn-success m-2">
+														<span>Đã được duyệt</span>
+													</button>
+											</c:when>
+											
+											<c:otherwise>
+													<button disabled class="col btn btn-info m-2">
+														<span>Đã bị từ chối</span>
+													</button>
+											</c:otherwise>
+										</c:choose>
 										</div>
 									</header>
 									<hr />

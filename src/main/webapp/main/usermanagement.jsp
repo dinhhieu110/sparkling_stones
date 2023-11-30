@@ -475,21 +475,21 @@ table.table .avatar {
 		<script type="text/javascript">
 			var status = document.getElementById("status").value;
 			if (status == "SuccessfullyAdded") {
-				swal("Congrats", "Account Added Successfully", "success");
+				swal("Chúc mừng!", "Thêm tài khoản thành công", "success");
 				status = "";
 
 			}
 			if (status == "UnsuccessfullyAdded") {
-				swal("Sorry!", "Account Added Unsuccessfully", "error");
+				swal("Xin lỗi!", "Thêm tài khoản thất bại", "error");
 				status = "";
 
 			}
 			if(status == "SuccessfullyRemoved"){
-				swal("Congrats", "Account Deleted Successfully", "success");
+				swal("Chúc mừng", "Xóa tài khoản thành công", "success");
 				status = "";
 			}
 			if(status == "SuccessfullyUpdated"){
-				swal("Congrats", "Account Updated Successfully", "success");
+				swal("Chúc mừng", "Cập nhật tài khoản thành công", "success");
 				status = "";
 			}
 		</script>
