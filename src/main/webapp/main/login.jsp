@@ -122,10 +122,10 @@
 	<script type="text/javascript">
 		var status = document.getElementById("status").value;
 		if(status == "SuccessfullyRegister"){
-			swal("Congrats","Account Created Successfully","success");
+			swal("Chúc Mừng","Đăng kí tài khoản thành công","success");
 		}
 		if(status == "SuccessfullyResetPassword"){
-			swal("Congrats","Password Updated Successfully","success");
+			swal("Chúc Mừng","Cập nhật mật khẩu thành công","success");
 		}
 	</script>
 	

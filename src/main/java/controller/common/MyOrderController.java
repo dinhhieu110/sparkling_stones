@@ -46,11 +46,15 @@ public class MyOrderController extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		Cart cart = (Cart) session.getAttribute("cart");
-		List<Order> listOrders = oDao.OrdersByUserId(user.getId());
+			if(user != null) {
+				List<Order> listOrders = oDao.OrdersByUserId(user.getId());
 		
-		request.setAttribute("userName", user.getFirstName());
-		request.setAttribute("listOrders", listOrders);
-		request.getRequestDispatcher(FORWARD_PAGE).forward(request, response);
+				request.setAttribute("userName", user.getFirstName());
+				request.setAttribute("listOrders", listOrders);
+				request.getRequestDispatcher(FORWARD_PAGE).forward(request, response);
+			}else {
+				request.getRequestDispatcher("/login").forward(request, response);
+			}
 		} else {
 			OrderDetailDAO odtDao = new OrderDetailDAO();
 			List<OrderDetail> listOrderDetails = odtDao.getListOrderDetails(orderId);

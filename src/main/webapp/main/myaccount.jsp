@@ -145,15 +145,24 @@ to {
 			<div class="row">
 				<div class="col-lg-3 col-xl-3">
 					<nav class="nav flex-lg-column w-100 d-flex nav-pills mb-4">
-						<a class="nav-link my-0 active" href="my-account?acc=user"><p class="pb-0 mb-0"
-								style="width: 100px">TRANG CÁ NHÂN</p></a> <a
-							class="nav-link my-0 bg-light" href="my-order"><p
-								class="pb-0 mb-0" style="width: 100px">Đơn hàng</p></a><a
-							class="nav-link my-0 bg-light"
-							href="ChangePassword?role=user"><p class="pb-0 mb-0"
-								style="width: 100px">Đổi Mật khẩu</p></a> <a
-							class="nav-link my-0 bg-light" href="logout"><p
-								class="pb-0 mb-0" style="width: 100px">Đăng xuất</p></a>
+						<a class="nav-link my-0 active" href="my-account?acc=user"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i class="fas fa-user-alt m-1 me-md-2"></i></span>Thông
+								Tin
+							</p></a> <a class="nav-link my-0 bg-light" href="my-order"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i class="fas fa-chart-bar fa-fw m-1 me-md-2"></i></span>Đơn
+								hàng
+							</p></a><a class="nav-link my-0 bg-light" href="ChangePassword?role=user"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i class="fa-solid fa-key m-1 me-md-2"></i></span>Mật
+								khẩu
+							</p></a> <a class="nav-link my-0 bg-light" href="logout"><p
+								class="pb-0 mb-0" style="width: 100px">
+								<span><i
+									class="fa-solid fa-right-from-bracket m-1 me-md-2"></i></span>Đăng
+								xuất
+							</p></a>
 					</nav>
 				</div>
 				<main class="col-lg-9 col-xl-9">

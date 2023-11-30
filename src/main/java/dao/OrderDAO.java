@@ -74,7 +74,7 @@ public class OrderDAO extends DAOService{
 	}
 	
 	public List<Order> OrdersByUserId(String userId) {
-		String sql = "select * from \"Orders\" where user_id = ? ";
+		String sql = "select * from \"Orders\" where user_id = ? order by order_date desc";
 		List<Object> params = new ArrayList<Object>();
 		params.add(UUID.fromString(userId));
 		List<Order> listOrders = new ArrayList<Order>();
@@ -122,4 +122,50 @@ public class OrderDAO extends DAOService{
 		}
 		return order;
 	}
+	
+	public List<Order> getAllOrders(int index){
+		List<Order> allOrders = new ArrayList<Order>();
+		String sql="select * from \"Orders\" order by order_date desc offset ? rows fetch next 5 rows only";
+		List<Object> params = new ArrayList<Object>();
+		params.add((index - 1) * 5);
+		ResultSet rs = select(sql, params);
+		try {
+			while(rs.next()) {
+				allOrders.add(new Order(rs.getString("id"), 
+										rs.getString("user_id"), 
+										rs.getString("fullname"), 
+										rs.getString("phone_number"), 		
+										rs.getTimestamp("order_date"), 
+										rs.getInt("status"),
+										rs.getInt("total_money"),
+										rs.getString("address")
+										));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return allOrders;
+	}
+	
+	public void AcceptAndDeclineOrder(int status, String orderId) {
+		String sql = "update \"Orders\" set status = ? where id = ?";
+		List<Object> params = new ArrayList<Object>();
+		params.add(status);
+		params.add(UUID.fromString(orderId));
+		update(sql, params);
+	}
+	
+	public int countOrders() {
+		String sql ="select count(*) from \"Orders\"";
+		ResultSet rs = select(sql);
+		int num = 0;
+		try {
+			while(rs.next()) {
+				num = rs.getInt("count");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return num;
 }	
+}

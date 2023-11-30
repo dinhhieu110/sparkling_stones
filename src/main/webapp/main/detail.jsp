@@ -207,7 +207,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="#" class="btn btn-warning shadow-0"> MUA NGAY </a> 
+						<!--  <a href="#" class="btn btn-warning shadow-0"> MUA NGAY </a> -->
 						<a href="#!" class="btn btn-primary shadow-0" onclick="addToCart(event, '${product.id}')"> 
 							<i class="me-1 fa fa-shopping-basket"></i> THÊM VÀO GIỎ HÀNG
 						</a> 

@@ -48,26 +48,24 @@
 		class="collapse d-lg-block sidebar collapse bg-white">
 		<div class="position-sticky">
 			<div class="list-group list-group-flush mx-3 mt-4">
-				<a href= "admin-home"
+				<a href="admin-home"
 					class="list-group-item list-group-item-action py-2 ripple"
 					aria-current="true"> <i
-					class="fas fa-tachometer-alt fa-fw me-3"></i><span>Thông số chung</span>
+					class="fas fa-tachometer-alt fa-fw me-3"></i><span>Thông số
+						chung</span>
 				</a> <a href="manage-user"
 					class="list-group-item list-group-item-action py-2 ripple"><i
 					class="fas fa-users fa-fw me-3"></i><span>Người dùng </span> </a> <a
-					href="manage-product" class="list-group-item list-group-item-action py-2 ripple">
-					<i class="fab fa-product-hunt fa-fw me-3"></i><span>Sản phẩm</span>
-				</a> <a href="#"
-					class="list-group-item list-group-item-action py- ripple"><i
+					href="manage-product"
+					class="list-group-item list-group-item-action py-2 ripple"> <i
+					class="fab fa-product-hunt fa-fw me-3"></i><span>Sản phẩm</span>
+				</a> <a href="manage-order"
+					class="list-group-item list-group-item-action py-2 ripple"><i
+					class="fas fa-chart-bar fa-fw me-3"></i><span>Đơn hàng</span></a><a
+					href="#" class="list-group-item list-group-item-action py- ripple"><i
 					class="fas fa-comments fa-fw me-3"></i><span>Đánh giá</span></a> <a
-					href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-					class="fas fa-chart-bar fa-fw me-3"></i><span>Đơn hàng</span></a> <a
-					href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-					class="fas fa-chart-pie fa-fw me-3"></i><span>Danh mục</span></a><a
-					href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-					class="fas fa-calendar fa-fw me-3"></i><span>Lịch</span></a> <a
-					href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-					class="fas fa-chart-bar fa-fw me-3"></i><span>Thống Kê</span></a>
+					href="logout" class="list-group-item list-group-item-action py-2 ripple"><span><i
+						class="fa-solid fa-right-from-bracket m-1 me-md-2"></i></span>Đăng Xuất</a>
 			</div>
 		</div>
 	</nav>
@@ -135,9 +133,9 @@
 				</a>
 					<ul class="dropdown-menu dropdown-menu-end"
 						aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="EditProfile?acc=admin">Thông tin</a></li>
-						<li><a class="dropdown-item" href="ChangePassword?role=admin">Đổi mật khẩu</a></li>
-						<li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+						<li><a class="dropdown-item" href="EditProfile?acc=admin"><span><i class="fas fa-user-alt m-1 me-md-2"></i></span>Thông tin</a></li>
+						<li><a class="dropdown-item" href="ChangePassword?role=admin"><span><i class="fa-solid fa-key m-1 me-md-2"></i></span>Đổi mật khẩu</a></li>
+						<li><a class="dropdown-item" href="logout"><span><i class="fa-solid fa-right-from-bracket m-1 me-md-2"></i></span>Đăng xuất</a></li>
 					</ul></li>
 			</ul>
 		</div>
