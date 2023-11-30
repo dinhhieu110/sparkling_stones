@@ -131,7 +131,7 @@ language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
             <a class="nav-link rounded text-dark" href="shop">Cửa Hàng</a>
           </li>
            <li class="nav-item my-li">
-            <a class="nav-link rounded text-dark" href="#">Bài Viết</a>
+            <a class="nav-link rounded text-dark" href="BlogController">Bài Viết</a>
           </li>
           <li class="nav-item my-li">
             <a class="nav-link rounded text-dark" href="#">Thương Hiệu</a>
