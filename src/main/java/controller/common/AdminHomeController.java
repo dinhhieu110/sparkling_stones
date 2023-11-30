@@ -9,6 +9,7 @@ import model.User;
 
 import java.io.IOException;
 
+import dao.OrderDAO;
 import dao.ProductDAO;
 import dao.UserDAO;
 
@@ -31,8 +32,13 @@ public class AdminHomeController extends HttpServlet {
 		int totalUser = uDao.getTotalUser();
 		ProductDAO pDao = new ProductDAO();
 		int totalProduct = pDao.getTotalProducts();
-		
+		long totalSpend = pDao.getTotalSpend();
+		OrderDAO oDao = new OrderDAO();
+		long income = oDao.getTotaIncome();
+		oDao.close();
 		uDao.close();
+		request.setAttribute("totalSpend", totalSpend);
+		request.setAttribute("income", income);
 		request.setAttribute("totalUser", totalUser);
 		request.setAttribute("totalProduct", totalProduct);
 		request.getRequestDispatcher(FOWARD_PAGE).forward(request, response);

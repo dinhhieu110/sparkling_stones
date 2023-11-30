@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -289,7 +290,7 @@ body {
 										<i class="far fa-user text-info fa-3x me-4"></i>
 										</div>
 										<div>
-											<h4>Total Users</h4>
+											<h4>Tổng số người dùng</h4>
 											<p class="mb-0">Current Users</p>
 										</div>
 									</div>
@@ -309,12 +310,13 @@ body {
 										<i class="fa-solid fa-money-bill text-warning fa-3x me-4"></i>
 										</div>
 										<div>
-											<h4>Total Capital</h4>
-											<p class="mb-0">Original capital amount</p>
+											<h4>Tổng tài sản</h4>
+											<p class="mb-0">Total Asset</p>
 										</div>
 									</div>
 									<div class="align-self-center">
-										<h4 class="h1 mb-0">6,605,031,126₫</h4>
+										<h4 class="card-title currency-style m-4"><fmt:formatNumber
+												value="${totalSpend}" type="currency" pattern="#,##0₫"/></h4>
 									</div>
 								</div>
 							</div>
@@ -328,11 +330,12 @@ body {
 								<div class="d-flex justify-content-between p-md-1">
 									<div class="d-flex flex-row">
 										<div class="align-self-center">
-											<h4 class="h1 mb-0 me-4">1,703,035,646₫</h4>
+											<h4 class="card-title currency-style m-4"><fmt:formatNumber
+												value="${income}" type="currency" pattern="#,##0₫"/></h4>
 										</div>
 										<div>
-											<h4>Total Profits</h4>
-											<p class="mb-0">Profit amount</p>
+											<h4>Tổng thu nhập</h4>
+											<p class="mb-0">Total Income</p>
 										</div>
 									</div>
 									<div class="align-self-center">
@@ -348,7 +351,8 @@ body {
 								<div class="d-flex justify-content-between p-md-1">
 									<div class="d-flex flex-row">
 										<div class="align-self-center">
-											<h4 class="h1 mb-0 me-4">4,205,064,981₫</h4>
+											<h4 class="card-title currency-style m-4"><fmt:formatNumber
+												value="${income *(10/100)}" type="currency" pattern="#,##0₫"/></h4>
 										</div>
 										<div>
 											<h4>Total Cost</h4>
