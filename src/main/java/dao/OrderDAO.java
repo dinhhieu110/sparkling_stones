@@ -2,7 +2,10 @@ package dao;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.UUID;
 
 import com.oracle.wls.shaded.org.apache.xpath.operations.Or;
@@ -180,5 +183,65 @@ public class OrderDAO extends DAOService{
 			System.out.println(e.getMessage());
 		}
 		return income;
+	}
+	
+	public Map<String, Long> getDailyIncomeInMonth(){
+		String sql ="with\r\n"
+				+ "  DateReference as (\r\n"
+				+ "    select\r\n"
+				+ "      generate_series(\r\n"
+				+ "        date_trunc('MONTH', current_date)::date,\r\n"
+				+ "        (\r\n"
+				+ "          date_trunc('MONTH', current_date) + interval '1 month - 1 day'\r\n"
+				+ "        )::date,\r\n"
+				+ "        interval '1 day'\r\n"
+				+ "      )::date as date_reference\r\n"
+				+ "  )\r\n"
+				+ "select\r\n"
+				+ "  extract(\r\n"
+				+ "    day\r\n"
+				+ "    from\r\n"
+				+ "      d.date_reference\r\n"
+				+ "  ) as label,\r\n"
+				+ "  coalesce(sum(o.total_money), 0) as value\r\n"
+				+ "from\r\n"
+				+ "  DateReference d\r\n"
+				+ "  left join \"Orders\" o on d.date_reference = o.order_date::date\r\n"
+				+ "where\r\n"
+				+ "  extract(\r\n"
+				+ "    month\r\n"
+				+ "    from\r\n"
+				+ "      d.date_reference\r\n"
+				+ "  ) = extract(\r\n"
+				+ "    month\r\n"
+				+ "    from\r\n"
+				+ "      current_date\r\n"
+				+ "  )\r\n"
+				+ "  and extract(\r\n"
+				+ "    year\r\n"
+				+ "    from\r\n"
+				+ "      d.date_reference\r\n"
+				+ "  ) = extract(\r\n"
+				+ "    year\r\n"
+				+ "    from\r\n"
+				+ "      current_date\r\n"
+				+ "  )\r\n"
+				+ "group by\r\n"
+				+ "  d.date_reference\r\n"
+				+ "order by\r\n"
+				+ "  d.date_reference;\r\n"
+				+ "\r\n"
+				+ "\r\n"
+				+ "";
+		Map<String, Long> chart = new LinkedHashMap<String, Long>();
+		ResultSet rs = select(sql);
+		try {
+			while(rs.next()) {
+				chart.put(rs.getString("label"), rs.getLong("value"));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return chart;
 	}
 }

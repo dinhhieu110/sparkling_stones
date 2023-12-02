@@ -372,6 +372,7 @@ body {
 		</div>
 	</main>
 	<!--Main layout-->
+	<%@include file="/common/script.jsp"%>
 	<script>
 		// Graph
 		var ctx = document.getElementById("myChart");
@@ -379,10 +380,9 @@ body {
 		var myChart = new Chart(ctx, {
 			type : "line",
 			data : {
-				labels : [ "Sunday", "Monday", "Tuesday", "Wednesday",
-						"Thursday", "Friday", "Saturday", ],
+				labels : [],
 				datasets : [ {
-					data : [ 15339, 21345, 18483, 24003, 23489, 24092, 12034 ],
+					data : [],
 					lineTension : 0,
 					backgroundColor : "transparent",
 					borderColor : "#007bff",
@@ -403,7 +403,7 @@ body {
 				},
 			},
 		});
+		queryChart();
 	</script>
-	<%@include file="/common/script.jsp"%>
 </body>
 </html>

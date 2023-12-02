@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.User;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import com.google.gson.Gson;
 
 import dao.OrderDAO;
 import dao.ProductDAO;
@@ -48,8 +52,11 @@ public class AdminHomeController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		OrderDAO oDao = new OrderDAO();
+		Map<String, Long> chart = oDao.getDailyIncomeInMonth();
+		PrintWriter out = response.getWriter();
+		Gson gson = new Gson();
+		out.println(gson.toJson(chart));
 	}
 
 }
