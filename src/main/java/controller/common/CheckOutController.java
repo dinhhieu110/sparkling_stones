@@ -90,16 +90,19 @@ public class CheckOutController extends HttpServlet {
 				OrderDAO oDao = new OrderDAO();
 				String orderId = oDao.addOrder(order);
 
+				OrderDetailDAO oDetailDAO = new OrderDetailDAO();
 				for (Item cartItem : cart.getItems()) {
 					OrderDetail orderDetail = new OrderDetail(orderId, cartItem.getProduct().getId(),
 							cartItem.getProduct().getDiscount() * cartItem.getQuantity(), cartItem.getQuantity());
-					OrderDetailDAO oDetailDAO = new OrderDetailDAO();
 					oDetailDAO.addOrderDetail(orderDetail);
 				}
 				CartDAO cartDao = new CartDAO();
 				cartDao.removeCart(user.getId());
 				String cartId = cartDao.addCart(user.getId());
 				cart = new Cart(cartId);
+				uDao.close();
+				oDetailDAO.close();
+				oDao.close();
 				session.setAttribute("cart", cart); 
 				forward = SUCCESS_FORWARD;
 
@@ -176,6 +179,5 @@ public class CheckOutController extends HttpServlet {
 			}
 			response.sendRedirect(forward);
 		}
-		uDao.close();
 	}
 }

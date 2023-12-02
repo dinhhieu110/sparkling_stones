@@ -338,3 +338,22 @@ function cancelOrder(orderId){
 	orderIdElement.value = orderId;
 }
 
+
+function queryChart(){
+	var path = getContextPath();
+	$.ajax({
+		url: path + "/admin-home",
+		data: {
+		},
+		type: "post",
+		success: function(response) {
+			const chart = JSON.parse(response);
+			myChart.data.labels = Object.keys(chart);
+			myChart.data.datasets[0].data = Object.values(chart);
+			myChart.update();
+		},
+		error: function(xhr) {
+			console.log("ERROR Ajax");
+		},
+	});
+}
