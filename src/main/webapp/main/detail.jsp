@@ -230,12 +230,7 @@
 								class="nav-link d-flex align-items-center justify-content-center w-100 active"
 								id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1"
 								role="tab" aria-controls="ex1-pills-1" aria-selected="true">ĐẶC
-									TẢ</a></li>
-							<li class="nav-item d-flex" role="presentation"><a
-								class="nav-link d-flex align-items-center justify-content-center w-100"
-								id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2"
-								role="tab" aria-controls="ex1-pills-2" aria-selected="false">ĐÁNH
-									GIÁ </a></li>
+									TẢ</a></li>	
 							<li class="nav-item d-flex" role="presentation"><a
 								class="nav-link d-flex align-items-center justify-content-center w-100"
 								id="ex1-tab-3" data-mdb-toggle="pill" href="#ex1-pills-3"
@@ -246,6 +241,11 @@
 								id="ex1-tab-4" data-mdb-toggle="pill" href="#ex1-pills-4"
 								role="tab" aria-controls="ex1-pills-4" aria-selected="false">CÂU
 									HỎI THƯỜNG GẶP </a></li>
+							<li class="nav-item d-flex" role="presentation"><a
+								class="nav-link d-flex align-items-center justify-content-center w-100"
+								id="ex1-tab-2" data-mdb-toggle="pill" href="#ex1-pills-2"
+								role="tab" aria-controls="ex1-pills-2" aria-selected="false">ĐÁNH
+									GIÁ </a></li>
 						</ul>
 						<!-- Pills navs -->
 

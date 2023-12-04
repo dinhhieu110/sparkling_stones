@@ -124,7 +124,7 @@ div.container-fluid {
 			<div class="rightcolumn">
 				<div class="card">
 					<div class="card-body">
-						<h2 class="card-title mb-4" style="color: #666; font-weight: lighter;">Gợi ý những bài viết khác</h2>
+						<h2 class="card-title mb-4" style="color: #666; font-weight: bold;">Gợi ý những bài viết khác</h2>
 						<c:forEach items="${otherBlogs}" var="o">
 							<div class="d-flex mb-3">
 								<a href="BlogDetailController?id=${o.id}" class="me-3"> <img
@@ -132,8 +132,8 @@ div.container-fluid {
 									class="img-md img-thumbnail" />
 								</a>
 								<div class=" text-dark">
-									 <a href="BlogDetailController?id=${o.id}"
-										class="nav-link mb-1"> ${o.tittle} </a>
+									 <strong><a href="BlogDetailController?id=${o.id}"
+										class="nav-link mb-1"> ${o.tittle} </a></strong>
 									<fmt:formatDate value="${o.createdAt}" pattern="dd/MM/yyyy" />
 								</div>
 							</div>
