@@ -88,7 +88,7 @@ table.table tr th, table.table tr td {
 }
 
 table.table tr th:first-child {
-	width: 60px;
+	width: 100px;
 }
 
 table.table tr th:last-child {
@@ -288,6 +288,66 @@ table.table .avatar {
 .modal form label {
 	font-weight: normal;
 }
+
+.swiper-slide {
+	height: 50%;
+}
+
+.swiper-slide>div {
+	padding-bottom: 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: transparent;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+}
+
+.swiper-slide-thumb-active {
+	overflow: hidden;
+}
+
+.swiper-slide-thumb-active::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.description-wrapper {
+	max-height: 2em;
+	overflow: hidden;
+	position: relative;
+}
+
+.read-more-btn {
+	background: none;
+	border: none;
+	color: #4F4F4F; /* Set button color to blue (#007bff) */
+	cursor: pointer;
+	padding: 0;
+	font-size: 14px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 0; /* Remove margin */
+}
+
+.full-description {
+	display: none;
+}
+
+.description-wrapper.expanded {
+	max-height: none;
+}
+
+.description-wrapper.expanded .read-more-btn {
+	display: none;
+}
 </style>
 </head>
 <body>
@@ -328,6 +388,7 @@ table.table .avatar {
 									<th>Đoạn 2</th>
 									<th>Ảnh phụ</th>
 									<th>Chú thích</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -336,10 +397,18 @@ table.table .avatar {
 										<td><img width="50px" height="50px" src="${b.thumbnail}" /></td>
 										<td>${b.tittle}</td>
 										<td>${b.heading1}</td>
-										<td>${b.para1}</td>
-										<td>${b.heading2}</td>
-										<td>${b.para2}</td>
-										<td><img width="50px" height="50px"
+										<td class="description-wrapper"><span
+											class="full-description">${b.para1}</span> <span
+											class="short-description"></span>
+											<button class="read-more-btn">Đọc thêm</button></td>
+<%-- 										<td>${b.para1}</td>
+ --%>										<td>${b.heading2}</td>
+										<td class="description-wrapper"><span
+											class="full-description">${b.para2}</span> <span
+											class="short-description"></span>
+											<button class="read-more-btn">Đọc thêm</button></td>
+<%-- 										<td>${b.para2}</td>
+ --%>										<td><img width="50px" height="50px"
 											src="${b.subthumbnial}" /></td>
 										<td>${b.note}</td>
 
@@ -481,6 +550,63 @@ table.table .avatar {
 
 	</main>
 </body>
+
+
+<script type="text/javascript">
+	document
+			.addEventListener(
+					"DOMContentLoaded",
+					function() {
+						var descriptionWrappers = document
+								.querySelectorAll('.description-wrapper');
+
+						descriptionWrappers
+								.forEach(function(wrapper) {
+									var fullDescription = wrapper
+											.querySelector('.full-description').textContent;
+									var shortDescription = fullDescription
+											.substring(0, 100); // Lấy 100 ký tự đầu tiên
+
+									wrapper.querySelector('.short-description').textContent = shortDescription
+											+ '...';
+
+									var readMoreBtn = wrapper
+											.querySelector('.read-more-btn');
+
+									readMoreBtn
+											.addEventListener(
+													'click',
+													function(event) {
+														event.stopPropagation(); // Prevent click event from propagating to the body
+														wrapper.classList
+																.add('expanded');
+														wrapper
+																.querySelector('.short-description').style.display = 'none';
+														wrapper
+																.querySelector('.full-description').style.display = 'block';
+													});
+								});
+
+						// Add click event listener to the body to collapse description when clicked outside
+						document.body
+								.addEventListener(
+										'click',
+										function(event) {
+											descriptionWrappers
+													.forEach(function(wrapper) {
+														if (!wrapper
+																.contains(event.target)) {
+															wrapper.classList
+																	.remove('expanded');
+															wrapper
+																	.querySelector('.short-description').style.display = 'block';
+															wrapper
+																	.querySelector('.full-description').style.display = 'none';
+														}
+													});
+										});
+					});
+</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
 <script type="text/javascript">
