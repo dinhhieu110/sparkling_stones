@@ -104,6 +104,11 @@ function updateCart(event, id, action) {
   });
 }
 
+function deleteBlog(id) {
+	const deleteElement3 = document.getElementById("deleteBlogHidden");
+	  deleteElement3.value = id;
+}
+
 function deleteUser(id) {
   const deleteElement = document.getElementById("deleteHidden");
   deleteElement.value = id;
@@ -112,6 +117,36 @@ function deleteUser(id) {
 function deleteProduct(id) {
   const deleteElement2 = document.getElementById("deleteProductHidden");
   deleteElement2.value = id;
+}
+
+function updateBlog(id) {
+	const updateElement = document.getElementById("updateHidden");
+	updateElement.value = id;
+	var path = getContextPath();
+	$("#title").text("Cập Nhật Bài Viết");
+	$("#fbtn").text("Cập Nhật");
+	$.ajax({
+		url: path + "/manage-blog",
+		data: {
+			id: id,
+		},
+		type: "get",
+		success: function(response) {
+			const blog = JSON.parse(response);
+		    console.log(blog);
+			$("#tittle").val(blog.tittle);
+			$("#heading1").val(blog.heading1);
+			$("#para1").val(blog.para1);
+			$("#heading2").val(blog.heading2);
+			$("#para2").val(blog.para2);
+			$("#note").val(blog.note);
+
+			$("#fbtn").val("update");
+		},
+		error: function(xhr) {
+			console.log("ERROR Ajax");
+		},
+	});
 }
 
 function updateUser(id) {
@@ -177,6 +212,21 @@ function updateProduct(id) {
       console.log("ERROR Ajax");
     },
   });
+}
+
+function addBlog() {
+	$("#title").text("Thêm Bài Viết Mới");
+	$("#thumbnail").val("");
+	$("#tittle").val("");
+	$("#heading1").val("");
+	$("#para1").val("");
+	$("#heading2").val("");
+	$("#para2").val("");
+	$("#subthumnial").val("");
+	$("#note").val("");
+
+	$("#fbtn").val("add");
+	$("#fbtn").text("Thêm");
 }
 
 function addUser() {

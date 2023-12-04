@@ -1,5 +1,5 @@
+<%@page import="dao.BlogDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ table.table tr th, table.table tr td {
 }
 
 table.table tr th:first-child {
-	width: 120px;
+	width: 100px;
 }
 
 table.table tr th:last-child {
@@ -249,7 +249,7 @@ table.table .avatar {
 }
 /* Modal styles */
 .modal .modal-dialog {
-	max-width: 600px;
+	max-width: 400px;
 }
 
 .modal .modal-header, .modal .modal-body, .modal .modal-footer {
@@ -354,8 +354,10 @@ table.table .avatar {
 	<%@include file="/common/adminheader.jsp"%>
 	<input type="hidden" id="status"
 		value="<%=request.getParameter("status")%>">
+
 	<main style="margin-top: 58px">
-	${error}
+		${error}
+
 		<div class="container pt-4">
 			<section class="mb-4">
 				<div class="table-responsive">
@@ -368,172 +370,148 @@ table.table .avatar {
 									</h2>
 								</div>
 								<div class="col-sm-6">
-									<a href="#openModal" onclick="addProduct()" class="btn btn-light text-dark"
-										data-toggle="modal"><i class="material-icons">&#xE147;</i>
-										<span>THÊM SẢN BÀI VIẾT MỚI</span></a>
+									<a href="#openModal" onClick="addBlog()"
+										class="btn btn-light text-dark" data-toggle="modal"><i
+										class="material-icons">&#xE147;</i> <span>THÊM BÀI VIẾT
+											MỚI</span></a>
 								</div>
 							</div>
 						</div>
-						<table class="table table-hover">
+						<table class="table table-striped table-hover">
 							<thead>
 								<tr>
 									<th>Ảnh chính</th>
 									<th>Tiêu đề</th>
-									<th>Ngày tạo</th>
-									<th>Heading 1</th>
-									<th>Nội dung 1</th>
-									<th>Heading 1</th>
-									<th>Nội dung 1</th>
-									<th>Ảnh con</th>
-									<th>Ghi chú</th>
+									<th>Tiêu đề 1</th>
+									<th>Đoạn 1</th>
+									<th>Tiêu đề 2</th>
+									<th>Đoạn 2</th>
+									<th>Ảnh phụ</th>
+									<th>Chú thích</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
+								<c:forEach items="${listB}" var="b">
 									<tr>
-										<td><img width="50px" height="50px" src="${o.thumbnail}" /></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td ></td>
-										<td ></td>
-										<td ></td>
-										<td><img width="50px" height="50px" src="${o.thumbnail}" /></td>
-										<td ></td>
+										<td><img width="50px" height="50px" src="${b.thumbnail}" /></td>
+										<td>${b.tittle}</td>
+										<td>${b.heading1}</td>
+										<td class="description-wrapper"><span
+											class="full-description">${b.para1}</span> <span
+											class="short-description"></span>
+											<button class="read-more-btn">Đọc thêm</button></td>
+<%-- 										<td>${b.para1}</td>
+ --%>										<td>${b.heading2}</td>
+										<td class="description-wrapper"><span
+											class="full-description">${b.para2}</span> <span
+											class="short-description"></span>
+											<button class="read-more-btn">Đọc thêm</button></td>
+<%-- 										<td>${b.para2}</td>
+ --%>										<td><img width="50px" height="50px"
+											src="${b.subthumbnial}" /></td>
+										<td>${b.note}</td>
+
+
+										<td><a href="#openModal" class="edit"
+											onclick="updateBlog('${b.id}')" data-toggle="modal"><i
+												class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+											<a href="#deleteEmployeeModal" class="delete"
+											onclick="deleteBlog('${b.id}')" data-toggle="modal"><i
+												class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a></td>
 									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
-
-						<!-- Pagination -->
 						<%
-						String from = (String) request.getAttribute("from");
+						BlogDAO bDao = new BlogDAO();
+						int countB = bDao.getTotalBlog();
 						%>
-						<nav aria-label="Page navigation example"
-							class="d-flex justify-content-center mt-3">
+						<div class="clearfix">
+							<div class="hint-text">
+								Hiển thị <b>${listB.size()}</b> trong số <b><%=countB%></b> bài
+								viết
+							</div>
 							<ul class="pagination">
-								<!-- First Button -->
-								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
-									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-           href="manage-product?index=1"
-       </c:if>
-									aria-label="First"> <span aria-hidden="true">First</span>
-								</a></li>
-
-								<!-- Backward Button -->
-								<li class="page-item ${tag == 1 ? 'disabled' : ''}"><a
-									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-                   href="manage-product?index=${tag - 1}"
-               </c:if>
-									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-								</a></li>
-
-								<!-- Pagination Items -->
-								<c:set var="startPage" value="${tag - 2}" />
-								<c:choose>
-									<c:when test="${startPage < 1}">
-										<c:set var="startPage" value="1" />
-									</c:when>
-									<c:when test="${startPage > endP - 4}">
-										<c:set var="startPage" value="${endP - 4}" />
-									</c:when>
-								</c:choose>
-								<c:forEach begin="${startPage}" end="${startPage + 4}" var="i">
-									<li class="page-item ${tag == i ? 'active' : ''}"><a
-										class="page-link"
-										<c:if test="${from eq 'ManageProductController'}">
-                       href="manage-product?index=${i}"
-                   </c:if>>${i}</a>
-									</li>
+								<li class="page-item ${tag == endP ?"disabled":" "}""><a
+									class="page-link" href="manage-blog?index=${(tag-1)}"
+									aria-label="Next"> <span aria-hidden="true">&laquo;</span></a></li>
+								<c:forEach begin="1" end="${endP}" var="i">
+									<li class="page-item ${tag == i ?"active":" "}"><a
+										class="page-link" href="manage-blog?index=${i}">${i}</a></li>
 								</c:forEach>
-
-								<!-- Forward Button -->
-								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
-									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-                   href="manage-product?index=${tag + 1}"
-               </c:if>
+								<li class="page-item ${tag == endP ?"disabled":" "}""><a
+									class="page-link" href="manage-blog?index=${(tag+1)}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
-
-
-								<!-- Last Button -->
-								<li class="page-item ${tag == endP ? 'disabled' : ''}"><a
-									class="page-link"
-									<c:if test="${from eq 'ManageProductController'}">
-           href="manage-product?index=${endP}"
-       </c:if>
-									aria-label="Last"> <span aria-hidden="true">Last</span>
-								</a></li>
-
-
-
 							</ul>
-						</nav>
-
-						<!-- Pagination -->
+						</div>
 					</div>
 				</div>
-
-				<!-- Add Modal HTML -->
+				<!-- Add & Edit Modal HTML -->
 				<div id="openModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action ="manage-product" method="post" enctype="multipart/form-data">
+							<form action="manage-blog" method="post">
 								<div class="modal-header">
-									<h4 id ="title" class="modal-title">THÊM SẢN PHẨM</h4>
+									<h4 id="title" class="modal-title">Thêm Bài Viết Mới</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
 									<div class="form-floating mb-3">
-										<input type="file" class="form-control"
-											id="thumbnail" placeholder="thumbnail" name="thumbnail" required><label
+										<input type="file" class="form-control" id="thumbnail"
+											placeholder="thumbnail" name="thumbnail" value =" " required><label
 											for="thumbnail">Ảnh chính</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Tiêu đề</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="date" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Ngày tạo</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Heading</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Nội dung</label>
-									</div>
-										<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Heading</label>
-									</div>
-									<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Nội dung</label>
 									</div>
 
 									<div class="form-floating mb-3">
-										<input type="file" class="form-control"
-											id="thumbnail" placeholder="thumbnail" name="thumbnail" required><label
-											for="thumbnail">Ảnh chính</label>
-									</div>
-										<div class="form-floating mb-3">
-										<input type="text" class="form-control" id="name"
-											placeholder="name" name="name" required> <label for="name">Ghi chú</label>
+										<input type="text" class="form-control" id="tittle"
+											placeholder="tittle" name="tittle" value =" "> <label
+											for="tittle">Tiêu đề</label>
 									</div>
 
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="heading1"
+											placeholder="heading1" name="heading1" value =" "> <label
+											for="heading1">Tiêu đề 1</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="para1"
+											placeholder="para1" name="para1" value =" "> <label for="para1">Đoạn
+											1</label>
+									</div>
+
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="heading2"
+											placeholder="heading2" name="heading2" value =" "> <label
+											for="heading2">Tiêu đề 2</label>
+									</div>
+									<div class="form-floating mb-3">
+										<input type="text" class="form-control" id="para2"
+											placeholder="para2" name="para2" value =" "> <label for="para2">Đoạn
+											2</label>
+									</div>
+
+									<div class="form-floating mb-3">
+										<input type="file" class="form-control" id="subthumbnial"
+											placeholder="Subthumbnail" name="subthumbnial" value =" " required><label
+											for="subthumbnial">Ảnh phụ</label>
+									</div>
+
+									<div class="form-floating">
+										<textarea name="note" class="form-control" placeholder="note "
+											id="note" ></textarea>
+										<label for="note">Chú thích</label>
+									</div>
 								</div>
-								<input type="hidden" name="myUpdateHidden" id="updateHidden" value =" " />
-								<input type="hidden" name="galleryHidden" id="galleryHidden" value =" " />
+								<input type="hidden" name="myUpdateHidden" id="updateHidden"
+									value=" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
-									<button id ="fbtn" type="submit" class="btn btn-light" name="action"
-										value="add">Thêm</button>
+									<button id="fbtn" type="submit" class="btn btn-light"
+										name="action" value="add">Thêm</button>
 								</div>
 							</form>
 						</div>
@@ -543,19 +521,20 @@ table.table .avatar {
 				<div id="deleteEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action="manage-product" method="post" enctype="multipart/form-data">
+							<form action="manage-blog" method="post">
 								<div class="modal-header">
-									<h4 class="modal-title">XÓA SẢN PHẨM</h4>
+									<h4 class="modal-title">Xóa Bài Viết</h4>
 									<button type="button" class="close" data-dismiss="modal"
 										aria-hidden="true">&times;</button>
 								</div>
 								<div class="modal-body">
-									<p>Bạn có chắc chắn muốn xóa sản phẩm này không?</p>
+									<p>Bạn có chắc là muốn xóa bài viết này?</p>
 									<p class="text-warning">
-										<small>Hành động này không thể quay lại.</small>
+										<small>Hành động này không thể được hoàn tác.</small>
 									</p>
 								</div>
-								<input type="hidden" name="myDeleteProductHidden" id="deleteProductHidden" value =" " />
+								<input type="hidden" name="myDeleteBlogHidden" id="deleteBlogHidden"
+									value=" " />
 								<div class="modal-footer">
 									<input type="button" class="btn btn-light" data-dismiss="modal"
 										value="Hủy">
@@ -568,6 +547,7 @@ table.table .avatar {
 				</div>
 			</section>
 		</div>
+
 	</main>
 </body>
 
@@ -628,26 +608,27 @@ table.table .avatar {
 					});
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<link rel="stylesheet" href="alert/dist/sweetalert.css">
+<link rel="stylesheet" href="alert/dist/sweetalert.css">
 <script type="text/javascript">
-	var status = document.getElementById("status").value;
-	switch (status) {
-	case "SuccessfullyDeleted":
-		swal("Hoàn thành", "Xóa sản phẩm thành công", "success");
-		status = "";
-		break;
-	case "SuccessfullAdded":
-		swal("Hoàn thành", "Thêm sản phẩm thành công", "success");
-		status = "";
-		break;
-	case "SuccessfullyUpdated":
-		swal("Hoàn thành", "Cập nhật sản phẩm thành công", "success");
-		status = "";
-		break;
-	default:
-		break;
-	}
-</script>
-		<%@include file="/common/script.jsp"%>
+			var status = document.getElementById("status").value;
+			if (status == "SuccessfullyAdded") {
+				swal("Chúc mừng!", "Thêm bài viết thành công", "success");
+				status = "";
 
+			}
+			if (status == "UnsuccessfullyAdded") {
+				swal("Xin lỗi!", "Thêm bài viết thất bại", "error");
+				status = "";
+
+			}
+			if(status == "SuccessfullyDeleted"){
+				swal("Chúc mừng", "Xóa bài viết thành công", "success");
+				status = "";
+			}
+			if(status == "SuccessfullyUpdated"){
+				swal("Chúc mừng", "Cập nhật bài viết thành công", "success");
+				status = "";
+			}
+		</script>
+<%@include file="/common/script.jsp"%>
 </html>

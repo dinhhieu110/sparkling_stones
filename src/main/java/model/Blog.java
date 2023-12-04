@@ -32,6 +32,25 @@ public class Blog {
 		this.subthumbnial = subthumbnial;
 		this.note = note;
 	}
+	
+	
+
+	public Blog(String id, String thumbnail, String tittle, String user_id, String heading1, String para1,
+			String heading2, String para2, String subthumbnial, String note) {
+		super();
+		this.id = id;
+		this.thumbnail = thumbnail;
+		this.tittle = tittle;
+		this.user_id = user_id;
+		this.heading1 = heading1;
+		this.para1 = para1;
+		this.heading2 = heading2;
+		this.para2 = para2;
+		this.subthumbnial = subthumbnial;
+		this.note = note;
+	}
+
+
 
 	public String getId() {
 		return id;
