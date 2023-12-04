@@ -297,4 +297,14 @@
     <servlet-name>BlogDetailController</servlet-name>
     <url-pattern>/BlogDetailController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManageBlogController</display-name>
+    <servlet-name>ManageBlogController</servlet-name>
+    <servlet-class>controller.common.ManageBlogController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManageBlogController</servlet-name>
+    <url-pattern>/ManageBlogController</url-pattern>
+  </servlet-mapping>
 </web-app>
