@@ -126,20 +126,19 @@ function updateBlog(id) {
 	$("#title").text("Cập Nhật Bài Viết");
 	$("#fbtn").text("Cập Nhật");
 	$.ajax({
-		url: path + "/ManageBlogController",
+		url: path + "/manage-blog",
 		data: {
 			id: id,
 		},
 		type: "get",
 		success: function(response) {
 			const blog = JSON.parse(response);
-			$("#thumbnail").val(blog.thumbnail);
+		    console.log(blog);
 			$("#tittle").val(blog.tittle);
 			$("#heading1").val(blog.heading1);
 			$("#para1").val(blog.para1);
 			$("#heading2").val(blog.heading2);
 			$("#para2").val(blog.para2);
-			$("#subthumnial").val(blog.subthumbnial);
 			$("#note").val(blog.note);
 
 			$("#fbtn").val("update");

@@ -76,15 +76,17 @@ public class ManageBlogController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final String SUCCESS_FORWARD = request.getContextPath() + "/ManageBlogController";
+		final String SUCCESS_FORWARD = request.getContextPath() + "/manage-blog";
 		// Lấy thông tin từ ADD & EDIT form
 		String thumbnail = request.getParameter("thumbnail");
+		thumbnail = "/SparklingStones/assets/img/" + thumbnail; 
 		String tittle = request.getParameter("tittle");
 		String heading1 = request.getParameter("heading1");
 		String para1 = request.getParameter("para1");
 		String heading2 = request.getParameter("heading2");
 		String para2 = request.getParameter("para2");
 		String subthumbnial = request.getParameter("subthumbnial");
+		subthumbnial = "/SparklingStones/assets/img/" + subthumbnial; 
 		String note = request.getParameter("note");
 		String action = request.getParameter("action");
 		BlogDAO bDao = new BlogDAO();

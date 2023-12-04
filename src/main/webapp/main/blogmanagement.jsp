@@ -365,14 +365,14 @@ table.table .avatar {
 							</div>
 							<ul class="pagination">
 								<li class="page-item ${tag == endP ?"disabled":" "}""><a
-									class="page-link" href="ManageBlogController?index=${(tag-1)}"
+									class="page-link" href="manage-blog?index=${(tag-1)}"
 									aria-label="Next"> <span aria-hidden="true">&laquo;</span></a></li>
 								<c:forEach begin="1" end="${endP}" var="i">
 									<li class="page-item ${tag == i ?"active":" "}"><a
-										class="page-link" href="ManageBlogController?index=${i}">${i}</a></li>
+										class="page-link" href="manage-blog?index=${i}">${i}</a></li>
 								</c:forEach>
 								<li class="page-item ${tag == endP ?"disabled":" "}""><a
-									class="page-link" href="ManageBlogController?index=${(tag+1)}"
+									class="page-link" href="manage-blog?index=${(tag+1)}"
 									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
 							</ul>
@@ -383,7 +383,7 @@ table.table .avatar {
 				<div id="openModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action="ManageBlogController" method="post">
+							<form action="manage-blog" method="post">
 								<div class="modal-header">
 									<h4 id="title" class="modal-title">Thêm Bài Viết Mới</h4>
 									<button type="button" class="close" data-dismiss="modal"
@@ -392,47 +392,47 @@ table.table .avatar {
 								<div class="modal-body">
 									<div class="form-floating mb-3">
 										<input type="file" class="form-control" id="thumbnail"
-											placeholder="thumbnail" name="thumbnail" required><label
+											placeholder="thumbnail" name="thumbnail" value =" " required><label
 											for="thumbnail">Ảnh chính</label>
 									</div>
 
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="tittle"
-											placeholder="tittle" name="tittle"> <label
+											placeholder="tittle" name="tittle" value =" "> <label
 											for="tittle">Tiêu đề</label>
 									</div>
 
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="heading1"
-											placeholder="heading1" name="heading1"> <label
+											placeholder="heading1" name="heading1" value =" "> <label
 											for="heading1">Tiêu đề 1</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="para1"
-											placeholder="para1" name="para1"> <label for="para1">Đoạn
+											placeholder="para1" name="para1" value =" "> <label for="para1">Đoạn
 											1</label>
 									</div>
 
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="heading2"
-											placeholder="heading2" name="heading2"> <label
+											placeholder="heading2" name="heading2" value =" "> <label
 											for="heading2">Tiêu đề 2</label>
 									</div>
 									<div class="form-floating mb-3">
 										<input type="text" class="form-control" id="para2"
-											placeholder="para2" name="para2"> <label for="para2">Đoạn
+											placeholder="para2" name="para2" value =" "> <label for="para2">Đoạn
 											2</label>
 									</div>
 
 									<div class="form-floating mb-3">
 										<input type="file" class="form-control" id="subthumbnial"
-											placeholder="Subthumbnail" name="subthumbnial" required><label
+											placeholder="Subthumbnail" name="subthumbnial" value =" " required><label
 											for="subthumbnial">Ảnh phụ</label>
 									</div>
 
 									<div class="form-floating">
 										<textarea name="note" class="form-control" placeholder="note "
-											id="note"></textarea>
+											id="note" ></textarea>
 										<label for="note">Chú thích</label>
 									</div>
 								</div>
@@ -452,7 +452,7 @@ table.table .avatar {
 				<div id="deleteEmployeeModal" class="modal fade">
 					<div class="modal-dialog">
 						<div class="modal-content">
-							<form action="ManageBlogController" method="post">
+							<form action="manage-blog" method="post">
 								<div class="modal-header">
 									<h4 class="modal-title">Xóa Bài Viết</h4>
 									<button type="button" class="close" data-dismiss="modal"
@@ -495,7 +495,7 @@ table.table .avatar {
 				status = "";
 
 			}
-			if(status == "SuccessfullyRemoved"){
+			if(status == "SuccessfullyDeleted"){
 				swal("Chúc mừng", "Xóa bài viết thành công", "success");
 				status = "";
 			}

@@ -62,10 +62,11 @@
 				</a> <a href="manage-order"
 					class="list-group-item list-group-item-action py-2 ripple"><i
 					class="fas fa-chart-bar fa-fw me-3"></i><span>Đơn hàng</span></a><a
-					href="#" class="list-group-item list-group-item-action py- ripple"><i
-					class="fas fa-comments fa-fw me-3"></i><span>Đánh giá</span></a> <a href="ManageBlogController"
+					href="manage-blog"
 					class="list-group-item list-group-item-action py- ripple"><i
-					class="fas fa-comments fa-fw me-3"></i><span>Bài viết</span></a> <a
+					class="fa-regular fa-newspaper me-3"></i><span>Bài viết</span></a><a
+					href="#" class="list-group-item list-group-item-action py- ripple"><i
+					class="fas fa-comments fa-fw me-3"></i><span>Đánh giá</span></a> <a
 					href="logout"
 					class="list-group-item list-group-item-action py-2 ripple"><span><i
 						class="fa-solid fa-right-from-bracket m-1 me-md-2"></i></span>Đăng Xuất</a>

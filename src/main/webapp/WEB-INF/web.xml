@@ -305,6 +305,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ManageBlogController</servlet-name>
-    <url-pattern>/ManageBlogController</url-pattern>
+    <url-pattern>/manage-blog</url-pattern>
   </servlet-mapping>
 </web-app>
